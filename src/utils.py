@@ -201,13 +201,13 @@ def load_data(data_path: str) -> Dict:
 
     if data_path.endswith(".jsonl"):
         data = {}
-        with open(data_path, "r") as f:
+        with open(data_path, "r", encoding="utf-8") as f:
             for line in f:
                 item = json.loads(line.strip())
                 data[item["id"]] = item["data"]
         return data
     else:
-        with open(data_path, "r") as f:
+        with open(data_path, "r", encoding="utf-8") as f:
             data = json.load(f)
         return data
 
