@@ -1,13 +1,33 @@
+# このファイルの目的:
+# 日本語TOEIC教材のサンプル商品データとサンプルクエリを作成する。
+# 入力ファイル:
+# なし。
+# 出力ファイル:
+# 日本語版データ/元データ/toeic_products_sample.csv
+# 日本語版データ/実験用データ/test_data_ja.json
+# 日本語版データ/実験用データ/test_selected_products_ja.json
+# 処理の流れ:
+# 1. 商品データを作成する。
+# 2. CSV形式で保存する。
+# 3. E-GEO形式の商品データとクエリをJSONとして保存する。
+# 実行コマンド:
+# uv run python "日本語版コード/01_サンプルデータ作成.py"
+# API通信や課金が発生するか:
+# なし。
+# 初心者が変更してよい箇所:
+# products リストの内容、queries、selected_indices。
+# 変更しない方がよい箇所:
+# 変換処理の基本構造。
+
 from __future__ import annotations
 
 import csv
 import json
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
-RAW_DIR = ROOT / "data_ja" / "raw"
-PROCESSED_DIR = ROOT / "data_ja" / "processed"
+RAW_DIR = ROOT / "日本語版データ" / "元データ"
+PROCESSED_DIR = ROOT / "日本語版データ" / "実験用データ"
 
 RAW_DIR.mkdir(parents=True, exist_ok=True)
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
@@ -169,7 +189,10 @@ with (RAW_DIR / "toeic_products_sample.csv").open(
 
 
 def to_egeo_product(product: dict[str, str]) -> dict:
-    """CSV形式の商品をE-GEO形式へ変換する。"""
+    """CSV形式の商品をE-GEO形式へ変換する。
+
+    商品の特徴や説明文を、原版E-GEOで扱いやすい形式に整えて返す。
+    """
     feature_list = product["features"].split("／")
 
     details = {

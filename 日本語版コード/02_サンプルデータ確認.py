@@ -1,14 +1,37 @@
+# このファイルの目的:
+# 作成した日本語サンプルデータが正しく保存されているか確認する。
+# 入力ファイル:
+# 日本語版データ/実験用データ/test_data_ja.json
+# 日本語版データ/実験用データ/test_selected_products_ja.json
+# 出力ファイル:
+# 画面出力。
+# 処理の流れ:
+# 1. JSONを読み込む。
+# 2. クエリと選択された商品が対応しているか確認する。
+# 3. 候補商品一覧を表示する。
+# 実行コマンド:
+# uv run python "日本語版コード/02_サンプルデータ確認.py"
+# API通信や課金が発生するか:
+# なし。
+# 初心者が変更してよい箇所:
+# 表示メッセージや確認条件。
+# 変更しない方がよい箇所:
+# データの整合性確認の基本ロジック。
+
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
-PROCESSED_DIR = ROOT / "data_ja" / "processed"
+PROCESSED_DIR = ROOT / "日本語版データ" / "実験用データ"
 
 
 def load_json(path: Path) -> dict:
+    """JSONファイルをUTF-8で読み込む。
+
+    文字化けしにくいように、明示的に UTF-8 を指定して読み込む。
+    """
     with path.open("r", encoding="utf-8") as file:
         return json.load(file)
 

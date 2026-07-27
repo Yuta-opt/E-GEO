@@ -1,13 +1,31 @@
+# このファイルの目的:
+# 初期順位取得に使う入力プロンプトの内容を確認する。
+# 入力ファイル:
+# 日本語版データ/実験用データ/test_data_ja.json
+# 出力ファイル:
+# 日本語版データ/実験用データ/ranking_prompt_preview.txt
+# 処理の流れ:
+# 1. サンプルデータを読み込む。
+# 2. 原版E-GEOの format_products を使って商品を整形する。
+# 3. ランキング用プロンプトを作成して保存する。
+# 実行コマンド:
+# uv run python "日本語版コード/03_順位付け入力確認.py"
+# API通信や課金が発生するか:
+# なし。
+# 初心者が変更してよい箇所:
+# プロンプト文面。
+# 変更しない方がよい箇所:
+# 原版E-GEOの整形関数を利用する部分。
+
 from __future__ import annotations
 
 import json
 import sys
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 SRC_DIR = ROOT / "src"
-DATA_DIR = ROOT / "data_ja" / "processed"
+DATA_DIR = ROOT / "日本語版データ" / "実験用データ"
 
 # 原版E-GEOのutils.pyを利用する
 sys.path.insert(0, str(SRC_DIR))
@@ -16,6 +34,10 @@ from utils import format_products  # noqa: E402
 
 
 def load_json(path: Path) -> dict:
+    """JSONファイルをUTF-8で読み込む。
+
+    文字化けを避けるために UTF-8 で読み込む。
+    """
     with path.open("r", encoding="utf-8") as file:
         return json.load(file)
 
