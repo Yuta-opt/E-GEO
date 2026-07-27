@@ -1,4 +1,4 @@
-# Claude Code
+﻿# Claude Code
 .claude/
 
 # Python-generated files
@@ -33,6 +33,6 @@ hf_data/
 data/
 results/
 
-# Amazon ESCI raw dataset
-日本語版データ/ESCI/元データ/*.parquet
-日本語版データ/ESCI/元データ/*.csv
+
+# Rakuten Books TOEIC raw data
+日本語版データ/TOEIC/元データ/*.xlsx
