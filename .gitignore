@@ -1,4 +1,4 @@
-﻿# Claude Code
+# Claude Code
 .claude/
 
 # Python-generated files
@@ -33,6 +33,9 @@ hf_data/
 data/
 results/
 
-
-# Rakuten Books TOEIC raw data
-日本語版データ/TOEIC/元データ/*.xlsx
+# Rakuten Books TOEIC local datasets and experiment outputs
+日本語版データ/TOEIC/元データ/*
+日本語版データ/TOEIC/加工済み/*
+日本語版データ/TOEIC/実験データ/*
+日本語版データ/実験結果/*
+!日本語版データ/実験結果/.gitkeep
