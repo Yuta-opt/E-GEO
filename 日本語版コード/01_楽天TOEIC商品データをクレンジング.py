@@ -13,9 +13,9 @@ import pandas as pd
 
 
 DEFAULT_INPUT = Path(
-    "日本語版データ/TOEIC/元データ/rakuten_toeic_raw_20260727.xlsx"
+    "日本語版データ/TOEIC/00_元データ/rakuten_toeic_raw_20260727.xlsx"
 )
-DEFAULT_OUTPUT_DIR = Path("日本語版データ/TOEIC/加工済み")
+DEFAULT_OUTPUT_DIR = Path("日本語版データ/TOEIC/01_クレンジング済み")
 SOURCE_DATE = "2026-07-27"
 
 REQUIRED_COLUMNS = [

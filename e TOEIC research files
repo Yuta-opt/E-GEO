@@ -1,0 +1,15 @@
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'README_日本語.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '日本語版データ/TOEIC/README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '日本語版ドキュメント/TOEIC実験_実施手順と判断記録.md', LF will be replaced by CRLF the next time Git touches it
+ .gitignore                                         |  15 [32m+[m[31m-[m
+ README_日本語.md                                   |  22 [32m+[m[31m-[m
+ 日本語版コード/07_TOEIC商品データクレンジング.py   | 512 [31m-----------------[m
+ 日本語版コード/08_TOEIC商品プール作成.py           | 473 [31m---------------[m
+ 日本語版コード/08_TOEIC商品プール再構成.py         | 373 [31m------------[m
+ 日本語版コード/09_TOEIC商品プール最終化.py         | 453 [31m---------------[m
+ 日本語版コード/10_TOEIC購入意図テンプレート作成.py | 635 [31m---------------------[m
+ 日本語版データ/TOEIC/README.md                     |  93 [32m+[m[31m--[m
+ 日本語版データ/実験結果/.gitkeep                   |   1 [31m-[m
+ .../TOEIC実験_実施手順と判断記録.md                |  24 [32m+[m[31m-[m
+ 10 files changed, 46 insertions(+), 2555 deletions(-)

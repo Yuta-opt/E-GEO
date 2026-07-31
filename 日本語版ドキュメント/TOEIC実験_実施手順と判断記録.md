@@ -193,7 +193,7 @@ description
 ### 6.5 元データの保存場所
 
 ```text
-日本語版データ/TOEIC/元データ/rakuten_toeic_raw_20260727.xlsx
+日本語版データ/TOEIC/00_元データ/rakuten_toeic_raw_20260727.xlsx
 ```
 
 元Excelは直接編集せず、再処理のための原本として保持します。
@@ -230,13 +230,13 @@ description
 ### 8.1 スクリプト
 
 ```text
-日本語版コード/07_TOEIC商品データクレンジング.py
+日本語版コード/01_楽天TOEIC商品データをクレンジング.py
 ```
 
 ### 8.2 実行コマンド
 
 ```powershell
-uv run python "日本語版コード/07_TOEIC商品データクレンジング.py"
+uv run python "日本語版コード/01_楽天TOEIC商品データをクレンジング.py"
 ```
 
 ### 8.3 主な処理
@@ -258,7 +258,7 @@ uv run python "日本語版コード/07_TOEIC商品データクレンジング.p
 ### 8.4 出力
 
 ```text
-日本語版データ/TOEIC/加工済み/
+日本語版データ/TOEIC/01_クレンジング済み/
 ├─ toeic_products_clean.csv
 ├─ toeic_products_excluded.csv
 ├─ toeic_products_review.csv
@@ -456,7 +456,7 @@ toeic_product_pool_final.csv
 ### 11.3 削除しないコード
 
 ```text
-07_TOEIC商品データクレンジング.py
+01_楽天TOEIC商品データをクレンジング.py
 08_TOEIC商品プール作成.py
 09_TOEIC商品プール最終化.py
 ```
@@ -470,7 +470,7 @@ toeic_product_pool_final.csv
 ### 12.1 スクリプト
 
 ```text
-日本語版コード/10_TOEIC購入意図テンプレート作成.py
+日本語版コード/03_TOEIC購入意図テンプレートを作成.py
 ```
 
 ### 12.2 目的
@@ -482,7 +482,7 @@ toeic_product_pool_final.csv
 ### 12.3 実行コマンド
 
 ```powershell
-uv run python "日本語版コード/10_TOEIC購入意図テンプレート作成.py"
+uv run python "日本語版コード/03_TOEIC購入意図テンプレートを作成.py"
 ```
 
 ### 12.4 購入意図のカテゴリ配分
@@ -679,13 +679,13 @@ uv sync
 ### 18.2 元Excelを配置
 
 ```text
-日本語版データ/TOEIC/元データ/rakuten_toeic_raw_20260727.xlsx
+日本語版データ/TOEIC/00_元データ/rakuten_toeic_raw_20260727.xlsx
 ```
 
 ### 18.3 クレンジング
 
 ```powershell
-uv run python "日本語版コード/07_TOEIC商品データクレンジング.py"
+uv run python "日本語版コード/01_楽天TOEIC商品データをクレンジング.py"
 ```
 
 ### 18.4 一次商品プール作成
@@ -703,7 +703,7 @@ uv run python "日本語版コード/09_TOEIC商品プール最終化.py"
 ### 18.6 購入意図テンプレート作成
 
 ```powershell
-uv run python "日本語版コード/10_TOEIC購入意図テンプレート作成.py"
+uv run python "日本語版コード/03_TOEIC購入意図テンプレートを作成.py"
 ```
 
 ### 18.7 途中生成物の整理
@@ -718,10 +718,10 @@ uv run python "日本語版コード/10_TOEIC購入意図テンプレート作�
 E-GEO/
 ├── README_日本語.md
 ├── 日本語版コード/
-│   ├── 07_TOEIC商品データクレンジング.py
+│   ├── 01_楽天TOEIC商品データをクレンジング.py
 │   ├── 08_TOEIC商品プール作成.py
 │   ├── 09_TOEIC商品プール最終化.py
-│   └── 10_TOEIC購入意図テンプレート作成.py
+│   └── 03_TOEIC購入意図テンプレートを作成.py
 ├── 日本語版ドキュメント/
 │   └── TOEIC実験_実施手順と判断記録.md
 └── 日本語版データ/

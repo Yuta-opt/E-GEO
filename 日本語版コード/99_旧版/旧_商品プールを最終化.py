@@ -1,3 +1,5 @@
+# 旧方式の保存用コードです。現在の実験では実行しません。
+
 from __future__ import annotations
 
 import argparse

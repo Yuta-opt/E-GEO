@@ -12,9 +12,9 @@ import pandas as pd
 
 
 DEFAULT_INPUT = Path(
-    "日本語版データ/TOEIC/加工済み/toeic_products_clean.csv"
+    "日本語版データ/TOEIC/01_クレンジング済み/toeic_products_clean.csv"
 )
-DEFAULT_OUTPUT_DIR = Path("日本語版データ/TOEIC/実験データ")
+DEFAULT_OUTPUT_DIR = Path("日本語版データ/TOEIC/02_商品プール")
 
 REQUIRED_COLUMNS = [
     "product_id",
@@ -300,7 +300,7 @@ def main() -> None:
     if not args.input.exists():
         raise FileNotFoundError(
             f"入力ファイルが見つかりません: {args.input}\n"
-            "07_TOEIC商品データクレンジング.pyを先に実行してください。"
+            "01_楽天TOEIC商品データをクレンジング.pyを先に実行してください。"
         )
 
     raw = pd.read_csv(

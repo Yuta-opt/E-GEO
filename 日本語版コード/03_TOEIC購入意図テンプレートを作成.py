@@ -18,9 +18,9 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 
 
 DEFAULT_INPUT = Path(
-    "日本語版データ/TOEIC/実験データ/toeic_product_pool_final.csv"
+    "日本語版データ/TOEIC/02_商品プール/toeic_product_pool_final.csv"
 )
-DEFAULT_OUTPUT_DIR = Path("日本語版データ/TOEIC/実験データ")
+DEFAULT_OUTPUT_DIR = Path("日本語版データ/TOEIC/03_購入意図")
 DEFAULT_SEED = 20260727
 
 CATEGORY_QUOTAS = {
