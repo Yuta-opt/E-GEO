@@ -1,0 +1,91 @@
+{
+  "schema_version": "toeic_egeo_openai_gemini_claude_v1",
+  "status": "implemented_not_executed",
+  "last_verified_date": "2026-08-02",
+  "purpose": "OpenAIをRewriter・Meta-optimizer・学習Model A、Geminiを学習Model B、Claudeを評価専用Model Eとして使用し、提供元をまたぐ縮小再現実験を行う。",
+  "formal_use_policy": {
+    "allowed": true,
+    "condition": "3社のsmoke実験で出力形式・実測費用・モデル利用可否を確認し、Train開始前にモデル構成を固定すること",
+    "limitation": "学習Re-rankerは2モデル、評価専用Re-rankerは1モデルへ縮小しており、先行研究の4学習・2評価構成の完全再現ではない。Gemini 3 FlashはPreviewモデルのため、正式実験開始日に利用可能性を再確認する。",
+    "reporting_text": "計算予算に合わせ、GPT-4.1とGemini 3 Flash Previewを学習Re-ranker、Claude Sonnet 4.5を評価専用Re-rankerとして用いた複数提供元の縮小再現実験である。"
+  },
+  "candidate_selection": {
+    "provider": "openai",
+    "api_key_env": "OPENAI_API_KEY",
+    "model_id": "gpt-5-mini-2025-08-07",
+    "note": "候補30件から10件の選定は04bで先に実行する。"
+  },
+  "roles": {
+    "rewriter": {
+      "provider": "openai",
+      "api_key_env": "OPENAI_API_KEY",
+      "model_id": "gpt-4.1-2025-04-14",
+      "temperature": 0.5,
+      "supports_temperature": true,
+      "max_output_tokens": 1800,
+      "input_usd_per_million": 2.0,
+      "output_usd_per_million": 8.0
+    },
+    "meta_optimizer": {
+      "provider": "openai",
+      "api_key_env": "OPENAI_API_KEY",
+      "model_id": "gpt-4.1-2025-04-14",
+      "temperature": 0.7,
+      "supports_temperature": true,
+      "max_output_tokens": 2400,
+      "input_usd_per_million": 2.0,
+      "output_usd_per_million": 8.0
+    },
+    "training_rerankers": [
+      {
+        "anonymous_label": "Model A",
+        "provider": "openai",
+        "api_key_env": "OPENAI_API_KEY",
+        "model_id": "gpt-4.1-2025-04-14",
+        "temperature": 0.3,
+        "supports_temperature": true,
+        "max_output_tokens": 500,
+        "input_usd_per_million": 2.0,
+        "output_usd_per_million": 8.0
+      },
+      {
+        "anonymous_label": "Model B",
+        "provider": "google",
+        "api_key_env": "GEMINI_API_KEY",
+        "model_id": "gemini-3-flash-preview",
+        "temperature": 0.3,
+        "supports_temperature": true,
+        "max_output_tokens": 500,
+        "input_usd_per_million": 0.5,
+        "output_usd_per_million": 3.0
+      }
+    ],
+    "heldout_rerankers": [
+      {
+        "anonymous_label": "Model E",
+        "provider": "anthropic",
+        "api_key_env": "ANTHROPIC_API_KEY",
+        "model_id": "claude-sonnet-4-5-20250929",
+        "temperature": 0.3,
+        "supports_temperature": true,
+        "max_output_tokens": 700,
+        "input_usd_per_million": 3.0,
+        "output_usd_per_million": 15.0
+      }
+    ]
+  },
+  "budget": {
+    "warning_thresholds_usd": [20, 50, 80],
+    "default_hard_stop_usd": 100,
+    "cost_accounting": "各社APIが返す入力・出力トークンへ2026-08-02時点の標準単価を適用する。Geminiのthinking tokensは出力料金へ含める。キャッシュ割引とBatch割引は保守的に考慮しない。"
+  },
+  "execution": {
+    "max_retries": 3,
+    "retry_max_wait_seconds": 12,
+    "store_openai_responses": false,
+    "resume_from_jsonl_cache": true,
+    "test_locked_until_prompt_freeze": true,
+    "short_test_after_long_prompt_freeze_only": true,
+    "smoke_tests_all_three_providers": true
+  }
+}
