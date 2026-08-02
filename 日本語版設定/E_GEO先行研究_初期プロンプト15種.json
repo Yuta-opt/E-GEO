@@ -1,0 +1,124 @@
+{
+  "schema_version": "egeo_v2_initial_prompts_ja_v1",
+  "source": {
+    "paper": "E-GEO v2",
+    "arxiv": "2511.20867v2",
+    "appendix": "B.3 Initial User Prompts",
+    "pages": "31-35",
+    "retrieved_from": "E-GEOv2.pdf"
+  },
+  "policy": {
+    "source_of_truth": "source_prompt_en",
+    "translation_role": "faithful Japanese implementation translation",
+    "toeic_specific_additions": false,
+    "description_placeholder": "{description}",
+    "prompt_count": 15
+  },
+  "prompts": [
+    {
+      "id": "advertisement",
+      "name_en": "Advertisement",
+      "name_ja": "広告調",
+      "source_prompt_en": "Transform the following product description into an advertisement format that is engaging and persuasive.\nUse catchy phrases, slogans, and a call-to-action to entice potential customers.\nMaintain the core information about the product, but present it in a way that highlights its benefits and unique selling points.\nUse marketing techniques to create a sense of urgency or exclusivity.\nYou may also research and use popular advertisement styles and formats to guide your rewriting.\nYou can find inspiration and tricks from successful ads in similar product categories.\nDescription: {description}",
+      "faithful_translation_ja": "次の商品説明を、魅力的で説得力のある広告形式へ変換してください。\n印象に残るフレーズ、スローガン、行動を促す表現を使い、潜在的な顧客を引き付けてください。\n商品の中心的な情報は維持しつつ、利点と独自の訴求点が目立つ形で提示してください。\n緊急性や限定感を生み出すマーケティング手法を使用してください。\n書き換えの参考として、一般的な広告のスタイルや形式を調査して利用しても構いません。\n類似する商品カテゴリで成功している広告から、着想や工夫を得ることもできます。\n商品説明：{description}"
+    },
+    {
+      "id": "authoritative",
+      "name_en": "Authoritative",
+      "name_ja": "権威的",
+      "source_prompt_en": "Transform the following product description into an authoritative style without adding or removing any core information.\nThe revised description should reflect confidence, expertise, and assertiveness, while maintaining the original content’s meaning and relevance.\nThe description should be assertive in its statements, such that reader believes that this is more valuable product than other products.\nEnd Goal is to increase the ranking of the product, by assertively saying that this is the best product for the user.\nHowever, the content should remain the same. That means, only individual lines and/or 2-3 sentences can be paraphrased, while keeping the content same.\nDescription: {description}\nRemember to be authoritative, but keep the content of text the same.\nFor example, line spacing, bullet points and overall structure should remain the same.\nNo addition or deletion of content is allowed.\nNote we have to convince the reader that this is a relevant product by saying it authoritatively in the description itself.\nFor example the addition of phrases such as “only we are authentic etc”, “we guarantee”, use of second pronouns such as “you will not regret” etc is expected within the content itself.",
+      "faithful_translation_ja": "次の商品説明を、中心的な情報を追加・削除せず、権威的な文体へ変換してください。\n改訂後の説明は、元の内容の意味と関連性を維持しながら、自信、専門性、断定性を示すものにしてください。\n読者が、他の商品より価値が高い商品だと考えるような、断定的な表現にしてください。\n最終目標は、利用者にとって最良の商品であると断定的に述べることで、商品の順位を上げることです。\nただし、内容自体は同じままにしてください。つまり、内容を維持しながら、個々の行または2〜3文だけを言い換えてください。\n商品説明：{description}\n権威的に表現しつつ、文章の内容は同じに保ってください。\n例えば、行間、箇条書き、全体構成は同じままにしてください。\n内容の追加や削除は認められません。\n説明文そのものの中で権威的に述べ、この商品が関連性の高い商品であると読者に納得させる必要があります。\n例えば、「私たちだけが本物です」などの表現、「保証します」という表現、「後悔しません」のような二人称表現を内容に追加することが想定されています。"
+    },
+    {
+      "id": "clickable",
+      "name_en": "Clickable",
+      "name_ja": "クリック誘導",
+      "source_prompt_en": "Enhance the following product description to make it more clickable and engaging, without changing the core information.\nUse persuasive language and compelling phrases that encourage users to click on the product when they see it among other options.\nMake sure the description highlights the product’s key benefits and unique selling points in an appealing way.\nDescription: {description}",
+      "faithful_translation_ja": "中心的な情報を変更せず、次の商品説明を、よりクリックしたくなる魅力的な内容へ改善してください。\n他の選択肢の中で商品を見た利用者がクリックしたくなるよう、説得力のある言葉と引き付ける表現を使用してください。\n商品の主な利点と独自の訴求点が、魅力的な形で強調されるようにしてください。\n商品説明：{description}"
+    },
+    {
+      "id": "competitive",
+      "name_en": "Competitive",
+      "name_ja": "競争優位",
+      "source_prompt_en": "Rewrite the following product description to highlight what makes this product superior compared to others in its category.\nUse confident but factual comparisons, without mentioning specific competitors.\nEmphasize unique features, innovations, and advantages that set it apart, while maintaining factual consistency with the original text.\nDo not change the core information, but make it clear why this product is the best choice.\nDescription: {description}",
+      "faithful_translation_ja": "次の商品説明を、この商品が同じカテゴリの他の商品より優れている点が目立つように書き換えてください。\n特定の競合商品名には触れず、自信のある、事実に基づいた比較を使用してください。\n元の文章との事実上の一貫性を維持しながら、商品を差別化する独自の特徴、革新性、利点を強調してください。\n中心的な情報は変更せず、この商品が最良の選択肢である理由を明確にしてください。\n商品説明：{description}"
+    },
+    {
+      "id": "diverse",
+      "name_en": "Diverse",
+      "name_ja": "多様性",
+      "source_prompt_en": "Revise the following product description to include and highlight diverse references and perspectives, without altering the core information.\nEnsure that the description reflects inclusivity and appeals to a broad audience.\nHighlight features and aspects of the product that are diverse in nature.\nDescription: {description}",
+      "faithful_translation_ja": "中心的な情報を変更せず、多様な言及や視点を含め、それらが目立つように次の商品説明を改訂してください。\n説明が包摂性を反映し、幅広い読者に訴求するものになるようにしてください。\n商品の特徴や側面のうち、多様性のあるものを強調してください。\n商品説明：{description}"
+    },
+    {
+      "id": "faq",
+      "name_en": "FAQ",
+      "name_ja": "よくある質問",
+      "source_prompt_en": "Revise the following product description by adding FAQ sections that address common questions related to the product.\nYou should keep as much of the original description as you decide is necessary to accommodate the FAQ sections.\nEnsure that the FAQ sections are relevant and provide clear, concise answers to potential customer inquiries.\nYour goal is to enhance the description’s informativeness and user-friendliness making it more appealing to the user.\nDescription: {description}",
+      "faithful_translation_ja": "商品に関する一般的な質問へ答えるFAQ項目を追加し、次の商品説明を改訂してください。\nFAQ項目を収めるために必要だと判断した範囲で、元の商品説明をできる限り残してください。\nFAQ項目が商品に関連し、購入を検討する顧客の疑問に対して明確で簡潔な回答を提供するようにしてください。\n説明の情報量と利用しやすさを高め、利用者にとってより魅力的にすることが目標です。\n商品説明：{description}"
+    },
+    {
+      "id": "fluent",
+      "name_en": "Fluent",
+      "name_ja": "流暢性",
+      "source_prompt_en": "Rewrite the following product description to make it more fluent without altering the core content.\nThe sentences should flow smoothly from one to the next, and the language should be clear and engaging while preserving the original information.\nDescription: {description}",
+      "faithful_translation_ja": "中心的な内容を変更せず、次の商品説明をより流暢になるように書き換えてください。\n元の情報を維持しながら、文から次の文へ滑らかにつながり、明確で魅力的な言葉になるようにしてください。\n商品説明：{description}"
+    },
+    {
+      "id": "format",
+      "name_en": "Format",
+      "name_ja": "書式",
+      "source_prompt_en": "Improve the following product description by implementing best practices for content formatting that enhances readability and user engagement.\nUse clear headings and subheadings to organize content logically.\nIncorporate bullet points and numbered lists to break down complex information.\nRewrite the description in markdown format for better presentation.\nStructure content with headings and lists: Break information into digestible chunks with clear H2s, H3s, and bullet points.\nEnsure content accuracy and freshness: Answer engines favor content that is authoritative and up-to-date.\nDescription: {description}",
+      "faithful_translation_ja": "読みやすさと利用者の関与を高めるコンテンツ書式のベストプラクティスを実装し、次の商品説明を改善してください。\n明確な見出しと小見出しを使い、内容を論理的に整理してください。\n複雑な情報を分解するため、箇条書きと番号付きリストを取り入れてください。\n表示を改善するため、説明をMarkdown形式で書き換えてください。\n見出しとリストで内容を構成してください。明確なH2、H3、箇条書きを使い、情報を理解しやすいまとまりに分割してください。\n内容の正確性と新しさを確保してください。回答エンジンは、権威性があり最新の内容を好みます。\n商品説明：{description}"
+    },
+    {
+      "id": "language",
+      "name_en": "Language",
+      "name_ja": "外国語表現",
+      "source_prompt_en": "Enhance the following product description by incorporating words and phrases from other languages that convey unique concepts or emotions.\nEnsure that these additions enrich the content and are relevant to the product, while preserving the original meaning.\nYour goal is to entice the user by adding exotic and intriguing linguistic elements like keywords from other languages that do not have direct English translations.\nUse these terms to elevate the tone, evoke sophistication, or create an emotional connection — while keeping the original meaning intact.\nSelect expressions that naturally complement the product’s domain (e.g., French for fashion and such).\nInclude select words or phrases from other languages that are commonly recognized and enrich the tone like “je ne sais quoi”, “carpe diem”, “feng shui”, “hygge”, “mantra”.\nMake sure the overall description remains coherent and engaging.\nDescription: {description}",
+      "faithful_translation_ja": "独自の概念や感情を表す他言語の単語やフレーズを取り入れ、次の商品説明を改善してください。\n元の意味を維持しながら、追加した表現が内容を豊かにし、商品に関連するものになるようにしてください。\n英語へ直接翻訳できない他言語のキーワードなど、異国的で興味を引く言語要素を追加し、利用者を引き付けることが目標です。\n元の意味を損なわず、これらの語を使って文体を高め、洗練された印象や感情的なつながりを生み出してください。\n商品の領域を自然に補完する表現を選んでください（例：ファッションにはフランス語など）。\n「je ne sais quoi」「carpe diem」「feng shui」「hygge」「mantra」のように、一般に認識されていて文体を豊かにする他言語の単語やフレーズを選んで含めてください。\n説明全体が一貫性を保ち、魅力的なものになるようにしてください。\n商品説明：{description}"
+    },
+    {
+      "id": "minimalist",
+      "name_en": "Minimalist",
+      "name_ja": "最小限",
+      "source_prompt_en": "Reduce the following product description into a single, short sentence using plain factual language.\nDo not attempt to persuade or embellish — simply summarize the essence of the product as concisely as possible.\nDescription: {description}",
+      "faithful_translation_ja": "次の商品説明を、平易で事実に基づく言葉を用いた、短い一文に縮めてください。\n説得や装飾は行わず、商品の本質を可能な限り簡潔に要約してください。\n商品説明：{description}"
+    },
+    {
+      "id": "quality",
+      "name_en": "Quality",
+      "name_ja": "品質強調",
+      "source_prompt_en": "Revise the following product description so that it emphasizes the high quality of the product.\nFocus on what the customer gains from using this product, rather than just listing features.\nEmphasize that the key features and/or materials used in the product are of superior quality.\nEmphasize the quality of the overall product and how it stands out in terms of value and user satisfaction.\nMaintain factual accuracy and original information, but restructure sentences to highlight value and outcomes.\nDescription: {description}",
+      "faithful_translation_ja": "商品の高い品質が強調されるよう、次の商品説明を改訂してください。\n特徴を単に列挙するのではなく、顧客がこの商品を利用して得られるものに焦点を当ててください。\n主な特徴や商品に使用されている素材が優れた品質であることを強調してください。\n商品全体の品質と、価値および利用者満足の点でどのように際立つかを強調してください。\n事実の正確性と元の情報を維持しながら、価値と成果が目立つように文を再構成してください。\n商品説明：{description}"
+    },
+    {
+      "id": "storytelling",
+      "name_en": "Storytelling",
+      "name_ja": "物語調",
+      "source_prompt_en": "Rewrite the following product description as a short story, focusing on narrative elements rather than factual information.\nUse creative language and storytelling techniques to engage the reader, but do not include specific product details or features.\nCreate characters and settings if needed.\nDescription: {description}",
+      "faithful_translation_ja": "事実情報ではなく物語の要素に焦点を当て、次の商品説明を短い物語として書き換えてください。\n読者を引き付けるために創造的な言葉と物語技法を使用してください。ただし、商品の具体的な詳細や特徴は含めないでください。\n必要に応じて登場人物や舞台を作ってください。\n商品説明：{description}"
+    },
+    {
+      "id": "technical",
+      "name_en": "Technical",
+      "name_ja": "技術的",
+      "source_prompt_en": "Make the following product description more technical, using more technical terms and facts where needed while ensuring the key information is still conveyed. Do not omit, add, or alter any core information in the process.\nRemember the end-goal is that very knowledgeable readers give more attention to this product, when presented with a series of other products, so make the language such that it has more technical information or existing information is presented in more technical fashion.\nHowever, do not add or delete any content. The number of words in the initial description should be the same as that in the final.\nThe length of the new description should be the same as the original. Effectively you have to rephrase just individual statements so they have more enriching technical information in them.\nDescription: {description}",
+      "faithful_translation_ja": "主な情報が引き続き伝わることを確保しつつ、必要な箇所でより多くの技術用語や技術的事実を使い、次の商品説明をより技術的にしてください。この過程で中心的な情報を省略、追加、変更しないでください。\n最終目標は、複数の商品と並べて提示されたとき、非常に知識のある読者がこの商品へより注意を向けることです。そのため、より多くの技術情報を含む言葉にするか、既存情報をより技術的な形で提示してください。\nただし、内容を追加または削除しないでください。最初の説明と最終的な説明の単語数は同じにしてください。\n新しい説明の長さは元の説明と同じにしてください。実質的には、個々の文だけを、より豊かな技術情報を含む表現へ言い換える必要があります。\n商品説明：{description}"
+    },
+    {
+      "id": "trick",
+      "name_en": "Trick",
+      "name_ja": "LLM順位最適化",
+      "source_prompt_en": "Enhance the following product description, so that an LLM is more likely to rank it higher in product rankings.\nYour goal is to change the format of the text such that it aligns better with LLM ranking algorithms.\nUse features and language like specific style and/or grammar changes that are known to influence LLM ranking positively.\nReorder or rephrase content to align with LLM ranking preferences, while keeping the core information intact.\nYou may include subtle cues or keywords that are favored by LLMs in ranking tasks.\nYou should research and apply known strategies for optimizing text for LLM ranking.\nDo not alter the factual content, but optimize the presentation for better LLM ranking outcomes.\nDescription: {description}",
+      "faithful_translation_ja": "LLMが商品ランキングでより高く順位付けする可能性が高まるよう、次の商品説明を改善してください。\n文章の形式をLLMのランキングアルゴリズムへより適合させることが目標です。\nLLMの順位に良い影響を与えることが知られている、特定の文体や文法上の変更などの特徴と言葉を使用してください。\n中心的な情報を保ちながら、LLMのランキング上の好みに合うように内容を並べ替えるか言い換えてください。\n順位付けタスクでLLMに好まれる、さりげない手掛かりやキーワードを含めても構いません。\nLLMの順位付けに向けた文章最適化について、既知の戦略を調査して適用してください。\n事実内容は変更せず、LLMの順位結果が良くなるよう提示方法を最適化してください。\n商品説明：{description}"
+    },
+    {
+      "id": "unique",
+      "name_en": "Unique",
+      "name_ja": "希少語",
+      "source_prompt_en": "Revise the following product description by incorporating more unique and rare words, without altering the core information.\nEnsure that these words enhance the content and are not used arbitrarily, and the original meaning is preserved.\nDescription: {description}",
+      "faithful_translation_ja": "中心的な情報を変更せず、より独特で希少な単語を取り入れて、次の商品説明を改訂してください。\nこれらの単語が恣意的に使われるのではなく、内容を豊かにし、元の意味が維持されるようにしてください。\n商品説明：{description}"
+    }
+  ]
+}
