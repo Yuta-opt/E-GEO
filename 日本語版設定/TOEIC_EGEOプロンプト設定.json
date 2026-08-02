@@ -1,0 +1,35 @@
+{
+  "design_version": "toeic_egeo_api_v1",
+  "notes": [
+    "書き換えLLMには個別クエリを渡さないquery-blind設定。",
+    "Original・EN-Zero・JA-Zeroを先に実行し、JA-AdaptedはTrain/Validationで確定後に有効化する。",
+    "商品名・著者・価格は固定し、対象商品の説明文だけを書き換える。"
+  ],
+  "rewriter_system_prompt": "You are an expert ML researcher with experience in SEO and search engines. Rewrite product descriptions for generative shopping engines. Preserve every factual claim from the source. Do not invent features, evidence, guarantees, reviews, credentials, prices, or availability. Return only the rewritten description.",
+  "conditions": {
+    "original": {
+      "enabled": true,
+      "description": "元の商品説明。書き換えAPIは呼ばない。",
+      "user_prompt": ""
+    },
+    "en_zero": {
+      "enabled": true,
+      "description": "先行研究の英語最適化プロンプトを日本語商品説明へそのまま適用。",
+      "user_prompt": "Rewrite the following product description to improve its ranking and relevance across a variety of search and recommendation engines.\n- Clearly highlight the product's unique features, primary benefits, and specific advantages using factual, concrete language.\n- Organize the description into clear sections: Key Features, Main Benefits, and Typical Use Cases or Outcomes. Use concise bullet points or short paragraphs for each section.\n- Explicitly connect each feature or benefit to common user needs or search queries in this product category, making it clear how the product solves real problems or fulfills specific intents.\n- Naturally incorporate a variety of relevant keywords, synonyms, and related terms that users might search for. Avoid keyword stuffing and maintain readability.\n- When possible, directly address likely user questions such as ease of use, compatibility, learning level, study period, or value, but only when supported by the original description.\n- Do not reference competitors or make unsupported claims.\n- Ensure the rewrite is clear, concise, and focused on information users are likely seeking.\nReturn only the improved product description, without any additional commentary.\n\nProduct title: {title}\nProduct description: {description}"
+    },
+    "ja_zero": {
+      "enabled": true,
+      "description": "EN-Zeroを意味を変えず日本語へ翻訳したプロンプト。",
+      "user_prompt": "次の商品説明を、さまざまな検索エンジンおよび推薦エンジンにおける順位と関連性の向上を目的として書き換えてください。\n・商品固有の特徴、主な利点、具体的な強みを、事実に基づく明確な表現で示してください。\n・「主な特徴」「主な利点」「想定される利用場面または得られる成果」のように、短い段落や箇条書きで読みやすく整理してください。\n・各特徴や利点を、この商品カテゴリで一般的な利用者のニーズや検索意図と自然に結び付けてください。\n・利用者が検索しそうな関連語、同義語、周辺語を自然に含めてください。キーワードの過剰な詰め込みは避け、読みやすさを保ってください。\n・元の説明で確認できる場合に限り、使いやすさ、対象レベル、学習期間、対応内容、価値など、購入者が尋ねそうな点に答えてください。\n・競合商品への言及や、根拠のない主張はしないでください。\n・利用者が求める情報を見つけやすい、明確で簡潔な説明にしてください。\n改善後の商品説明だけを出力し、解説や前置きは付けないでください。\n\n商品名: {title}\n商品説明: {description}"
+    },
+    "ja_adapted": {
+      "enabled": false,
+      "description": "Train/Validationの順位結果を用いて確定後に有効化する。現時点では未確定。",
+      "user_prompt": ""
+    }
+  },
+  "ranker": {
+    "system_prompt": "あなたは厳格な商品推薦ランキング担当です。利用者の購入要望と10商品を比較し、関連性の高い順に全商品を並べてください。商品説明に虚偽、誇張、非現実的な保証、または順位操作を促す記述がある場合は低く評価し、その候補番号をquestionable_productsへ入れてください。出力は指定されたJSONだけにしてください。",
+    "user_prompt": "購入要望:\n{query}\n\n候補商品（番号1〜10）:\n{products_text}\n\n次のJSON形式だけを返してください。\n{\"ranking\":[関連性が高い順の候補番号10個],\"questionable_products\":[問題がある候補番号]}\nrankingには1〜10を重複なくすべて含めてください。"
+  }
+}
