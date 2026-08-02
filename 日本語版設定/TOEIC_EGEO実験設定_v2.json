@@ -1,0 +1,144 @@
+{
+  "schema_version": "toeic_egeo_meta_optimization_v2",
+  "status": "design_locked_api_not_started",
+  "source": {
+    "paper": "E-GEO v2",
+    "arxiv": "2511.20867v2",
+    "sections": [
+      "5.4 Cross-Engine Prompt Meta-Optimization",
+      "Algorithm 1",
+      "Appendix A.2",
+      "Appendix B.5"
+    ]
+  },
+  "dataset": {
+    "train": 40,
+    "validation": 10,
+    "test": 30,
+    "total": 80
+  },
+  "query_policy": {
+    "optimization_query_form": "long",
+    "primary_test_query_form": "long",
+    "supplemental_test_query_form": "short",
+    "short_query_is_used_during_optimization": false,
+    "short_query_runs_only_after_prompt_freeze": true,
+    "short_query_evaluates_initial_prompts": false,
+    "note": "長文を先行研究準拠の主実験に使用し、短文は固定済み最適化プロンプトの追加評価に限定する。"
+  },
+  "prompt_policy": {
+    "initial_prompt_count": 15,
+    "initial_prompt_catalog": "日本語版設定/E_GEO先行研究_初期プロンプト15種.json",
+    "implementation_language": "Japanese faithful translations",
+    "rewriter_is_query_blind": true,
+    "one_optimization_trajectory_per_initial_prompt": true,
+    "final_prompt_selection": "highest mean validation rank improvement across training rerankers among all evaluated prompt versions"
+  },
+  "optimization": {
+    "epochs": 2,
+    "batches_per_epoch": 4,
+    "batch_size": 10,
+    "validation_count_per_evaluation": 10,
+    "history_accumulates_across_epochs": true,
+    "meta_update_after_last_batch_of_each_epoch": false,
+    "meta_updates_per_prompt": 6,
+    "train_partition_rule": "deterministic reshuffle for each epoch",
+    "numpy_seed": 42,
+    "note": "先行研究の2 epochs・各epoch 10 batches・batch size 100を、Train 40件に合わせて2 epochs・各epoch 4 batches・batch size 10へ縮小する。"
+  },
+  "evaluation": {
+    "rank_improvement": "original_rank - rewritten_rank",
+    "original_rank_is_cached_once_per_query_and_reranker": true,
+    "same_candidate_set_and_target_across_all_conditions": true,
+    "test_is_locked_until_prompt_freeze": true,
+    "evaluate_initial_and_optimized_prompts_on_primary_test": true,
+    "heldout_rerankers_are_not_visible_to_meta_optimizer": true,
+    "training_rerankers_are_anonymized": true
+  },
+  "temperature_and_seed": {
+    "rewriter_temperature": 0.5,
+    "reranker_temperature": 0.3,
+    "meta_optimizer_temperature": 0.7,
+    "target_selection_seed": 42
+  },
+  "model_roles": {
+    "rewriter": {
+      "paper_model": "GPT-4.1",
+      "planned_model_id": null
+    },
+    "meta_optimizer": {
+      "paper_model": "GPT-4.1",
+      "planned_model_id": null
+    },
+    "training_rerankers": [
+      {
+        "anonymous_label": "Model A",
+        "paper_model": "GPT-4.1",
+        "planned_model_id": null
+      },
+      {
+        "anonymous_label": "Model B",
+        "paper_model": "Gemini 3 Flash Preview",
+        "planned_model_id": null
+      }
+    ],
+    "heldout_rerankers": [
+      {
+        "anonymous_label": "Model E",
+        "paper_model": "Claude Sonnet 4.5",
+        "planned_model_id": null
+      }
+    ],
+    "note": "モデルIDはAPI利用直前に、提供状況・価格・予算を公式情報で確認して固定する。"
+  },
+  "execution_plans": [
+    {
+      "id": "smoke_1_engine",
+      "label_ja": "接続・全工程確認",
+      "formal_research_result": false,
+      "prompt_count": 1,
+      "train_count": 2,
+      "validation_count": 1,
+      "test_count": 1,
+      "epochs": 1,
+      "batches_per_epoch": 2,
+      "batch_size": 1,
+      "training_reranker_count": 1,
+      "heldout_reranker_count": 1,
+      "candidate_selection_count": 1,
+      "run_supplemental_short": false
+    },
+    {
+      "id": "minimum_research",
+      "label_ja": "本研究の最小構成",
+      "formal_research_result": true,
+      "prompt_count": 15,
+      "train_count": 40,
+      "validation_count": 10,
+      "test_count": 30,
+      "epochs": 2,
+      "batches_per_epoch": 4,
+      "batch_size": 10,
+      "training_reranker_count": 2,
+      "heldout_reranker_count": 1,
+      "candidate_selection_count": 80,
+      "run_supplemental_short": true
+    },
+    {
+      "id": "paper_like",
+      "label_ja": "先行研究に近いモデル構成",
+      "formal_research_result": true,
+      "prompt_count": 15,
+      "train_count": 40,
+      "validation_count": 10,
+      "test_count": 30,
+      "epochs": 2,
+      "batches_per_epoch": 4,
+      "batch_size": 10,
+      "training_reranker_count": 4,
+      "heldout_reranker_count": 2,
+      "candidate_selection_count": 80,
+      "run_supplemental_short": true
+    }
+  ]
+}
