@@ -9,6 +9,7 @@ dependencies = [
     "huggingface_hub>=0.34",
     "isort>=7.0.0",
     "anthropic>=0.40.0",
+    "google-genai>=1.0.0",
     "llm-batch-helper>=0.4.0",
     "matplotlib>=3.10.7",
     "numpy>=2.3.5",
