@@ -27,7 +27,11 @@ function Invoke-Step {
     Write-Host "============================================================" -ForegroundColor Cyan
     Write-Host $Title -ForegroundColor Cyan
     Write-Host "============================================================" -ForegroundColor Cyan
+    $global:LASTEXITCODE = 0
     & $Command
+    if ($LASTEXITCODE -ne 0) {
+        throw "ステップ失敗: $Title（終了コード $LASTEXITCODE）"
+    }
 }
 
 Write-Host "E-GEO 日本語TOEIC研究：OpenAI + Gemini + Claude" -ForegroundColor Green
@@ -62,7 +66,8 @@ Invoke-Step "4. 候補30件→10件の計画を固定モデルで再作成" {
 }
 
 Invoke-Step "5. メタ最適化スケジュールを再確認" {
-    uv run python ".\日本語版コード\05a_TOEICメタ最適化実験を計画.py"
+    uv run python ".\日本語版コード\05a_TOEICメタ最適化実験を計画.py" `
+        --overwrite
 }
 
 if ($Mode -eq "Validate") {
