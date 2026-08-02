@@ -13,6 +13,7 @@ $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 Set-Location $RepoRoot
 
 $CandidateModel = "gpt-5-mini-2025-08-07"
+$Runner = ".\日本語版コード\05c_TOEIC_OpenAI単一キー実験を自動実行.py"
 
 function Invoke-Step {
     param(
@@ -42,6 +43,7 @@ Invoke-Step "2. 実行コードの構文チェック" {
         ".\日本語版コード\05a_TOEICメタ最適化実験を計画.py" `
         ".\日本語版コード\05b_TOEIC候補選定API直前チェック.py" `
         ".\日本語版コード\05c_TOEICメタ最適化API実験を自動実行.py" `
+        $Runner `
         ".\日本語版コード\06_TOEICメタ最適化実験結果を分析.py" `
         ".\日本語版コード\07_TOEIC研究完了チェック.py"
 }
@@ -63,10 +65,16 @@ if ($Mode -eq "Validate") {
     Invoke-Step "6. API直前チェック（API呼び出し0回）" {
         uv run python ".\日本語版コード\05b_TOEIC候補選定API直前チェック.py"
     }
-    Invoke-Step "7. 研究本体ランナーのdry-run（API呼び出し0回）" {
-        uv run python ".\日本語版コード\05c_TOEICメタ最適化API実験を自動実行.py" `
-            --mode smoke `
-            --hard-stop-usd $HardStopUsd
+    if (Test-Path ".\日本語版データ\TOEIC\04_候補商品\08_toeic_experiment_instances.json") {
+        Invoke-Step "7. OpenAI研究本体ランナーのdry-run（API呼び出し0回）" {
+            uv run python $Runner `
+                --mode smoke `
+                --hard-stop-usd $HardStopUsd
+        }
+    }
+    else {
+        Write-Host ""
+        Write-Host "候補10件が未確定のため、研究本体dry-runは候補選定後に行います。" -ForegroundColor Yellow
     }
     Write-Host ""
     Write-Host "Validate完了：APIは呼び出していません。" -ForegroundColor Green
@@ -86,8 +94,8 @@ Invoke-Step "7. 候補10件を全80購入意図で選定し、対象商品を固
 }
 
 if ($Mode -eq "Smoke") {
-    Invoke-Step "8. 研究本体のsmoke実験" {
-        uv run python ".\日本語版コード\05c_TOEICメタ最適化API実験を自動実行.py" `
+    Invoke-Step "8. OpenAI単一キーのsmoke実験" {
+        uv run python $Runner `
             --mode smoke `
             --execute `
             --hard-stop-usd $HardStopUsd
@@ -107,16 +115,16 @@ if ($Mode -eq "Smoke") {
 }
 
 if (-not $SkipSmoke) {
-    Invoke-Step "8. 正式実験前のsmoke実験" {
-        uv run python ".\日本語版コード\05c_TOEICメタ最適化API実験を自動実行.py" `
+    Invoke-Step "8. 正式実験前のOpenAI smoke実験" {
+        uv run python $Runner `
             --mode smoke `
             --execute `
             --hard-stop-usd $HardStopUsd
     }
 }
 
-Invoke-Step "9. 15プロンプトの正式メタ最適化・Test評価" {
-    uv run python ".\日本語版コード\05c_TOEICメタ最適化API実験を自動実行.py" `
+Invoke-Step "9. 15プロンプトのOpenAI正式メタ最適化・Test評価" {
+    uv run python $Runner `
         --mode full `
         --execute `
         --hard-stop-usd $HardStopUsd
