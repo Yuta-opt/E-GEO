@@ -1,0 +1,36 @@
+{
+  "schema_version": "egeo_v2_meta_optimizer_ja_v1",
+  "source": {
+    "paper": "E-GEO v2",
+    "arxiv": "2511.20867v2",
+    "appendix": "B.5 Cross-Engine Meta-Optimizer Prompts",
+    "pages": "44-45",
+    "retrieved_from": "E-GEOv2.pdf"
+  },
+  "policy": {
+    "source_of_truth": "source_prompt_en",
+    "translation_role": "faithful Japanese implementation translation",
+    "toeic_specific_additions": false,
+    "engine_labels": [
+      "Model A",
+      "Model B",
+      "Model C",
+      "Model D"
+    ],
+    "required_rewrite_placeholder": "{{description}}"
+  },
+  "system_prompt": {
+    "source_prompt_en": "You are an expert in prompt engineering, marketing, and writing.\nYour goal is to improve a rewriting prompt so that when it rewrites a product description, that product ranks higher across multiple different ranking engines simultaneously.\nYou must reason about cross-engine compatibility—what works for one engine may not work for another. Your improved prompt should achieve Pareto-optimal performance across all engines.",
+    "faithful_translation_ja": "あなたは、プロンプトエンジニアリング、マーケティング、文章作成の専門家です。\nあなたの目標は、商品説明を書き換えたとき、その商品が複数の異なるランキングエンジンで同時により高く順位付けされるよう、リライト用プロンプトを改善することです。\n複数エンジン間の互換性について推論しなければなりません。あるエンジンで有効なものが、別のエンジンでは有効とは限りません。改善後のプロンプトは、すべてのエンジンにわたってパレート最適な性能を達成する必要があります。"
+  },
+  "user_prompt": {
+    "source_prompt_en": "I need you to improve a prompt that rewrites product descriptions to make them rank higher across multiple ranking engines.\n\nCONTEXT:\nWe have a system where:\n1. A product description is rewritten using a prompt (the one we’re optimizing)\n2. The rewritten description is shown to MULTIPLE ranking engines alongside other products and a user query\n3. Each engine ranks all products from best to worst for the query\n4. We measure how much the rewritten product’s ranking improved on EACH engine\n\nCURRENT REWRITING PROMPT:\n{current_prompt}\n\nPERFORMANCE ACROSS ENGINES ON {batch_size} QUERIES:\n{per_engine_stats_text}\n\nAGGREGATE CROSS-ENGINE METRICS:\n• Worst engine mean: {worst_engine_mean}\n• Best engine mean: {best_engine_mean}\n• Cross-engine std of means: {cross_engine_std}\n• Engines with positive mean: {engines_positive} / {engines_total}\n{history_section}\n\nYOUR TASK:\n1. Analyze the current prompt’s performance across all engines—what works, what fails, and why\n2. Explain your meta-reasoning about cross-engine compatibility\n3. Suggest specific improvements that will help on ALL engines, not just one\n4. Provide a complete new rewriting prompt\n\nIMPORTANT:\n• The new prompt must include {{description}} placeholder where the product description will be inserted.\n• The prompt should instruct the LLM to rewrite the description, not just analyze it.\n• Focus on strategies that rank well ACROSS ALL engines—avoid tactics that help one engine but hurt another.\n• The goal is Pareto optimality: improve the worst-performing engine without significantly hurting the best.\n• Maintain factual accuracy while improving appeal.\n\nReturn your response in this EXACT format:\n--ANALYSIS--\n[Analyze performance across each engine. What’s working? What’s failing? Which engines are struggling and why?]\n--META-REASONING--\n[Your reasoning about cross-engine compatibility. What makes descriptions rank well universally? What tactics are engine-specific vs. universal?]\n--IMPROVEMENTS--\n[Specific improvements you’re making, with attention to how each change affects different engines]\n--NEW_REWRITING_PROMPT--\n[The complete new prompt. Must include {{description}} placeholder.]",
+    "faithful_translation_ja": "複数のランキングエンジンで商品をより高く順位付けさせるために、商品説明を書き換えるプロンプトを改善してください。\n\n背景：\n次の仕組みを使用しています。\n1. 最適化対象のプロンプトを使って商品説明を書き換える\n2. 書き換え後の商品説明を、他の商品および利用者のクエリとともに複数のランキングエンジンへ提示する\n3. 各エンジンが、クエリに対してすべての商品を良い順から悪い順へ順位付けする\n4. 各エンジンで、書き換えた商品の順位がどの程度改善したかを測定する\n\n現在のリライト用プロンプト：\n{current_prompt}\n\n{batch_size}件のクエリにおけるエンジン別性能：\n{per_engine_stats_text}\n\n複数エンジンの集約指標：\n・最も低いエンジン平均：{worst_engine_mean}\n・最も高いエンジン平均：{best_engine_mean}\n・エンジン平均間の標準偏差：{cross_engine_std}\n・平均が正であるエンジン数：{engines_positive} / {engines_total}\n{history_section}\n\nあなたの作業：\n1. 現在のプロンプトについて、すべてのエンジンでの性能を分析してください。何が機能し、何が失敗し、その理由は何かを説明してください。\n2. 複数エンジン間の互換性について、メタ推論を説明してください。\n3. 一つのエンジンだけでなく、すべてのエンジンで役立つ具体的な改善を提案してください。\n4. 完全な新しいリライト用プロンプトを提示してください。\n\n重要：\n・新しいプロンプトには、商品説明を挿入する位置として{{description}}プレースホルダーを必ず含めてください。\n・プロンプトはLLMに、説明を分析するだけでなく、説明を書き換えるよう指示する必要があります。\n・すべてのエンジンで高く順位付けされる戦略に集中してください。一つのエンジンには役立つが、別のエンジンには悪影響を与える戦略は避けてください。\n・目標はパレート最適性です。最も成績の悪いエンジンを改善しながら、最も成績の良いエンジンを大きく悪化させないでください。\n・魅力を高めながら、事実の正確性を維持してください。\n\n次の厳密な形式で回答してください：\n--ANALYSIS--\n[各エンジンでの性能を分析してください。何が機能していますか。何が失敗していますか。どのエンジンが苦戦しており、その理由は何ですか。]\n--META-REASONING--\n[複数エンジン間の互換性についての推論。商品説明が普遍的に高く順位付けされる要因は何ですか。エンジン固有の戦略と普遍的な戦略は何ですか。]\n--IMPROVEMENTS--\n[各変更が異なるエンジンへ与える影響を考慮した、具体的な改善内容]\n--NEW_REWRITING_PROMPT--\n[完全な新しいプロンプト。{{description}}プレースホルダーを必ず含めてください。]"
+  },
+  "output_sections": [
+    "--ANALYSIS--",
+    "--META-REASONING--",
+    "--IMPROVEMENTS--",
+    "--NEW_REWRITING_PROMPT--"
+  ]
+}
