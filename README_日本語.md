@@ -4,10 +4,8 @@ E-GEO v2の中核である、**複数Re-rankerの順位結果を用いたプロ�
 
 ## 研究の中心
 
-本研究は、先行研究の完成プロンプトを1つ移植する実験ではありません。
-
 ```text
-15種類の異なる初期リライトプロンプト
+15種類の初期リライトプロンプト
         ↓
 Trainで複数Re-rankerの順位改善量を測定
         ↓
@@ -17,168 +15,162 @@ Validation平均が最も高い版を固定
         ↓
 未使用のTestと評価専用Re-rankerで最終評価
         ↓
-異なる初期プロンプトが共通戦略へ収束するか分析
+初期版と最適化版、長文と短文、プロンプト収束を分析
 ```
 
 位置づけは、**E-GEO v2のscaled-down replicationと、日本語・TOEIC・短文検索への拡張**です。
 
 ## データ
 
-- 楽天ブックスで収集したTOEIC教材：300件
-- 明らかに使用できない商品を除外後：271件
-- 価格欠損と明確な同一商品を除外した商品プール：270件
+- 楽天ブックスで収集：300商品
+- クレンジング後：271商品
+- 最終商品プール：270商品
 - 購入意図：80件
-- 分割：Train 40／Validation 10／Test 30
-- 主実験：長文の購入相談クエリ
-- 追加実験：対応するGoogleサジェスト由来の短文クエリ
+- Train 40／Validation 10／Test 30
+- 主実験：長文購入相談
+- 追加実験：Googleサジェスト由来の短文検索
 
-購入意図とクエリは、対象商品を見ずに先に固定しています。購入意図の正本は`toeic_query_intents_review.xlsx`です。旧`toeic_query_intents_master.csv`は削除しました。
+購入意図の正本は`toeic_query_intents_review.xlsx`です。Dense Retrievalの2,400行について、正本の`long_query_final`と最終商品プールの`title + description_clean`を使用したことを照合し、不一致0件を確認済みです。
 
 ## 候補商品の作成
 
-先行研究と同じ二段階構造を使います。
-
 ```text
-長文クエリ
+270商品
   ↓
 多言語Sentence TransformerによるDense Retrieval
   ↓
-270商品からコサイン類似度上位30件
+コサイン類似度上位30件
   ↓
-GPT-5 miniによる厳格な関連性判定
-  ↓
-候補10件を固定
+OpenAI GPT-5 miniによる関連商品10件の選定
   ↓
 seed 42で対象商品1件を固定
 ```
 
-日本語対応のため、埋め込みモデルには`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`を使用します。カテゴリによる事前絞り込み、タイトルの独自重み付け、目標得点による加点は使用しません。
+埋め込みモデルは`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`です。カテゴリ絞り込み、タイトルへの独自重み付け、目標得点加点は使用しません。
 
-Dense Retrievalの2,400行について、次が正式ファイルと完全一致することを検証済みです。
+## 本体実験は2経路に分離
 
-- クエリ：`toeic_query_intents_review.xlsx`の`long_query_final`
-- 商品：`toeic_product_pool_final.csv`の`title`と`description_clean`
-- クエリ不一致：0行
-- タイトル不一致：0行
-- 商品説明不一致：0行
+### A. OpenAI単一キー版
 
-## プロンプト最適化
-
-初期プロンプトは、E-GEO v2 Appendix B.3の15種類を忠実に日本語へ翻訳したものです。
-
-- 15初期プロンプト
-- 2 epochs
-- 1 epoch当たり4 batches
-- 1 batch当たりTrain 10件
-- 各版をValidation 10件でも評価
-- 履歴はepochをまたいで蓄積
-- Testは最終プロンプト固定までロック
-
-先行研究の1,000 Train／500 Validation／2,000 Test、4学習Re-ranker／2評価専用Re-rankerを、今回は40／10／30、最小構成では2学習Re-ranker／1評価専用Re-rankerへ縮小します。
-
-## 評価
-
-主指標：
+実行入口：
 
 ```text
-順位改善量 = 元順位 - リライト後順位
+日本語版コード/05c_TOEIC_OpenAI単一キー実験を自動実行.py
+tools/実行_TOEIC研究_OpenAI単一キー.ps1
 ```
 
-同じクエリ、候補10件、対象商品を全条件で共有します。元順位はクエリとRe-rankerの組ごとに一度だけ計算し、キャッシュします。
+必要なキー：
 
-最終分析では、初期版と最適化版の順位改善に加え、先行研究と同じ10特徴の出現と、プロンプト埋め込み間の距離から収束を調べます。
+```env
+OPENAI_API_KEY=
+```
 
-## 現在使うコード
+モデル構成：
 
 ```text
-日本語版コード/
-├─ 01_楽天TOEIC商品データをクレンジング.py
-├─ 02_実験用TOEIC商品プールを作成.py
-├─ 03_TOEIC購入意図テンプレートを作成.py
-├─ 04_TOEIC候補商品を割り当て.py
-├─ 04b_TOEIC候補10商品を選ぶ.py
-├─ 04c_TOEIC候補検索入力を検証.py
-├─ 05a_TOEICメタ最適化実験を計画.py
-└─ 05b_TOEIC候補選定API直前チェック.py
+Rewriter              GPT-4.1
+Meta-optimizer         GPT-4.1
+Training Model A       GPT-4.1
+Training Model B       GPT-4.1 mini
+Held-out Model E       GPT-5
 ```
 
-旧`EN-Zero／JA-Zero／JA-Adapted`設計の05〜07、旧プロンプト設定、旧分析出力は削除済みです。
+実装は簡単ですが、全モデルが同じ提供元である点が制約です。
 
-## 現在使う設定
+### B. OpenAI・Gemini・Claude版（正式実験の第一候補）
+
+実行入口：
 
 ```text
-日本語版設定/
-├─ E_GEO先行研究_初期プロンプト15種.json
-├─ E_GEO先行研究_共通プロンプト設定.json
-├─ E_GEO先行研究_メタ最適化設定.json
-├─ E_GEO先行研究_候補10件選定設定.json
-├─ TOEIC_EGEO実験設定_v2.json
-└─ TOEIC_APIモデル設定_v1.json
+日本語版コード/05d_TOEIC_OpenAI_Gemini_Claude実験を自動実行.py
+tools/実行_TOEIC研究_OpenAI_Gemini_Claude.ps1
 ```
 
-英語原文を正本とし、日本語版にはTOEIC固有の独自指示を加えていません。
+必要なキー：
 
-候補30件→10件の最初の有料工程では、再現性のため`gpt-5-mini-2025-08-07`を使用する予定です。OpenAIのResponses APIで利用できる固定スナップショットであり、正式実行前に直前チェックを通します。
+```env
+OPENAI_API_KEY=
+GEMINI_API_KEY=
+ANTHROPIC_API_KEY=
+```
 
-## API費用と完了見込み
-
-詳細は[`日本語版ドキュメント/TOEIC_API費用と完了見込み.md`](日本語版ドキュメント/TOEIC_API費用と完了見込み.md)に記録しています。
-
-現時点の目安：
+モデル構成：
 
 ```text
-APIキー設定後の数値結果完成：3〜5日
-発表可能状態：5〜7日
+Candidate selector     OpenAI GPT-5 mini
+Rewriter               OpenAI GPT-4.1
+Meta-optimizer          OpenAI GPT-4.1
+Training Model A        OpenAI GPT-4.1
+Training Model B        Google Gemini 3 Flash Preview
+Held-out Model E        Anthropic Claude Sonnet 4.5
 ```
 
-| 構成 | 概算費用 | 位置づけ |
-|---|---:|---|
-| 先行研究に近い4学習＋2評価 | $55〜$150、中心約$90 | 比較可能性優先 |
-| 推奨：2学習＋1評価 | $40〜$105、中心約$65〜$70 | 第一候補 |
-| 予算優先 | $10〜$30、中心約$17〜$20 | 小型モデルで手順を維持 |
+先行研究の4学習＋2評価モデルから2学習＋1評価へ縮小していますが、OpenAI・Google・Anthropicを分離できるため、OpenAI単一キー版より提供元をまたぐ一般化検証が強くなります。
 
-第一候補は、GPT-4.1をRewriter・Meta-optimizer・学習Re-ranker A、Gemini 2.5 Flashを学習Re-ranker B、GPT-5を評価専用Re-rankerにする構成です。少数件の実測トークンから再見積りし、$100超過が見込まれる場合は予算優先構成へ変更します。
+## ファイル名と出力を混ぜない
 
-## データフォルダ
+### OpenAIのみ
 
 ```text
-日本語版データ/TOEIC/
-├─ 00_元データ/
-├─ 01_クレンジング済み/
-├─ 02_商品プール/
-├─ 03_購入意図/
-├─ 04_候補商品/
-├─ 05_API実験/
-├─ 06_分析結果/
-└─ 07_本番前チェック/
+日本語版設定/TOEIC_OpenAI単一キー実験設定_v1.json
+日本語版データ/TOEIC/05_API実験/01_OpenAI単一キー実行/
 ```
 
-CSV、Excel、API結果はローカル管理とし、GitHubにはアップロードしません。
+### OpenAI・Gemini・Claude
+
+```text
+日本語版設定/TOEIC_OpenAI_Gemini_Claude実験設定_v1.json
+日本語版データ/TOEIC/05_API実験/02_OpenAI_Gemini_Claude実行/
+日本語版データ/TOEIC/06_分析結果/02_OpenAI_Gemini_Claude/
+```
+
+異なる構成のAPI結果や分析結果を同じフォルダへ混ぜません。
+
+## 3社版の実行方法
+
+APIを使わない構文・入力・設定確認：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File ".\tools\実行_TOEIC研究_OpenAI_Gemini_Claude.ps1" -Mode Validate
+```
+
+3社すべてを少数データで確認：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File ".\tools\実行_TOEIC研究_OpenAI_Gemini_Claude.ps1" -Mode Smoke
+```
+
+正式実験：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File ".\tools\実行_TOEIC研究_OpenAI_Gemini_Claude.ps1" -Mode Full
+```
+
+20・50・80ドルで警告し、既定100ドルで停止します。成功済みジョブはJSONLキャッシュから再利用するため、途中停止後に同じコマンドで再開できます。
 
 ## 現在地
 
 完了：
 
-- 商品クレンジングと270件の商品プール
-- 購入意図80件と短文・長文クエリ
-- 多言語Dense Retrievalによる各クエリ上位30件
-- Dense Retrieval入力の完全一致検証
-- 先行研究の初期プロンプト15種類
-- Rewriter／Re-ranker／Meta-optimizerの共通設定
-- 30件から10件を選ぶ80 APIジョブのdry-run
-- 候補選定用固定モデル設定
-- API直前チェックコード
-- メタ最適化スケジュール作成コード
-- 旧設計ファイルと旧生成物の整理
+- 商品クレンジングと270商品固定
+- 購入意図80件、長文・短文クエリ
+- Dense Retrieval上位30件
+- Dense入力の完全一致検証
+- 初期プロンプト15種類
+- メタ最適化スケジュール
+- OpenAI単一キー版ランナー
+- OpenAI・Gemini・Claude版ランナー
+- 統計・収束・図表の自動分析コード
+- 研究完了チェック
+- 2経路の設定・実行・出力フォルダ分離
 
 未完了：
 
-- GPT-5 miniによる上位30件から候補10件の選定
-- 候補10件確定後の対象商品固定
-- メタ最適化APIランナー本体
-- 少数件の実測トークンに基づく最終予算確定
-- 正規の分析コードと本番前チェック
-- Test、統計、収束分析、発表用図表
+- GPT-5 miniによる候補30件→10件の有料選定
+- 3社APIのsmoke実行
+- 実測トークンによる最終費用確定
+- 正式Train／Validation／Test
+- ポスターへの結果反映
 
 **有料API呼び出しはまだ0回です。**
 
