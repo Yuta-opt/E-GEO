@@ -13,7 +13,6 @@ $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 Set-Location $RepoRoot
 
 $CandidateModel = "gpt-5-mini-2025-08-07"
-$Python = "uv run python"
 
 function Invoke-Step {
     param(
@@ -43,7 +42,8 @@ Invoke-Step "2. 実行コードの構文チェック" {
         ".\日本語版コード\05a_TOEICメタ最適化実験を計画.py" `
         ".\日本語版コード\05b_TOEIC候補選定API直前チェック.py" `
         ".\日本語版コード\05c_TOEICメタ最適化API実験を自動実行.py" `
-        ".\日本語版コード\06_TOEICメタ最適化実験結果を分析.py"
+        ".\日本語版コード\06_TOEICメタ最適化実験結果を分析.py" `
+        ".\日本語版コード\07_TOEIC研究完了チェック.py"
 }
 
 Invoke-Step "3. Dense Retrieval入力の再検証" {
@@ -95,6 +95,11 @@ if ($Mode -eq "Smoke") {
     Invoke-Step "9. smoke結果を自動分析" {
         uv run python ".\日本語版コード\06_TOEICメタ最適化実験結果を分析.py"
     }
+    Invoke-Step "10. smoke完了チェック" {
+        uv run python ".\日本語版コード\07_TOEIC研究完了チェック.py" `
+            --allow-smoke `
+            --hard-stop-usd $HardStopUsd
+    }
     Write-Host ""
     Write-Host "Smoke完了：候補80件と小規模な全工程を確認しました。" -ForegroundColor Green
     Write-Host "正式実験は -Mode Full で開始します。"
@@ -121,10 +126,16 @@ Invoke-Step "10. 正式結果の統計・収束・図表を自動生成" {
     uv run python ".\日本語版コード\06_TOEICメタ最適化実験結果を分析.py"
 }
 
+Invoke-Step "11. 数値結果の研究完了チェック" {
+    uv run python ".\日本語版コード\07_TOEIC研究完了チェック.py" `
+        --hard-stop-usd $HardStopUsd
+}
+
 Write-Host ""
 Write-Host "============================================================" -ForegroundColor Green
-Write-Host "OpenAI単一キー構成の研究実行と分析が完了しました。" -ForegroundColor Green
+Write-Host "OpenAI単一キー構成の研究実行・分析・完了検査が終了しました。" -ForegroundColor Green
 Write-Host "============================================================" -ForegroundColor Green
 Write-Host "APIログ：日本語版データ/TOEIC/05_API実験/01_OpenAI単一キー実行"
 Write-Host "分析結果：日本語版データ/TOEIC/06_分析結果"
+Write-Host "完了判定：日本語版データ/TOEIC/07_本番前チェック/02_research_completion_check.json"
 Write-Host "同じコマンドを再実行しても、成功済みAPIジョブはキャッシュから再利用します。"
