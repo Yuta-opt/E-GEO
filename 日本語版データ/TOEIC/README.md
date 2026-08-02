@@ -37,7 +37,9 @@ API利用後に、次が追加されます。
 
 旧TF-IDF候補割当で作成した`toeic_candidate_*`と`toeic_experiment_instances.json`は使用しません。
 
-## 現在の05_API実験
+## 05_API実験
+
+`05a_TOEICメタ最適化実験を計画.py`を実行すると、次が作成されます。
 
 ```text
 00_実行計画/
@@ -46,6 +48,8 @@ API利用後に、次が追加されます。
 ├─ 03_api_call_plan_summary.csv
 └─ 04_meta_optimization_plan.json
 ```
+
+2026年8月2日時点では、05aコードは実装済みですが、ローカル出力の確認前です。
 
 旧`Original／EN-Zero／JA-Zero`設計の`experiment_plan.json`、`rewrite_results.jsonl`、`ranking_results.jsonl`は使用しません。
 
