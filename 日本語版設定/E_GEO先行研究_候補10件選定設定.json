@@ -14,14 +14,15 @@
     "input_candidate_count": 30,
     "output_candidate_count": 10,
     "index_range": [0, 29],
-    "output_order": "strictly increasing"
+    "output_order": "strictly increasing",
+    "template_note": "Literal braces around the mathematical set are doubled only for Python str.format escaping; the rendered prompt contains single braces."
   },
   "system_prompt": {
     "source_prompt_en": "You are a strict retrieval re-ranking classifier.",
     "faithful_translation_ja": "あなたは厳格な検索再ランキング分類器です。"
   },
   "user_prompt": {
-    "source_prompt_en": "Given:\n• QUERY: a shopping-related user query.\n• PRODUCTS: 30 candidates, each formatted as i: title where i ∈ {0, . . . , 29}.\n\nTask. Select 10 products relevant to the query. Prefer smaller indices (ties broken toward earlier retrieval position).\n\nOutput rules. A JSON array of exactly 10 distinct integers in [0, 29], in strictly increasing order, with no explanation text. If fewer than 10 products are relevant, fill remaining slots with closest reasonable alternatives.\n\nExample. [0,1,2,3,4,5,6,7,8,9]\n\nQUERY:\n{query}\n\nPRODUCTS:\n{products_text}",
-    "faithful_translation_ja": "入力：\n・QUERY：商品購入に関する利用者のクエリ。\n・PRODUCTS：30件の候補商品。各商品は i: title の形式で、i ∈ {0, ..., 29} とする。\n\n作業：クエリに関連する商品を10件選択してください。関連性が同程度の場合は、小さい番号、つまりDense Retrievalで上位の商品を優先してください。\n\n出力規則：0〜29の範囲にある相異なる整数を厳密に10個含むJSON配列を、昇順で返してください。説明文は一切付けないでください。関連商品が10件未満の場合は、残りを最も近い妥当な商品で補ってください。\n\n例：[0,1,2,3,4,5,6,7,8,9]\n\nQUERY：\n{query}\n\nPRODUCTS：\n{products_text}"
+    "source_prompt_en": "Given:\n• QUERY: a shopping-related user query.\n• PRODUCTS: 30 candidates, each formatted as i: title where i ∈ {{0, . . . , 29}}.\n\nTask. Select 10 products relevant to the query. Prefer smaller indices (ties broken toward earlier retrieval position).\n\nOutput rules. A JSON array of exactly 10 distinct integers in [0, 29], in strictly increasing order, with no explanation text. If fewer than 10 products are relevant, fill remaining slots with closest reasonable alternatives.\n\nExample. [0,1,2,3,4,5,6,7,8,9]\n\nQUERY:\n{query}\n\nPRODUCTS:\n{products_text}",
+    "faithful_translation_ja": "入力：\n・QUERY：商品購入に関する利用者のクエリ。\n・PRODUCTS：30件の候補商品。各商品は i: title の形式で、i ∈ {{0, ..., 29}} とする。\n\n作業：クエリに関連する商品を10件選択してください。関連性が同程度の場合は、小さい番号、つまりDense Retrievalで上位の商品を優先してください。\n\n出力規則：0〜29の範囲にある相異なる整数を厳密に10個含むJSON配列を、昇順で返してください。説明文は一切付けないでください。関連商品が10件未満の場合は、残りを最も近い妥当な商品で補ってください。\n\n例：[0,1,2,3,4,5,6,7,8,9]\n\nQUERY：\n{query}\n\nPRODUCTS：\n{products_text}"
   }
 }
