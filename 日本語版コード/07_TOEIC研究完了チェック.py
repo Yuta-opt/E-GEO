@@ -46,8 +46,9 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "候補80件、15プロンプト×8版、Test長文・短文、分析ファイル、"
-            "費用上限を確認し、研究数値結果の完成状態を判定する。APIは呼び出さない。"
+            "候補80件、15プロンプト×8版、Test長文・短文、複数評価モデル、"
+            "分析ファイル、費用上限を確認し、研究数値結果の完成状態を判定する。"
+            "APIは呼び出さない。"
         )
     )
     parser.add_argument("--instances", type=Path, default=DEFAULT_INSTANCES)
@@ -56,11 +57,20 @@ def main() -> None:
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     parser.add_argument("--hard-stop-usd", type=float, default=100.0)
     parser.add_argument(
+        "--expected-heldout-count",
+        type=int,
+        default=1,
+        help="正式Testで横並び評価するHeld-out Re-ranker数。",
+    )
+    parser.add_argument(
         "--allow-smoke",
         action="store_true",
         help="正式80件ではなくsmoke出力の構造確認として判定する。",
     )
     args = parser.parse_args()
+
+    if args.expected_heldout_count < 1:
+        raise ValueError("expected-heldout-countは1以上である必要があります。")
 
     instances = read_json(args.instances)
     versions = read_jsonl(args.run_dir / "02_optimization_versions.jsonl")
@@ -82,6 +92,17 @@ def main() -> None:
         if "condition" in test_frame
         else {}
     )
+    heldout_labels = (
+        sorted(test_frame["reranker_label"].astype(str).unique().tolist())
+        if "reranker_label" in test_frame
+        else []
+    )
+    heldout_models = (
+        sorted(test_frame["reranker_model"].astype(str).unique().tolist())
+        if "reranker_model" in test_frame
+        else []
+    )
+    heldout_count = len(heldout_labels)
 
     expected_analysis_files = [
         "01_test_summary.csv",
@@ -111,15 +132,27 @@ def main() -> None:
         duplicate_test = bool(test_frame.duplicated(key_columns).any())
 
     if args.allow_smoke:
+        expected_rows_per_condition = (
+            len(final_prompts) * args.expected_heldout_count
+        )
         checks = {
             "instances_available": len(instances) >= 4,
             "at_least_one_prompt": len(final_prompts) >= 1,
             "two_versions_per_smoke_prompt": len(versions) == len(final_prompts) * 2,
+            "heldout_reranker_count": heldout_count == args.expected_heldout_count,
             "test_conditions_present": set(condition_counts) == {
                 "test_initial_long",
                 "test_optimized_long",
                 "test_optimized_short",
             },
+            "test_rows_per_condition": all(
+                int(condition_counts.get(condition, 0)) == expected_rows_per_condition
+                for condition in [
+                    "test_initial_long",
+                    "test_optimized_long",
+                    "test_optimized_short",
+                ]
+            ),
             "test_rows_unique": not duplicate_test,
             "analysis_complete": not missing_analysis,
             "cost_below_hard_stop": float(
@@ -128,7 +161,9 @@ def main() -> None:
         }
         status = "smoke_complete" if all(checks.values()) else "smoke_incomplete"
     else:
-        expected_test_per_condition = 15 * 30 * 1
+        expected_test_per_condition = (
+            15 * 30 * args.expected_heldout_count
+        )
         checks = {
             "instances_80": len(instances) == 80,
             "split_40_10_30": split_counts == {
@@ -142,16 +177,17 @@ def main() -> None:
                 not version_frame.empty
                 and version_frame.groupby("prompt_id").size().eq(8).all()
             ),
-            "test_initial_long_450": int(
+            "heldout_reranker_count": heldout_count == args.expected_heldout_count,
+            "test_initial_long_expected": int(
                 condition_counts.get("test_initial_long", 0)
             ) == expected_test_per_condition,
-            "test_optimized_long_450": int(
+            "test_optimized_long_expected": int(
                 condition_counts.get("test_optimized_long", 0)
             ) == expected_test_per_condition,
-            "test_optimized_short_450": int(
+            "test_optimized_short_expected": int(
                 condition_counts.get("test_optimized_short", 0)
             ) == expected_test_per_condition,
-            "test_rows_1350": len(test_rows) == expected_test_per_condition * 3,
+            "test_rows_expected": len(test_rows) == expected_test_per_condition * 3,
             "test_rows_unique": not duplicate_test,
             "analysis_complete": not missing_analysis,
             "run_status_complete": run_summary.get("status") == "complete",
@@ -159,7 +195,11 @@ def main() -> None:
                 run_summary.get("total_api_cost_usd_estimate", 0)
             ) < args.hard_stop_usd,
         }
-        status = "research_numeric_results_complete" if all(checks.values()) else "incomplete"
+        status = (
+            "research_numeric_results_complete"
+            if all(checks.values())
+            else "incomplete"
+        )
 
     report = {
         "status": status,
@@ -169,6 +209,10 @@ def main() -> None:
         "split_counts": {str(k): int(v) for k, v in split_counts.items()},
         "optimization_version_count": len(versions),
         "final_prompt_count": len(final_prompts),
+        "expected_heldout_reranker_count": args.expected_heldout_count,
+        "actual_heldout_reranker_count": heldout_count,
+        "heldout_reranker_labels": heldout_labels,
+        "heldout_reranker_models": heldout_models,
         "test_result_count": len(test_rows),
         "test_condition_counts": {
             str(k): int(v) for k, v in condition_counts.items()
@@ -179,7 +223,8 @@ def main() -> None:
         ),
         "hard_stop_usd": args.hard_stop_usd,
         "meaning": (
-            "research_numeric_results_completeは、数値結果・統計・図表がそろった状態を示す。"
+            "research_numeric_results_completeは、指定した全Held-out Re-rankerについて"
+            "数値結果・統計・図表がそろった状態を示す。"
             "ポスター本文の最終解釈とレイアウト確認は別途必要である。"
         ),
     }
@@ -189,6 +234,12 @@ def main() -> None:
     )
 
     print("07 研究完了チェック")
+    print(
+        "  Held-out Re-rankers: "
+        f"expected={args.expected_heldout_count}, actual={heldout_count}"
+    )
+    for label, model in zip(heldout_labels, heldout_models):
+        print(f"    {label}: {model}")
     for key, value in checks.items():
         print(f"  {key}: {'OK' if value else 'NG'}")
     print(f"  status: {status}")
