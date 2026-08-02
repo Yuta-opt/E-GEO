@@ -66,7 +66,7 @@
         "model_id": "gpt-5-2025-08-07",
         "temperature": null,
         "supports_temperature": false,
-        "max_output_tokens": 700,
+        "max_output_tokens": 2000,
         "input_usd_per_million": 1.25,
         "output_usd_per_million": 10.0
       }
