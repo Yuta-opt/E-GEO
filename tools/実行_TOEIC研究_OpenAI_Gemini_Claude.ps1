@@ -17,6 +17,7 @@ $Runner = ".\日本語版コード\05d_TOEIC_OpenAI_Gemini_Claude実験を自動
 $RunDir = ".\日本語版データ\TOEIC\05_API実験\02_OpenAI_Gemini_Claude実行"
 $AnalysisDir = ".\日本語版データ\TOEIC\06_分析結果\02_OpenAI_Gemini_Claude"
 $CompletionReport = ".\日本語版データ\TOEIC\07_本番前チェック\03_OpenAI_Gemini_Claude研究完了チェック.json"
+$ExpectedHeldoutCount = 3
 
 function Invoke-Step {
     param(
@@ -37,6 +38,7 @@ function Invoke-Step {
 Write-Host "E-GEO 日本語TOEIC研究：OpenAI + Gemini + Claude" -ForegroundColor Green
 Write-Host "Mode: $Mode"
 Write-Host "Hard stop: USD $HardStopUsd"
+Write-Host "最終Test評価モデル数: $ExpectedHeldoutCount（GPT / Gemini / Claude）"
 Write-Host "必要キー: OPENAI_API_KEY / GEMINI_API_KEY / ANTHROPIC_API_KEY"
 Write-Host "APIキーの値は画面に表示しません。"
 
@@ -107,11 +109,12 @@ if ($Mode -eq "Smoke") {
             --run-dir $RunDir `
             --output-dir $AnalysisDir
     }
-    Invoke-Step "10. smoke完了チェック" {
+    Invoke-Step "10. smoke完了チェック（GPT・Gemini・Claudeの3評価モデル必須）" {
         uv run python ".\日本語版コード\07_TOEIC研究完了チェック.py" `
             --run-dir $RunDir `
             --analysis-dir $AnalysisDir `
             --report $CompletionReport `
+            --expected-heldout-count $ExpectedHeldoutCount `
             --allow-smoke `
             --hard-stop-usd $HardStopUsd
     }
@@ -142,11 +145,12 @@ Invoke-Step "10. 3社正式結果の統計・収束・図表を専用フォル�
         --output-dir $AnalysisDir
 }
 
-Invoke-Step "11. 3社構成の研究完了チェック" {
+Invoke-Step "11. 3社構成の研究完了チェック（GPT・Gemini・Claudeの3評価モデル必須）" {
     uv run python ".\日本語版コード\07_TOEIC研究完了チェック.py" `
         --run-dir $RunDir `
         --analysis-dir $AnalysisDir `
         --report $CompletionReport `
+        --expected-heldout-count $ExpectedHeldoutCount `
         --hard-stop-usd $HardStopUsd
 }
 
