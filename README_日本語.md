@@ -100,12 +100,20 @@ ANTHROPIC_API_KEY=
 Candidate selector     OpenAI GPT-5 mini
 Rewriter               OpenAI GPT-4.1
 Meta-optimizer          OpenAI GPT-4.1
-Training Model A        OpenAI GPT-4.1
-Training Model B        Google Gemini 3 Flash Preview
-Held-out Model E        Anthropic Claude Sonnet 4.5
+
+学習Re-ranker
+Model A                 OpenAI GPT-4.1
+Model B                 Google Gemini 3 Flash Preview
+
+固定後のHeld-out Test評価
+Model E                 OpenAI GPT-5
+Model F                 Google Gemini 3.5 Flash
+Model G                 Anthropic Claude Sonnet 4.5
 ```
 
-先行研究の4学習＋2評価モデルから2学習＋1評価へ縮小していますが、OpenAI・Google・Anthropicを分離できるため、OpenAI単一キー版より提供元をまたぐ一般化検証が強くなります。
+メタ最適化にはGPT-4.1とGemini 3 Flash Previewだけを使用します。プロンプト固定後、同じTest 30件、同じ候補10件、同じ対象商品、同じ初期版・最適化版の説明文を、GPT-5・Gemini 3.5 Flash・Claude Sonnet 4.5の3モデルへ渡して横並び比較します。
+
+先行研究は4学習Re-rankerと2評価専用Re-rankerを使用しました。本研究は学習Re-rankerを2モデルへ縮小しています。評価専用では、先行研究と同じ役割のGPT-5とClaude Sonnet 4.5に、3社横断比較の追加評価としてGemini 3.5 Flashを加えます。したがって完全再現ではなく、縮小再現＋3社比較の拡張です。
 
 ## ファイル名と出力を混ぜない
 
@@ -148,6 +156,8 @@ powershell -ExecutionPolicy Bypass -File ".\tools\実行_TOEIC研究_OpenAI_Gemi
 
 20・50・80ドルで警告し、既定100ドルで停止します。成功済みジョブはJSONLキャッシュから再利用するため、途中停止後に同じコマンドで再開できます。
 
+完了チェックは、GPT-5・Gemini 3.5 Flash・Claude Sonnet 4.5の3評価モデルすべてについてTest結果がそろわない限り、研究完了と判定しません。
+
 ## 現在地
 
 完了：
@@ -160,8 +170,9 @@ powershell -ExecutionPolicy Bypass -File ".\tools\実行_TOEIC研究_OpenAI_Gemi
 - メタ最適化スケジュール
 - OpenAI単一キー版ランナー
 - OpenAI・Gemini・Claude版ランナー
+- GPT・Gemini・Claudeの3モデルHeld-out Test比較設定
 - 統計・収束・図表の自動分析コード
-- 研究完了チェック
+- 評価モデル数を検査する研究完了チェック
 - 2経路の設定・実行・出力フォルダ分離
 
 未完了：
