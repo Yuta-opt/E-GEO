@@ -1,0 +1,62 @@
+{
+  "schema_version": "toeic_egeo_api_models_v1",
+  "status": "candidate_selection_model_locked_other_roles_pending",
+  "last_verified_date": "2026-08-02",
+  "candidate_selection": {
+    "provider": "openai",
+    "model_id": "gpt-5-mini-2025-08-07",
+    "endpoint": "responses",
+    "role": "Dense Retrieval上位30件から関連商品10件を選択",
+    "paper_alignment": "E-GEO v2 Product Stage 4でGPT-5-miniを使用",
+    "locked": true
+  },
+  "smoke_test": {
+    "provider": "openai",
+    "model_id": "gpt-5-mini-2025-08-07",
+    "scope": "候補選定1購入意図だけ",
+    "formal_research_result": false
+  },
+  "rewriter": {
+    "paper_model": "GPT-4.1",
+    "planned_model_id": "gpt-4.1-2025-04-14",
+    "locked": false,
+    "note": "先行研究と合わせる第一候補。全体費用見積り後に固定する。"
+  },
+  "meta_optimizer": {
+    "paper_model": "GPT-4.1",
+    "planned_model_id": "gpt-4.1-2025-04-14",
+    "locked": false,
+    "note": "先行研究と合わせる第一候補。全体費用見積り後に固定する。"
+  },
+  "training_rerankers": [
+    {
+      "anonymous_label": "Model A",
+      "paper_model": "GPT-4.1",
+      "planned_provider": "openai",
+      "planned_model_id": "gpt-4.1-2025-04-14",
+      "locked": false
+    },
+    {
+      "anonymous_label": "Model B",
+      "paper_model": "Gemini 3 Flash Preview",
+      "planned_provider": null,
+      "planned_model_id": null,
+      "locked": false
+    }
+  ],
+  "heldout_rerankers": [
+    {
+      "anonymous_label": "Model E",
+      "paper_model": "Claude Sonnet 4.5",
+      "planned_provider": null,
+      "planned_model_id": null,
+      "locked": false
+    }
+  ],
+  "rules": [
+    "候補10件選定では固定スナップショットを使用する",
+    "接続確認の1モデル結果を正式研究結果として扱わない",
+    "正式なメタ最適化は最低2学習Re-rankerと1評価専用Re-rankerで行う",
+    "モデルIDと料金は本番前チェックに記録した後で変更しない"
+  ]
+}
