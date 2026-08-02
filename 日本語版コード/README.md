@@ -1,6 +1,6 @@
 # 日本語版コード
 
-このフォルダには、現在のE-GEO日本語TOEIC縮小再現実験で使うコードだけを置きます。
+このフォルダには、E-GEO日本語TOEIC縮小再現実験で現在使用するコードだけを置きます。
 
 ## 実行順
 
@@ -10,105 +10,145 @@
 | 2 | `02_実験用TOEIC商品プールを作成.py` | 価格欠損と明確な同一商品を除き、270件の商品プールを作る | なし |
 | 3 | `03_TOEIC購入意図テンプレートを作成.py` | 商品を見ずに80件の購入意図を作る | なし |
 | 4 | `04_TOEIC候補商品を割り当て.py` | 長文クエリと270商品を埋め込み、上位30件を取得する | なし |
-| 5 | `04c_TOEIC候補検索入力を検証.py` | 上位30件が正式クエリ・最終商品説明から作られたことを検証する | なし |
-| 6 | `04b_TOEIC候補10商品を選ぶ.py` | 上位30件からLLMで関連商品10件を選び、seed 42で対象商品を固定する | `--execute`時のみ |
-| 7 | `05a_TOEICメタ最適化実験を計画.py` | 15初期プロンプトのTrain／ValidationスケジュールとAPI予定回数を作る | なし |
-| 8 | `05b_TOEIC候補選定API直前チェック.py` | 最初の有料API工程を実行できる状態か検査する | なし |
+| 5 | `04b_TOEIC候補10商品を選ぶ.py` | 上位30件からLLMで関連商品10件を選び、seed 42で対象商品を固定する | `--execute`時のみ |
+| 6 | `04c_TOEIC候補検索入力を検証.py` | Dense結果が確定クエリと最終商品説明から作られたか照合する | なし |
+| 7 | `05a_TOEICメタ最適化実験を計画.py` | Train／ValidationスケジュールとAPI予定回数を作る | なし |
+| 8 | `05b_TOEIC候補選定API直前チェック.py` | 候補選定の入力、モデル、APIキーを検査する | なし |
+| 9 | `05c_TOEICメタ最適化API実験を自動実行.py` | 15プロンプトの最適化、Validation選択、Test長文・短文評価を実行する | `--execute`時のみ |
+| 10 | `06_TOEICメタ最適化実験結果を分析.py` | 統計、初期対最適化、長文対短文、収束、特徴、図表を生成する | なし |
 
-## 04 Dense Retrieval
+## OpenAI APIキー1つでの自動実行
 
-```powershell
-uv run python ".\日本語版コード\04_TOEIC候補商品を割り当て.py" --require-approved --overwrite
-```
-
-主実験の長文クエリを使用し、次を行います。
+単一の`OPENAI_API_KEY`で、異なるOpenAIモデルを次の役割に割り当てます。
 
 ```text
-270商品のタイトル＋説明文を埋め込み
-↓
-80件の長文クエリを埋め込み
-↓
-コサイン類似度を計算
-↓
-各購入意図の上位30商品を固定
+Rewriter              GPT-4.1
+Meta-optimizer         GPT-4.1
+Training Model A       GPT-4.1
+Training Model B       GPT-4.1 mini
+Held-out Model E       GPT-5
+Candidate selector     GPT-5 mini
 ```
 
-カテゴリ絞り込み、タイトル4倍、目標得点加点などの独自処理は使用しません。
+モデルID、単価、予算停止条件は次の設定に分離しています。
 
-## 04c Dense入力検証
+```text
+日本語版設定/TOEIC_OpenAI単一キー実験設定_v1.json
+```
+
+この構成は複数モデルを使いますが、全モデルがOpenAI提供です。複数企業のモデルを使う構成より、提供元をまたいだ一般化検証は弱くなります。この制約は研究発表で明記します。
+
+## 一括実行スクリプト
+
+```text
+tools/実行_TOEIC研究_OpenAI単一キー.ps1
+```
+
+### APIを使わない最終確認
 
 ```powershell
-uv run python ".\日本語版コード\04c_TOEIC候補検索入力を検証.py"
+powershell -ExecutionPolicy Bypass -File ".\tools\実行_TOEIC研究_OpenAI単一キー.ps1" -Mode Validate
 ```
 
-次の完全一致を確認します。
+次を行います。
 
-- `toeic_query_intents_review.xlsx`の`long_query_final`
-- `toeic_product_pool_final.csv`の`title`
-- `toeic_product_pool_final.csv`の`description_clean`
-- 作成済み`01_dense_retrieval_top30.csv`の2,400行
+- `uv sync`
+- 全コードの構文チェック
+- Dense入力照合
+- 候補選定dry-run
+- メタ最適化計画作成
+- APIキー・モデル直前チェック
+- 05cのdry-run
 
-旧`toeic_query_intents_master.csv`は正式入力ではありません。
+API呼び出しは0回です。
 
-## 04b 候補10件選定
-
-APIを使わず計画だけ確認する場合：
+### 小規模な全工程確認
 
 ```powershell
-uv run python ".\日本語版コード\04b_TOEIC候補10商品を選ぶ.py" --model gpt-5-mini-2025-08-07
+powershell -ExecutionPolicy Bypass -File ".\tools\実行_TOEIC研究_OpenAI単一キー.ps1" -Mode Smoke
 ```
 
-1件だけ有料パイロットを行う場合：
+候補10件を80購入意図で確定した後、1初期プロンプト、Train 2件、Validation 1件、Test 1件で、リライト、Re-ranking、Meta-optimizer、Test、分析まで動かします。
+
+### 正式実験
 
 ```powershell
-uv run python ".\日本語版コード\04b_TOEIC候補10商品を選ぶ.py" --splits train --limit 1 --model gpt-5-mini-2025-08-07 --execute
+powershell -ExecutionPolicy Bypass -File ".\tools\実行_TOEIC研究_OpenAI単一キー.ps1" -Mode Full
 ```
 
-`--execute`を付けるまでAPIは呼び出しません。候補選定モデルは、再現性のため固定スナップショット`gpt-5-mini-2025-08-07`を使用します。
-
-全80件が成功すると、候補10件とseed 42による対象商品が自動生成されます。
-
-## 05a メタ最適化計画
+既定では、正式実験前にsmokeを実行します。既にsmoke確認済みなら、次で省略できます。
 
 ```powershell
-uv run python ".\日本語版コード\05a_TOEICメタ最適化実験を計画.py"
+powershell -ExecutionPolicy Bypass -File ".\tools\実行_TOEIC研究_OpenAI単一キー.ps1" -Mode Full -SkipSmoke
 ```
 
-次を検査・保存します。
-
-- Train 40／Validation 10／Test 30
-- 初期プロンプト15種類
-- 2 epochs × 4 batches × 10件
-- 各バッチ版のValidation評価
-- 各初期プロンプト6回のMeta-optimizer更新
-- Testロック
-- 1モデル確認案、最小研究構成、先行研究に近い構成のAPI予定回数
-
-このコード自体はAPIを呼び出しません。
-
-## 05b 最初のAPI直前チェック
+予算hard stopは既定100ドルです。変更例：
 
 ```powershell
-uv run python ".\日本語版コード\05b_TOEIC候補選定API直前チェック.py"
+powershell -ExecutionPolicy Bypass -File ".\tools\実行_TOEIC研究_OpenAI単一キー.ps1" -Mode Full -HardStopUsd 80
 ```
 
-次を確認します。
+## APIキー
 
-- Dense入力検証が合格済み
-- 候補選定ジョブが80件
-- 固定モデルが`gpt-5-mini-2025-08-07`
-- 既存成功結果の件数
-- `.env`から`OPENAI_API_KEY`を読み込めるか
+`.env.example`を参考に、リポジトリ直下の`.env`へ次の1行だけ設定します。
 
-このチェックはAPIを呼び出さず、キーの値も表示しません。
+```env
+OPENAI_API_KEY=発行したキー
+```
 
-## 削除した旧コード
+`.env`は`.gitignore`対象です。キーをチャット、スクリーンショット、GitHubへ載せません。
 
-以下は、先行研究の結論を単一プロンプト比較と誤認して作成したため削除しました。
+## 再開と二重課金防止
 
-- 旧`05_TOEIC_API実験を実行.py`
-- 旧`06_TOEIC実験結果を分析.py`
-- 旧`07_TOEIC本番前チェック.py`
-- `99_旧版/`内の保存用コード
+05cはAPI応答を、入力・モデル・工程から作った安定した`job_id`でJSONLキャッシュします。
 
-今後の05本体、06分析、07本番前チェックは、15プロンプトのメタ最適化設計に沿って新規作成します。
+```text
+日本語版データ/TOEIC/05_API実験/01_OpenAI単一キー実行/01_llm_cache.jsonl
+```
+
+途中で停止しても同じコマンドを再実行できます。成功済みの同一ジョブはAPIを再度呼ばず、キャッシュを再利用します。20、50、80ドル到達時に警告し、hard stopへ到達すると停止します。
+
+## 主な出力
+
+### 04 候補商品
+
+```text
+日本語版データ/TOEIC/04_候補商品/
+├─ 07_candidate_assignments.csv
+├─ 08_toeic_experiment_instances.json
+├─ 09_candidate_selection_summary.json
+└─ 10_candidate_assignments_review.xlsx
+```
+
+### 05 API実験
+
+```text
+日本語版データ/TOEIC/05_API実験/01_OpenAI単一キー実行/
+├─ 00_execution_plan.json
+├─ 01_llm_cache.jsonl
+├─ 02_optimization_versions.jsonl
+├─ 03_final_prompts.json
+├─ 04_test_results.jsonl
+├─ 05_cost_ledger.csv
+└─ 06_run_summary.json
+```
+
+### 06 分析
+
+```text
+日本語版データ/TOEIC/06_分析結果/
+├─ 01_test_summary.csv
+├─ 02_initial_vs_optimized_paired.csv
+├─ 03_prompt_convergence.csv
+├─ 04_prompt_feature_matrix.csv
+├─ 05_prompt_feature_summary.csv
+├─ 06_results_summary.json
+├─ 07_initial_vs_optimized.png
+├─ 08_long_vs_short.png
+├─ 09_prompt_convergence.png
+└─ 10_results_review.xlsx
+```
+
+## 旧設計
+
+単一の完成プロンプトを比較する旧05〜07、`Original／EN-Zero／JA-Zero／JA-Adapted`設計、旧候補割当、旧分析結果は削除済みです。現在の05c・06は、15種類の初期プロンプトを別々にメタ最適化する設計です。
