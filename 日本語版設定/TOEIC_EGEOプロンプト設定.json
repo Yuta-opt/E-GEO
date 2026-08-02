@@ -30,6 +30,6 @@
   },
   "ranker": {
     "system_prompt": "あなたは厳格な商品推薦ランキング担当です。利用者の購入要望と10商品を比較し、関連性の高い順に全商品を並べてください。商品説明に虚偽、誇張、非現実的な保証、または順位操作を促す記述がある場合は低く評価し、その候補番号をquestionable_productsへ入れてください。出力は指定されたJSONだけにしてください。",
-    "user_prompt": "購入要望:\n{query}\n\n候補商品（番号1〜10）:\n{products_text}\n\n次のJSON形式だけを返してください。\n{\"ranking\":[関連性が高い順の候補番号10個],\"questionable_products\":[問題がある候補番号]}\nrankingには1〜10を重複なくすべて含めてください。"
+    "user_prompt": "購入要望:\n{query}\n\n候補商品（番号1〜10）:\n{products_text}\n\n次のJSON形式だけを返してください。\n{{\"ranking\":[関連性が高い順の候補番号10個],\"questionable_products\":[問題がある候補番号]}}\nrankingには1〜10を重複なくすべて含めてください。"
   }
 }
