@@ -3,10 +3,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import math
-import re
-import unicodedata
-from collections import Counter
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -14,7 +10,6 @@ import numpy as np
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.styles import Alignment, Font, PatternFill
-from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.worksheet.table import Table, TableStyleInfo
 
 
@@ -25,14 +20,13 @@ DEFAULT_INTENTS = Path(
     "日本語版データ/TOEIC/03_購入意図/toeic_query_intents_review.xlsx"
 )
 DEFAULT_OUTPUT_DIR = Path("日本語版データ/TOEIC/04_候補商品")
-DEFAULT_SEED = 42
-DEFAULT_CANDIDATE_COUNT = 10
-DEFAULT_PRESELECT_COUNT = 30
+DEFAULT_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+DEFAULT_TOP_K = 30
+DEFAULT_BATCH_SIZE = 32
 
 PRODUCT_REQUIRED_COLUMNS = [
     "product_id",
     "title",
-    "category_hint",
     "description_clean",
 ]
 INTENT_REQUIRED_COLUMNS = [
@@ -46,86 +40,29 @@ INTENT_REQUIRED_COLUMNS = [
     "review_status",
 ]
 
-POSITIVE_INTENT_COLUMNS = [
-    "short_query",
-    "long_query",
-    "category_label",
-    "persona_or_current_score",
-    "target_score",
-    "primary_need",
-    "must_have",
-    "nice_to_have",
-    "query_focus_hint",
-]
-PRODUCT_TEXT_COLUMNS = [
-    "title",
-    "description_clean",
-    "author_clean",
-    "publisher",
-    "series_name",
-    "book_format",
-    "score_hint",
+# 先行研究は商品listingの title / features / description を利用する。
+# TOEIC商品プールに存在する列だけを、重み付けせず1回ずつ連結する。
+PRODUCT_TEXT_COLUMN_GROUPS = [
+    ("title",),
+    ("features", "feature_bullets", "features_clean"),
+    ("description_clean", "description"),
+    ("details", "details_clean"),
 ]
 
 
-def normalize_text(value: Any) -> str:
-    text = unicodedata.normalize("NFKC", str(value or "")).casefold()
-    text = re.sub(r"[\u0000-\u001f]", " ", text)
-    text = re.sub(r"[^0-9a-zぁ-んァ-ヶ一-龠々ー&+]+", " ", text)
-    return re.sub(r"\s+", " ", text).strip()
+def clean_text(value: Any) -> str:
+    return " ".join(str(value or "").replace("\x00", " ").split()).strip()
 
 
 def nonempty(value: Any) -> bool:
-    return bool(normalize_text(value))
+    return bool(clean_text(value))
 
 
-def char_wb_ngrams(text: str, min_n: int = 3, max_n: int = 5) -> list[str]:
-    """scikit-learn の char_wb に近い、単語境界付き文字 n-gram。"""
-    normalized = normalize_text(text)
-    features: list[str] = []
-    for token in normalized.split():
-        padded = f" {token} "
-        for n in range(min_n, max_n + 1):
-            if len(padded) < n:
-                continue
-            features.extend(
-                f"c{n}:{padded[index:index + n]}"
-                for index in range(len(padded) - n + 1)
-            )
-        if re.fullmatch(r"[0-9a-z&+]+", token):
-            features.append(f"w:{token}")
-    return features
-
-
-def parse_first_number(value: Any) -> float | None:
-    match = re.search(r"\d{3,4}", normalize_text(value))
-    if not match:
-        return None
-    return float(match.group())
-
-
-def score_affinity(target_score: Any, product_score: Any) -> float:
-    target = parse_first_number(target_score)
-    product = parse_first_number(product_score)
-    if target is None or product is None:
-        return 0.0
-    difference = abs(target - product)
-    return 0.08 * math.exp(-difference / 180.0)
-
-
-def weighted_join(row: pd.Series, columns: Iterable[str]) -> str:
-    parts: list[str] = []
-    for column in columns:
-        value = str(row.get(column, "") or "").strip()
-        if not value:
-            continue
-        repeat = 1
-        if column == "title":
-            repeat = 4
-        elif column in {"category_label", "must_have", "primary_need"}:
-            repeat = 2
-        parts.extend([value] * repeat)
-    return " ".join(parts)
+def first_existing_column(frame: pd.DataFrame, candidates: Iterable[str]) -> str | None:
+    for column in candidates:
+        if column in frame.columns:
+            return column
+    return None
 
 
 def load_products(path: Path) -> pd.DataFrame:
@@ -141,7 +78,9 @@ def load_products(path: Path) -> pd.DataFrame:
     if missing:
         raise ValueError("商品プールに必要な列がありません: " + ", ".join(missing))
     if frame["product_id"].duplicated().any():
-        duplicated = frame.loc[frame["product_id"].duplicated(), "product_id"].tolist()
+        duplicated = frame.loc[
+            frame["product_id"].duplicated(), "product_id"
+        ].astype(str).tolist()
         raise ValueError(f"product_idが重複しています: {duplicated[:5]}")
     return frame.reset_index(drop=True)
 
@@ -194,17 +133,17 @@ def resolve_queries(intents: pd.DataFrame, require_approved: bool) -> pd.DataFra
         ~resolved["short_query"].map(nonempty)
         | ~resolved["long_query"].map(nonempty),
         "intent_id",
-    ].tolist()
+    ].astype(str).tolist()
     if empty:
         raise ValueError(f"短文または長文クエリが空です: {empty[:10]}")
 
     if require_approved:
         not_approved = resolved.loc[
             resolved["review_status"].ne("承認"), "intent_id"
-        ].tolist()
+        ].astype(str).tolist()
         missing_final = resolved.loc[
             resolved["query_source"].ne("final"), "intent_id"
-        ].tolist()
+        ].astype(str).tolist()
         messages: list[str] = []
         if not_approved:
             messages.append(f"未承認: {not_approved[:10]}")
@@ -212,538 +151,498 @@ def resolve_queries(intents: pd.DataFrame, require_approved: bool) -> pd.DataFra
             messages.append(f"final未入力: {missing_final[:10]}")
         if messages:
             raise ValueError(
-                "API実験用の確定データとして使えません。\n" + "\n".join(messages)
+                "本実験用の確定データとして使えません。\n" + "\n".join(messages)
             )
     return resolved
 
 
-class TfidfIndex:
-    def __init__(self, documents: list[str]) -> None:
-        self.document_counts = [Counter(char_wb_ngrams(text)) for text in documents]
-        document_frequency: Counter[str] = Counter()
-        for counts in self.document_counts:
-            document_frequency.update(counts.keys())
-        total = len(documents)
-        self.idf = {
-            term: math.log((1 + total) / (1 + frequency)) + 1.0
-            for term, frequency in document_frequency.items()
-        }
-        self.document_vectors = [self._vectorize_counts(counts) for counts in self.document_counts]
-        self.document_norms = [self._norm(vector) for vector in self.document_vectors]
-
-    def _vectorize_counts(self, counts: Counter[str]) -> dict[str, float]:
-        return {
-            term: (1.0 + math.log(count)) * self.idf.get(term, 0.0)
-            for term, count in counts.items()
-            if term in self.idf and count > 0
-        }
-
-    @staticmethod
-    def _norm(vector: dict[str, float]) -> float:
-        return math.sqrt(sum(value * value for value in vector.values()))
-
-    def similarities(self, query: str) -> np.ndarray:
-        query_vector = self._vectorize_counts(Counter(char_wb_ngrams(query)))
-        query_norm = self._norm(query_vector)
-        if query_norm == 0:
-            return np.zeros(len(self.document_vectors), dtype=float)
-        scores = np.zeros(len(self.document_vectors), dtype=float)
-        for index, document_vector in enumerate(self.document_vectors):
-            denominator = query_norm * self.document_norms[index]
-            if denominator == 0:
-                continue
-            if len(query_vector) < len(document_vector):
-                dot = sum(
-                    value * document_vector.get(term, 0.0)
-                    for term, value in query_vector.items()
-                )
-            else:
-                dot = sum(
-                    value * query_vector.get(term, 0.0)
-                    for term, value in document_vector.items()
-                )
-            scores[index] = dot / denominator
-        return scores
+def resolve_product_text_columns(products: pd.DataFrame) -> list[str]:
+    selected: list[str] = []
+    for group in PRODUCT_TEXT_COLUMN_GROUPS:
+        column = first_existing_column(products, group)
+        if column is not None and column not in selected:
+            selected.append(column)
+    if "title" not in selected or "description_clean" not in selected:
+        raise ValueError("Dense Retrievalにはtitleとdescription_cleanが必要です。")
+    return selected
 
 
-def stable_target_positions(
-    intents: pd.DataFrame, candidate_count: int, seed: int
-) -> dict[str, int]:
-    """論文同様、固定seedで各クエリの対象商品indexを一度だけ引く。"""
-    ordered_ids = sorted(intents["intent_id"].astype(str).tolist())
-    rng = np.random.default_rng(seed)
-    positions = rng.integers(1, candidate_count + 1, size=len(ordered_ids))
-    return {intent_id: int(position) for intent_id, position in zip(ordered_ids, positions)}
-
-
-def candidate_indices_for_intent(
-    intent: pd.Series,
-    products: pd.DataFrame,
-    positive_index: TfidfIndex,
-    negative_index: TfidfIndex,
-    candidate_count: int,
-    preselect_count: int,
-) -> tuple[list[int], list[dict[str, Any]], dict[int, dict[str, Any]]]:
-    positive_query = weighted_join(intent, POSITIVE_INTENT_COLUMNS)
-    negative_query = str(intent.get("avoid", "") or "")
-    scores = positive_index.similarities(positive_query)
-    negative_scores = (
-        negative_index.similarities(negative_query)
-        if nonempty(negative_query)
-        else np.zeros(len(products), dtype=float)
+def combine_columns(row: pd.Series, columns: Iterable[str]) -> str:
+    return "\n".join(
+        value
+        for column in columns
+        if (value := clean_text(row.get(column, "")))
     )
 
-    adjusted = scores - 0.20 * negative_scores
-    target_score = intent.get("target_score", "")
-    adjusted += np.array(
-        [score_affinity(target_score, value) for value in products.get("score_hint", "")],
-        dtype=float,
+
+def load_sentence_transformer(model_name: str, device: str | None) -> Any:
+    try:
+        from sentence_transformers import SentenceTransformer
+    except ImportError as exc:
+        raise RuntimeError(
+            "sentence-transformersが未導入です。\n"
+            "リポジトリをpullした後、次を一度実行してください。\n"
+            "  uv sync"
+        ) from exc
+
+    kwargs: dict[str, Any] = {}
+    if device:
+        kwargs["device"] = device
+    return SentenceTransformer(model_name, **kwargs)
+
+
+def encode_texts(
+    model: Any,
+    texts: list[str],
+    batch_size: int,
+    show_progress_bar: bool,
+) -> np.ndarray:
+    embeddings = model.encode(
+        texts,
+        batch_size=batch_size,
+        show_progress_bar=show_progress_bar,
+        convert_to_numpy=True,
+        normalize_embeddings=True,
     )
-
-    same_category = products["category_hint"].eq(str(intent["category"]))
-    eligible_indices = np.flatnonzero(same_category.to_numpy())
-    if len(eligible_indices) < candidate_count:
-        eligible_indices = np.arange(len(products))
-
-    ranked = sorted(
-        eligible_indices.tolist(),
-        key=lambda index: (-float(adjusted[index]), int(index)),
-    )
-    preselected = ranked[: max(preselect_count, candidate_count)]
-
-    selected: list[int] = []
-    used_description_groups: set[str] = set()
-    for index in preselected:
-        group = str(products.iloc[index].get("description_group_id", "") or "")
-        if group and group in used_description_groups:
-            continue
-        selected.append(index)
-        if group:
-            used_description_groups.add(group)
-        if len(selected) == candidate_count:
-            break
-
-    if len(selected) < candidate_count:
-        for index in ranked:
-            if index in selected:
-                continue
-            selected.append(index)
-            if len(selected) == candidate_count:
-                break
-
-    if len(selected) != candidate_count:
-        raise ValueError(
-            f"{intent['intent_id']}で候補{candidate_count}件を確保できませんでした。"
-        )
-
-    rank_by_index = {index: rank for rank, index in enumerate(ranked, start=1)}
-    retrieval_meta = {
-        index: {
-            "retrieval_rank": rank_by_index[index],
-            "retrieval_score": round(float(adjusted[index]), 8),
-        }
-        for index in selected
-    }
-
-    preselection_rows: list[dict[str, Any]] = []
-    for retrieval_rank, index in enumerate(preselected[:preselect_count], start=1):
-        product = products.iloc[index]
-        preselection_rows.append(
-            {
-                "intent_id": intent["intent_id"],
-                "retrieval_rank": retrieval_rank,
-                "selected_top10": index in selected,
-                "retrieval_score": round(float(adjusted[index]), 8),
-                "product_id": product.get("product_id", ""),
-                "title": product.get("title", ""),
-                "category_hint": product.get("category_hint", ""),
-                "score_hint": product.get("score_hint", ""),
-            }
-        )
-    return selected, preselection_rows, retrieval_meta
+    array = np.asarray(embeddings, dtype=np.float32)
+    if array.ndim != 2:
+        raise ValueError(f"埋め込みの形が不正です: {array.shape}")
+    if not np.isfinite(array).all():
+        raise ValueError("埋め込みにNaNまたは無限大が含まれています。")
+    return array
 
 
-def build_assignments(
+def retrieve_top_k(
+    product_embeddings: np.ndarray,
+    query_embeddings: np.ndarray,
+    top_k: int,
+) -> tuple[np.ndarray, np.ndarray]:
+    if product_embeddings.shape[1] != query_embeddings.shape[1]:
+        raise ValueError("商品とクエリの埋め込み次元が一致しません。")
+    similarity_matrix = query_embeddings @ product_embeddings.T
+    top_indices = np.argsort(-similarity_matrix, axis=1, kind="stable")[:, :top_k]
+    top_scores = np.take_along_axis(similarity_matrix, top_indices, axis=1)
+    return top_indices, top_scores
+
+
+def build_retrieval_outputs(
     products: pd.DataFrame,
     intents: pd.DataFrame,
-    candidate_count: int,
-    preselect_count: int,
-    seed: int,
-    target_positions: dict[str, int],
-) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, list[dict[str, Any]]]:
-    product_documents = [
-        weighted_join(row, PRODUCT_TEXT_COLUMNS)
-        for _, row in products.iterrows()
-    ]
-    positive_index = TfidfIndex(product_documents)
-    negative_index = positive_index
-    assignment_rows: list[dict[str, Any]] = []
-    preselection_rows: list[dict[str, Any]] = []
-    summary_rows: list[dict[str, Any]] = []
-    instances: list[dict[str, Any]] = []
+    query_form: str,
+    model_name: str,
+    top_indices: np.ndarray,
+    top_scores: np.ndarray,
+) -> tuple[pd.DataFrame, list[dict[str, Any]]]:
+    query_column = f"{query_form}_query"
+    rows: list[dict[str, Any]] = []
+    jobs: list[dict[str, Any]] = []
 
-    for _, intent in intents.sort_values("intent_id").iterrows():
-        selected, preselection, retrieval_meta = candidate_indices_for_intent(
-            intent,
-            products,
-            positive_index,
-            negative_index,
-            candidate_count,
-            preselect_count,
-        )
-        preselection_rows.extend(preselection)
-        target_position = target_positions[str(intent["intent_id"])]
-        target_product = products.iloc[selected[target_position - 1]]
-        product_payloads: list[dict[str, Any]] = []
-        title_list: list[str] = []
+    for intent_offset, (_, intent) in enumerate(
+        intents.sort_values("intent_id").iterrows()
+    ):
+        query = clean_text(intent[query_column])
+        product_items: list[dict[str, Any]] = []
 
-        for candidate_position, product_index in enumerate(selected, start=1):
-            product = products.iloc[product_index]
-            is_target = candidate_position == target_position
-            retrieval_entry = retrieval_meta[product_index]
-            assignment = {
-                "intent_id": intent["intent_id"],
-                "split": intent["split"],
-                "category": intent["category"],
-                "category_label": intent.get("category_label", ""),
-                "intent_review_status": intent["review_status"],
-                "query_source": intent["query_source"],
-                "short_query": intent["short_query"],
-                "long_query": intent["long_query"],
-                "candidate_position": candidate_position,
-                "target_candidate_position": target_position,
-                "is_target": is_target,
-                "retrieval_rank": retrieval_entry["retrieval_rank"],
-                "retrieval_score": retrieval_entry["retrieval_score"],
-                "product_id": product.get("product_id", ""),
-                "isbn": product.get("isbn", ""),
-                "title": product.get("title", ""),
-                "author_clean": product.get("author_clean", ""),
-                "price_yen_num": product.get("price_yen_num", ""),
-                "category_hint": product.get("category_hint", ""),
-                "score_hint": product.get("score_hint", ""),
-                "publisher": product.get("publisher", ""),
-                "description_clean": product.get("description_clean", ""),
-                "description_length_num": product.get("description_length_num", ""),
-                "product_url": product.get("product_url", ""),
-                "candidate_set_status": "未確認",
-                "candidate_review_note": "",
-                "target_selection_seed": seed,
-                "target_selection_rule": "fixed_seed_uniform_index_1_to_10",
-            }
-            assignment_rows.append(assignment)
-            title_list.append(str(product.get("title", "")))
-            product_payloads.append(
-                {
-                    "candidate_position": candidate_position,
-                    "product_id": str(product.get("product_id", "")),
-                    "title": str(product.get("title", "")),
-                    "author": str(product.get("author_clean", "")),
-                    "price_yen": str(product.get("price_yen_num", "")),
-                    "category": str(product.get("category_hint", "")),
-                    "description": str(product.get("description_clean", "")),
-                    "is_target": is_target,
-                }
-            )
-
-        summary_rows.append(
-            {
-                "intent_id": intent["intent_id"],
-                "split": intent["split"],
-                "category": intent["category"],
-                "short_query": intent["short_query"],
-                "long_query": intent["long_query"],
-                "query_source": intent["query_source"],
-                "target_candidate_position": target_position,
-                "target_product_id": target_product.get("product_id", ""),
-                "target_title": target_product.get("title", ""),
-                "candidate_titles": "\n".join(
-                    f"{index}. {title}" for index, title in enumerate(title_list, start=1)
-                ),
-                "candidate_set_review": "未確認",
-                "review_note": "",
-            }
-        )
-        instances.append(
-            {
+        for retrieval_rank, (product_index, score) in enumerate(
+            zip(top_indices[intent_offset], top_scores[intent_offset]),
+            start=1,
+        ):
+            product = products.iloc[int(product_index)]
+            row = {
                 "intent_id": str(intent["intent_id"]),
                 "split": str(intent["split"]),
                 "category": str(intent["category"]),
-                "queries": {
-                    "short": str(intent["short_query"]),
-                    "long": str(intent["long_query"]),
-                    "source": str(intent["query_source"]),
-                },
-                "target_candidate_position": target_position,
-                "target_product_id": str(target_product.get("product_id", "")),
-                "products": product_payloads,
+                "query_form": query_form,
+                "query": query,
+                "query_source": str(intent["query_source"]),
+                "retrieval_rank": retrieval_rank,
+                "cosine_similarity": round(float(score), 8),
+                "product_index": int(product_index),
+                "product_id": str(product.get("product_id", "")),
+                "title": str(product.get("title", "")),
+                "description_clean": str(product.get("description_clean", "")),
+                "author_clean": str(product.get("author_clean", "")),
+                "publisher": str(product.get("publisher", "")),
+                "category_hint": str(product.get("category_hint", "")),
+                "score_hint": str(product.get("score_hint", "")),
+                "price_yen_num": str(product.get("price_yen_num", "")),
+                "product_url": str(product.get("product_url", "")),
+                "embedding_model": model_name,
+                "selected_top10": "",
+                "selection_note": "",
+            }
+            rows.append(row)
+            product_items.append(
+                {
+                    "index": retrieval_rank - 1,
+                    "retrieval_rank": retrieval_rank,
+                    "product_id": str(product.get("product_id", "")),
+                    "title": str(product.get("title", "")),
+                    "cosine_similarity": round(float(score), 8),
+                }
+            )
+
+        jobs.append(
+            {
+                "job_type": "candidate_relevance_selection",
+                "intent_id": str(intent["intent_id"]),
+                "split": str(intent["split"]),
+                "query_form": query_form,
+                "query": query,
+                "products": product_items,
+                "instruction": (
+                    "Select exactly 10 relevant products from the 30 titles. "
+                    "Prefer smaller indices when relevance is tied. "
+                    "Return a JSON array of 10 distinct integers in ascending order."
+                ),
+                "expected_output_example": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                "status": "not_executed",
             }
         )
 
-    assignments = pd.DataFrame(assignment_rows)
-    preselection_frame = pd.DataFrame(preselection_rows)
-    intent_summary = pd.DataFrame(summary_rows)
-    return assignments, preselection_frame, intent_summary, instances
+    return pd.DataFrame(rows), jobs
 
 
-def validate_assignments(assignments: pd.DataFrame, candidate_count: int) -> None:
-    counts = assignments.groupby("intent_id").size()
-    invalid_counts = counts[counts.ne(candidate_count)]
+def validate_retrieval(
+    retrieval: pd.DataFrame,
+    intent_count: int,
+    top_k: int,
+) -> None:
+    if retrieval["intent_id"].nunique() != intent_count:
+        raise ValueError("出力された購入意図数が入力と一致しません。")
+
+    counts = retrieval.groupby("intent_id").size()
+    invalid_counts = counts[counts.ne(top_k)]
     if not invalid_counts.empty:
-        raise ValueError(f"候補件数が不正です: {invalid_counts.to_dict()}")
+        raise ValueError(f"上位候補数が不正です: {invalid_counts.to_dict()}")
 
-    duplicate_pairs = assignments.duplicated(["intent_id", "product_id"])
+    duplicate_pairs = retrieval.duplicated(["intent_id", "product_id"])
     if duplicate_pairs.any():
-        raise ValueError("同じ購入意図の候補内で商品が重複しています。")
-
-    target_counts = assignments.groupby("intent_id")["is_target"].sum()
-    invalid_targets = target_counts[target_counts.ne(1)]
-    if not invalid_targets.empty:
-        raise ValueError(f"対象商品数が不正です: {invalid_targets.to_dict()}")
-
-    category_mismatch = assignments.loc[
-        assignments["category"].ne(assignments["category_hint"])
-    ]
-    if not category_mismatch.empty:
-        examples = category_mismatch[["intent_id", "category", "category_hint"]].head()
+        examples = retrieval.loc[
+            duplicate_pairs, ["intent_id", "product_id", "title"]
+        ].head()
         raise ValueError(
-            "カテゴリの異なる商品が候補に混ざっています。\n"
+            "同じ購入意図の上位30件内でproduct_idが重複しています。\n"
             + examples.to_string(index=False)
         )
 
+    expected_ranks = list(range(1, top_k + 1))
+    for intent_id, group in retrieval.groupby("intent_id", sort=False):
+        if group["retrieval_rank"].astype(int).tolist() != expected_ranks:
+            raise ValueError(f"{intent_id}のretrieval_rankが不正です。")
 
-def style_workbook(path: Path) -> None:
+    scores = retrieval["cosine_similarity"].astype(float)
+    if not np.isfinite(scores.to_numpy()).all():
+        raise ValueError("コサイン類似度にNaNまたは無限大があります。")
+
+
+def style_review_workbook(path: Path) -> None:
     workbook = load_workbook(path)
     header_fill = PatternFill("solid", fgColor="1F4E78")
     header_font = Font(color="FFFFFF", bold=True)
 
     for sheet in workbook.worksheets:
         sheet.freeze_panes = "A2"
+        sheet.auto_filter.ref = sheet.dimensions
         for cell in sheet[1]:
             cell.fill = header_fill
             cell.font = header_font
-            cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+            cell.alignment = Alignment(
+                horizontal="center", vertical="center", wrap_text=True
+            )
         for row in sheet.iter_rows(min_row=2):
             for cell in row:
                 cell.alignment = Alignment(vertical="top", wrap_text=True)
 
-    summary = workbook["intent_summary"]
+    retrieval_sheet = workbook["dense_top30"]
     widths = {
-        "A": 14, "B": 12, "C": 14, "D": 46, "E": 80,
-        "F": 16, "G": 12, "H": 18, "I": 46, "J": 100,
-        "K": 18, "L": 40,
+        "A": 14,
+        "B": 12,
+        "C": 16,
+        "D": 12,
+        "E": 80,
+        "F": 14,
+        "G": 12,
+        "H": 18,
+        "I": 12,
+        "J": 22,
+        "K": 70,
+        "L": 100,
+        "M": 24,
+        "N": 24,
+        "O": 18,
+        "P": 18,
+        "Q": 16,
+        "R": 48,
+        "S": 52,
+        "T": 16,
+        "U": 42,
     }
     for column, width in widths.items():
-        summary.column_dimensions[column].width = width
-    review = DataValidation(type="list", formula1='"未確認,承認,要修正,除外"')
-    summary.add_data_validation(review)
-    review.add(f"K2:K{summary.max_row}")
-    table = Table(displayName="IntentCandidateSummary", ref=summary.dimensions)
-    table.tableStyleInfo = TableStyleInfo(name="TableStyleMedium2", showRowStripes=True)
-    summary.add_table(table)
-
-    assignments = workbook["candidate_assignments"]
-    for column in ("A", "B", "C", "D", "E", "F", "G"):
-        assignments.column_dimensions[column].width = 16
-    assignments.column_dimensions["H"].width = 46
-    assignments.column_dimensions["I"].width = 80
-    assignments.column_dimensions["U"].width = 48
-    assignments.column_dimensions["AC"].width = 100
-
-    preselection = workbook["preselection_top30"]
-    preselection.column_dimensions["F"].width = 70
+        retrieval_sheet.column_dimensions[column].width = width
+    table = Table(displayName="ToeicDenseTop30", ref=retrieval_sheet.dimensions)
+    table.tableStyleInfo = TableStyleInfo(
+        name="TableStyleMedium2", showRowStripes=True
+    )
+    retrieval_sheet.add_table(table)
 
     instructions = workbook["instructions"]
-    instructions.column_dimensions["A"].width = 24
+    instructions.column_dimensions["A"].width = 26
     instructions.column_dimensions["B"].width = 110
     workbook.save(path)
 
 
 def write_outputs(
     output_dir: Path,
-    assignments: pd.DataFrame,
-    preselection: pd.DataFrame,
-    intent_summary: pd.DataFrame,
-    instances: list[dict[str, Any]],
+    retrieval: pd.DataFrame,
+    jobs: list[dict[str, Any]],
     intents: pd.DataFrame,
     products: pd.DataFrame,
-    seed: int,
-    candidate_count: int,
-    preselect_count: int,
+    product_text_columns: list[str],
+    model_name: str,
+    query_form: str,
+    top_k: int,
 ) -> list[Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
-    assignments_path = output_dir / "toeic_candidate_assignments.csv"
-    summary_csv_path = output_dir / "toeic_candidate_intent_summary.csv"
-    instances_path = output_dir / "toeic_experiment_instances.json"
-    summary_json_path = output_dir / "toeic_candidate_assignment_summary.json"
-    review_path = output_dir / "toeic_candidate_assignments_review.xlsx"
+    retrieval_path = output_dir / "01_dense_retrieval_top30.csv"
+    jobs_path = output_dir / "02_candidate_selection_jobs.jsonl"
+    summary_path = output_dir / "03_dense_retrieval_summary.json"
+    review_path = output_dir / "04_dense_retrieval_review.xlsx"
 
-    assignments.to_csv(assignments_path, index=False, encoding="utf-8-sig")
-    intent_summary.to_csv(summary_csv_path, index=False, encoding="utf-8-sig")
-    instances_path.write_text(
-        json.dumps(instances, ensure_ascii=False, indent=2), encoding="utf-8"
+    retrieval.to_csv(retrieval_path, index=False, encoding="utf-8-sig")
+    jobs_path.write_text(
+        "\n".join(json.dumps(job, ensure_ascii=False) for job in jobs) + "\n",
+        encoding="utf-8",
     )
 
     digest_source = "\n".join(
-        f"{row.intent_id}:{row.product_id}:{row.candidate_position}:{int(row.is_target)}"
-        for row in assignments.itertuples()
+        f"{row.intent_id}:{row.retrieval_rank}:{row.product_id}:{row.cosine_similarity}"
+        for row in retrieval.itertuples()
     )
     summary = {
-        "design_version": "query_first_candidate_assignment_v1",
-        "intent_count": int(assignments["intent_id"].nunique()),
-        "candidate_rows": int(len(assignments)),
-        "candidate_count_per_intent": candidate_count,
-        "preselect_count": preselect_count,
+        "design_version": "toeic_egeo_dense_retrieval_v2",
+        "paper_structure": (
+            "dense retrieval top-30, followed by an LLM selecting 10 relevant products"
+        ),
+        "api_calls": 0,
+        "status": "dense_top30_complete_candidate_top10_not_selected",
+        "intent_count": int(retrieval["intent_id"].nunique()),
         "product_pool_count": int(len(products)),
-        "target_selection_seed": seed,
-        "target_selection_rule": "fixed_seed_uniform_index_1_to_10",
+        "retrieval_rows": int(len(retrieval)),
+        "top_k": top_k,
+        "query_form": query_form,
         "query_source_counts": {
             str(key): int(value)
             for key, value in intents["query_source"].value_counts().items()
         },
         "split_counts": {
             str(key): int(value)
-            for key, value in intent_summary["split"].value_counts().items()
+            for key, value in intents["split"].value_counts().items()
         },
-        "assignment_sha256": hashlib.sha256(
+        "embedding_model": model_name,
+        "embedding_normalization": "L2",
+        "similarity": "cosine via normalized embedding dot product",
+        "product_text_columns": product_text_columns,
+        "removed_from_old_method": [
+            "category pre-filter",
+            "title x4 weighting",
+            "target score affinity bonus",
+            "avoid similarity penalty",
+            "manual metadata weighting",
+            "direct deterministic top-10 selection",
+        ],
+        "next_stage": (
+            "Use an LLM relevance selector to choose exactly 10 products "
+            "from each fixed top-30 list. Do not choose the target product yet."
+        ),
+        "retrieval_sha256": hashlib.sha256(
             digest_source.encode("utf-8")
         ).hexdigest(),
-        "method": [
-            "購入意図のカテゴリと同じカテゴリの商品だけを検索対象にする",
-            "タイトルを強く重み付けしたchar_wb TF-IDF（3〜5文字）で候補を順位付けする",
-            "avoid条件との類似度を減点する",
-            "目標スコアと商品スコアが近い場合に小さな加点を行う",
-            "同一説明文の商品が同じ候補集合へ重複しないよう優先的に除く",
-            "対象商品indexは先行研究同様に固定seedで一度だけ抽選し全条件で共有する",
-        ],
     }
-    summary_json_path.write_text(
+    summary_path.write_text(
         json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
     instructions = pd.DataFrame(
         [
-            ["確認対象", "intent_summaryシートを上から確認する。80件×10商品を1行ずつ見る必要はない。"],
-            ["候補商品", "購入意図に対して明らかに無関係な商品が混ざっていないか確認する。"],
-            ["対象商品", "target_candidate_positionの1商品だけがAPI実験で書き換え対象になる。"],
-            ["短文・長文", "同じ候補10件と同じ対象商品を共用する。"],
-            ["承認", "問題なければcandidate_set_reviewを「承認」にする。"],
-            ["要修正", "問題がある購入意図だけ「要修正」にし、review_noteへ理由を書く。"],
-            ["重要", "初期LLM順位を見てから対象商品を選び直さない。"],
-            ["再現性", f"対象商品選定seedは{seed}。候補集合と対象商品は全条件で固定する。"],
+            [
+                "この段階の役割",
+                "長文購入クエリごとに、270商品からDense Retrieval上位30件を固定する。",
+            ],
+            [
+                "API",
+                "このコードはAPIを呼ばない。02_candidate_selection_jobs.jsonlは後工程用。",
+            ],
+            [
+                "先行研究との対応",
+                "Dense Retrieval上位30件の後、LLMがタイトルから関連商品10件を選ぶ二段階方式。",
+            ],
+            [
+                "重要",
+                "現時点では候補10件も書き換え対象商品も確定していない。",
+            ],
+            [
+                "クエリ",
+                f"候補取得には{query_form}クエリを使用。同じ候補10件を後で短文実験にも共有する。",
+            ],
+            [
+                "独自加点",
+                "カテゴリ絞り込み、タイトル重み、得点帯加点、avoid減点は使用していない。",
+            ],
         ],
         columns=["項目", "説明"],
     )
-
     with pd.ExcelWriter(review_path, engine="openpyxl") as writer:
-        intent_summary.to_excel(writer, sheet_name="intent_summary", index=False)
-        assignments.to_excel(writer, sheet_name="candidate_assignments", index=False)
-        preselection.to_excel(writer, sheet_name="preselection_top30", index=False)
+        retrieval.to_excel(writer, sheet_name="dense_top30", index=False)
         instructions.to_excel(writer, sheet_name="instructions", index=False)
-    style_workbook(review_path)
+    style_review_workbook(review_path)
 
+    return [retrieval_path, jobs_path, summary_path, review_path]
+
+
+def expected_output_paths(output_dir: Path) -> list[Path]:
     return [
-        assignments_path,
-        summary_csv_path,
-        instances_path,
-        summary_json_path,
-        review_path,
+        output_dir / "01_dense_retrieval_top30.csv",
+        output_dir / "02_candidate_selection_jobs.jsonl",
+        output_dir / "03_dense_retrieval_summary.json",
+        output_dir / "04_dense_retrieval_review.xlsx",
     ]
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "確定したTOEIC購入意図ごとに商品プールから候補10件を固定し、"
-            "固定seedで書き換え対象商品1件を選ぶ。APIは呼び出さない。"
+            "確定したTOEIC購入意図を使い、多言語Sentence Transformerの"
+            "Dense Retrievalで商品プールから上位30件を作る。APIは呼び出さない。"
         )
     )
     parser.add_argument("--products", type=Path, default=DEFAULT_PRODUCTS)
     parser.add_argument("--intents", type=Path, default=DEFAULT_INTENTS)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
-    parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
-    parser.add_argument("--candidate-count", type=int, default=DEFAULT_CANDIDATE_COUNT)
-    parser.add_argument("--preselect-count", type=int, default=DEFAULT_PRESELECT_COUNT)
+    parser.add_argument("--model", default=DEFAULT_MODEL)
+    parser.add_argument(
+        "--query-form",
+        choices=["long", "short"],
+        default="long",
+        help="主実験はlong。shortは動作比較用で、正式候補の作成には使わない。",
+    )
+    parser.add_argument("--top-k", type=int, default=DEFAULT_TOP_K)
+    parser.add_argument("--batch-size", type=int, default=DEFAULT_BATCH_SIZE)
+    parser.add_argument("--device")
     parser.add_argument("--limit", type=int)
     parser.add_argument("--require-approved", action="store_true")
     parser.add_argument("--overwrite", action="store_true")
-    parser.add_argument("--preview", action="store_true")
+    parser.add_argument(
+        "--preview",
+        action="store_true",
+        help="入力と設定だけ確認し、モデル読込・埋め込み・ファイル出力を行わない。",
+    )
     args = parser.parse_args()
 
-    if args.candidate_count <= 1:
-        raise ValueError("candidate-countは2以上にしてください。")
-    if args.preselect_count < args.candidate_count:
-        raise ValueError("preselect-countはcandidate-count以上にしてください。")
+    if args.top_k <= 0:
+        raise ValueError("top-kは1以上にしてください。")
+    if args.batch_size <= 0:
+        raise ValueError("batch-sizeは1以上にしてください。")
 
     products = load_products(args.products)
+    if args.top_k > len(products):
+        raise ValueError(
+            f"top-k={args.top_k}は商品数{len(products)}を超えています。"
+        )
+
     all_intents = resolve_queries(load_intents(args.intents), args.require_approved)
-    target_position_source = all_intents.copy()
     intents = all_intents.sort_values("intent_id").reset_index(drop=True)
     if args.limit is not None:
         if args.limit <= 0:
             raise ValueError("limitは1以上にしてください。")
         intents = intents.head(args.limit).copy()
 
-    # limit時も対象商品indexを本番と同じにするため、全intentでseed抽選後に対象行だけ使う。
-    full_positions = stable_target_positions(
-        target_position_source, args.candidate_count, args.seed
-    )
-    assignments, preselection, intent_summary, instances = build_assignments(
-        products,
-        intents,
-        args.candidate_count,
-        args.preselect_count,
-        args.seed,
-        full_positions,
-    )
-    validate_assignments(assignments, args.candidate_count)
+    product_text_columns = resolve_product_text_columns(products)
+    query_column = f"{args.query_form}_query"
 
-    print("候補商品割当の検査が完了しました。")
+    print("04 Dense Retrievalの入力確認が完了しました。")
     print(f"  商品プール: {len(products)}件")
     print(f"  購入意図: {len(intents)}件")
-    print(f"  候補商品: {len(assignments)}行（各{args.candidate_count}件）")
-    print(f"  対象商品seed: {args.seed}")
-    print(
-        "  query source: "
-        + ", ".join(
-            f"{key}={value}"
-            for key, value in intents["query_source"].value_counts().items()
-        )
-    )
-    for row in intent_summary.head(3).itertuples():
-        print(f"  {row.intent_id}: 対象={row.target_candidate_position}番 {row.target_title}")
+    print(f"  使用クエリ: {query_column}")
+    print(f"  埋め込みモデル: {args.model}")
+    print(f"  商品文章列: {', '.join(product_text_columns)}")
+    print(f"  取得件数: 各{args.top_k}件")
+    print("  カテゴリ絞り込み・独自加点: なし")
+    print("  API呼び出し: 0回")
 
     if args.preview:
-        print("Preview only. ファイルは変更していません。")
+        print("Preview only. モデル読込とファイル出力は行っていません。")
         return
 
-    expected_paths = [
-        args.output_dir / "toeic_candidate_assignments.csv",
-        args.output_dir / "toeic_candidate_intent_summary.csv",
-        args.output_dir / "toeic_experiment_instances.json",
-        args.output_dir / "toeic_candidate_assignment_summary.json",
-        args.output_dir / "toeic_candidate_assignments_review.xlsx",
-    ]
-    existing = [path for path in expected_paths if path.exists()]
+    existing = [path for path in expected_output_paths(args.output_dir) if path.exists()]
     if existing and not args.overwrite:
         raise FileExistsError(
             "出力が既にあります。再作成時は --overwrite を付けてください。\n"
             + "\n".join(str(path) for path in existing)
         )
 
+    product_texts = [
+        combine_columns(row, product_text_columns)
+        for _, row in products.iterrows()
+    ]
+    empty_products = [
+        str(products.iloc[index]["product_id"])
+        for index, text in enumerate(product_texts)
+        if not nonempty(text)
+    ]
+    if empty_products:
+        raise ValueError(f"埋め込み対象の商品文章が空です: {empty_products[:10]}")
+
+    query_texts = intents[query_column].map(clean_text).tolist()
+    empty_queries = [
+        str(intent_id)
+        for intent_id, text in zip(intents["intent_id"], query_texts)
+        if not nonempty(text)
+    ]
+    if empty_queries:
+        raise ValueError(f"埋め込み対象クエリが空です: {empty_queries[:10]}")
+
+    print("埋め込みモデルを読み込んでいます。初回はモデルをダウンロードします。")
+    model = load_sentence_transformer(args.model, args.device)
+
+    print("商品文章を埋め込み中です。")
+    product_embeddings = encode_texts(
+        model, product_texts, args.batch_size, show_progress_bar=True
+    )
+    print("購入クエリを埋め込み中です。")
+    query_embeddings = encode_texts(
+        model, query_texts, args.batch_size, show_progress_bar=True
+    )
+
+    top_indices, top_scores = retrieve_top_k(
+        product_embeddings, query_embeddings, args.top_k
+    )
+    retrieval, jobs = build_retrieval_outputs(
+        products,
+        intents,
+        args.query_form,
+        args.model,
+        top_indices,
+        top_scores,
+    )
+    validate_retrieval(retrieval, len(intents), args.top_k)
+
     paths = write_outputs(
         args.output_dir,
-        assignments,
-        preselection,
-        intent_summary,
-        instances,
+        retrieval,
+        jobs,
         intents,
         products,
-        args.seed,
-        args.candidate_count,
-        args.preselect_count,
+        product_text_columns,
+        args.model,
+        args.query_form,
+        args.top_k,
     )
-    print("04の出力を作成しました。")
+
+    print("04 Dense Retrievalが完了しました。")
+    print(f"  出力行数: {len(retrieval)}")
+    print(f"  候補選定APIジョブ: {len(jobs)}件（未実行）")
+    print("  API呼び出し: 0回")
     for path in paths:
         print(f"  {path}")
 
