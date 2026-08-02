@@ -33,19 +33,11 @@ hf_data/
 data/
 results/
 
-# Rakuten Books TOEIC local datasets and experiment outputs
+# Japanese TOEIC local datasets and generated experiment outputs
 日本語版データ/TOEIC/00_元データ/*
 日本語版データ/TOEIC/01_クレンジング済み/*
 日本語版データ/TOEIC/02_商品プール/*
 日本語版データ/TOEIC/03_購入意図/*
-日本語版データ/TOEIC/04_API実験/*
-日本語版データ/TOEIC/05_分析結果/*
-日本語版データ/TOEIC/99_旧版/*
-!日本語版データ/TOEIC/04_API実験/.gitkeep
-!日本語版データ/TOEIC/05_分析結果/.gitkeep
-!日本語版データ/TOEIC/99_旧版/.gitkeep
-
-# Japanese TOEIC generated datasets and experiment outputs
 日本語版データ/TOEIC/04_候補商品/*
 日本語版データ/TOEIC/05_API実験/*
 日本語版データ/TOEIC/06_分析結果/*
