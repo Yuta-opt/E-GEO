@@ -1,0 +1,88 @@
+{
+  "schema_version": "toeic_egeo_openai_single_key_v1",
+  "status": "implemented_not_executed",
+  "last_verified_date": "2026-08-02",
+  "purpose": "OPENAI_API_KEYを1つ設定し、候補選定後のメタ最適化・Test評価まで同じランナーで自動実行する。",
+  "formal_use_policy": {
+    "allowed": true,
+    "condition": "pilotの実測費用と出力形式を確認し、Train開始前にこのモデル構成を固定すること",
+    "limitation": "複数モデルは使用するが全てOpenAI提供であり、複数企業APIを使う構成よりも提供元横断の一般化検証は弱い。",
+    "reporting_text": "計算・実装制約のため、単一提供元の異なるモデルを学習Re-rankerおよび評価専用Re-rankerとして用いた縮小再現実験である。"
+  },
+  "roles": {
+    "candidate_selection": {
+      "provider": "openai",
+      "model_id": "gpt-5-mini-2025-08-07",
+      "temperature": null,
+      "supports_temperature": false,
+      "max_output_tokens": 300,
+      "input_usd_per_million": 0.25,
+      "output_usd_per_million": 2.0
+    },
+    "rewriter": {
+      "provider": "openai",
+      "model_id": "gpt-4.1-2025-04-14",
+      "temperature": 0.5,
+      "supports_temperature": true,
+      "max_output_tokens": 1800,
+      "input_usd_per_million": 2.0,
+      "output_usd_per_million": 8.0
+    },
+    "meta_optimizer": {
+      "provider": "openai",
+      "model_id": "gpt-4.1-2025-04-14",
+      "temperature": 0.7,
+      "supports_temperature": true,
+      "max_output_tokens": 2400,
+      "input_usd_per_million": 2.0,
+      "output_usd_per_million": 8.0
+    },
+    "training_rerankers": [
+      {
+        "anonymous_label": "Model A",
+        "provider": "openai",
+        "model_id": "gpt-4.1-2025-04-14",
+        "temperature": 0.3,
+        "supports_temperature": true,
+        "max_output_tokens": 500,
+        "input_usd_per_million": 2.0,
+        "output_usd_per_million": 8.0
+      },
+      {
+        "anonymous_label": "Model B",
+        "provider": "openai",
+        "model_id": "gpt-4.1-mini-2025-04-14",
+        "temperature": 0.3,
+        "supports_temperature": true,
+        "max_output_tokens": 500,
+        "input_usd_per_million": 0.4,
+        "output_usd_per_million": 1.6
+      }
+    ],
+    "heldout_rerankers": [
+      {
+        "anonymous_label": "Model E",
+        "provider": "openai",
+        "model_id": "gpt-5-2025-08-07",
+        "temperature": null,
+        "supports_temperature": false,
+        "max_output_tokens": 700,
+        "input_usd_per_million": 1.25,
+        "output_usd_per_million": 10.0
+      }
+    ]
+  },
+  "budget": {
+    "warning_thresholds_usd": [20, 50, 80],
+    "default_hard_stop_usd": 100,
+    "cost_accounting": "Responses APIが返すinput_tokensとoutput_tokensへ標準単価を適用する。cached token割引は保守的に考慮しない。"
+  },
+  "execution": {
+    "max_retries": 3,
+    "retry_max_wait_seconds": 12,
+    "store_api_responses": false,
+    "resume_from_jsonl_cache": true,
+    "test_locked_until_prompt_freeze": true,
+    "short_test_after_long_prompt_freeze_only": true
+  }
+}
