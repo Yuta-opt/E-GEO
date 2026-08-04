@@ -115,6 +115,9 @@ def main() -> None:
     ]
 
     compliance = run_summary.get("prior_study_compliance", {})
+    meta_history_description = str(
+        compliance.get("meta_optimizer_history", "")
+    ).lower()
     manual_complete = bool(
         analysis_summary.get("manual_feature_scoring_complete", False)
     )
@@ -149,8 +152,11 @@ def main() -> None:
             "validation_visible_to_meta_optimizer"
         )
         is False,
-        "train_only_meta_history": compliance.get("meta_optimizer_history")
-        == "training results only",
+        "train_prompt_and_per_engine_history": (
+            "training" in meta_history_description
+            and "per-engine" in meta_history_description
+            and "prompt" in meta_history_description
+        ),
         "model_family_system_prompts": "model-family-specific"
         in str(compliance.get("reranker_system_prompts", "")),
         "rewriter_uses_listing_text": compliance.get("rewriter_input")
