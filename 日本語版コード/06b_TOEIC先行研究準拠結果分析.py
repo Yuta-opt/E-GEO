@@ -304,10 +304,7 @@ def create_feature_review_workbook(
         columns=["項目", "説明"],
     )
     feature_definitions = pd.DataFrame(
-        [
-            [feature_id, label]
-            for feature_id, label in FEATURES
-        ],
+        [[feature_id, label] for feature_id, label in FEATURES],
         columns=["feature_id", "日本語定義"],
     )
     scores = pd.DataFrame(score_rows)
@@ -613,7 +610,7 @@ def main() -> None:
             "1": "implicit",
             "2": "explicit",
         },
-        "automatic_keyword_feature_scoring_used": false,
+        "automatic_keyword_feature_scoring_used": False,
         "charts": [str(path) for path in chart_paths],
         "feature_outputs": feature_outputs,
         "prior_study_alignment": {
