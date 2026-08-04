@@ -5,9 +5,10 @@ from __future__ import annotations
 既存05dのAPI接続・キャッシュ・費用上限処理を再利用しつつ、次を修正する。
 
 1. Meta-optimizerへ渡す履歴はTrain結果だけとし、Validationを漏らさない。
-2. Re-rankerには原著コードのモデルファミリー別System Promptを使う。
-3. Rewriterへは、原著実装に合わせて商品名＋商品説明を渡す。
-4. 15プロンプト、2 epochs、4 batches、各8評価版、40/10/30を維持する。
+2. Train履歴には各版のプロンプト本文とエンジン別スコアを保持する。
+3. Re-rankerには原著コードのモデルファミリー別System Promptを使う。
+4. Rewriterへは、原著実装に合わせて商品名＋商品説明を渡す。
+5. 15プロンプト、2 epochs、4 batches、各8評価版、40/10/30を維持する。
 
 APIは --execute を付けない限り呼び出さない。
 """
@@ -20,10 +21,11 @@ from pathlib import Path
 from typing import Any
 
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
 LEGACY_MULTI_PROVIDER_RUNNER = Path(__file__).with_name(
     "05d_TOEIC_OpenAI_Gemini_Claude実験を自動実行.py"
 )
-ORIGINAL_PROMPTS_PATH = Path("src/multi_model_optimization/prompts.py")
+ORIGINAL_PROMPTS_PATH = REPO_ROOT / "src/multi_model_optimization/prompts.py"
 COMPLIANT_EXPERIMENT_CONFIG = Path(
     "日本語版設定/TOEIC_EGEO実験設定_v3_先行研究準拠.json"
 )
@@ -83,18 +85,48 @@ def family_system_prompt(role: Any) -> str:
 
 
 def train_only_history_text(history: list[dict[str, Any]]) -> str:
-    """Meta-optimizerへTrain履歴だけを渡す。
+    """原著と同様に、Trainのプロンプト本文とエンジン別結果だけを渡す。
 
     Validationは版選択専用であり、次のプロンプト生成には一切渡さない。
     """
     if not history:
         return ""
+
     lines = ["\nPREVIOUS OPTIMIZATION HISTORY (TRAIN RESULTS ONLY):"]
     for item in history:
         lines.append(
-            f"• version {item['version_number']} ({item['version_label']}): "
-            f"train mean={item['train_summary']['overall_mean']:.4f}"
+            f"\nVersion {item['version_number']} "
+            f"({item['version_label']}):"
         )
+        prompt_text = str(item.get("prompt_text", ""))
+        prompt_preview = (
+            prompt_text[:1200] + "..."
+            if len(prompt_text) > 1200
+            else prompt_text
+        )
+        lines.append(f"Prompt:\n{prompt_preview}")
+
+        train_summary = item["train_summary"]
+        for label, mean in train_summary.get("engine_means", {}).items():
+            lines.append(
+                f"  {label}: mean rank improvement = {float(mean):+.4f}"
+            )
+        lines.append(
+            "  Aggregate: "
+            f"overall mean={float(train_summary['overall_mean']):+.4f}, "
+            f"worst engine={float(train_summary['worst_engine_mean']):+.4f}, "
+            f"best engine={float(train_summary['best_engine_mean']):+.4f}, "
+            f"cross-engine std={float(train_summary['cross_engine_std']):.4f}"
+        )
+
+        meta_update = item.get("meta_update") or {}
+        reasoning = str(meta_update.get("meta_reasoning", "")).strip()
+        if reasoning:
+            reasoning_preview = (
+                reasoning[:800] + "..." if len(reasoning) > 800 else reasoning
+            )
+            lines.append(f"Previous meta-reasoning:\n{reasoning_preview}")
+
     return "\n".join(lines)
 
 
@@ -210,7 +242,9 @@ def annotate_run_summary() -> None:
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
     summary["prior_study_compliance"] = {
         "validation_visible_to_meta_optimizer": False,
-        "meta_optimizer_history": "training results only",
+        "meta_optimizer_history": (
+            "training prompt text and per-engine training results only"
+        ),
         "reranker_system_prompts": (
             "model-family-specific prompts from "
             "src/multi_model_optimization/prompts.py"
