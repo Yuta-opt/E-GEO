@@ -3,7 +3,7 @@ param(
     [ValidateSet("Validate", "Smoke", "Full")]
     [string]$Mode = "Validate",
 
-    [double]$HardStopUsd = 123,
+    [double]$HardStopUsd = 121,
 
     [switch]$SkipSmoke
 )
@@ -41,7 +41,8 @@ function Invoke-Step {
 Write-Host "E-GEO 日本語TOEIC研究：OpenAI主予算＋低予算Gemini/Claude" -ForegroundColor Green
 Write-Host "Mode: $Mode"
 Write-Host "総hard stop: USD $HardStopUsd"
-Write-Host "Provider上限: OpenAI 100 / Google 15 / Anthropic 8 USD"
+Write-Host "OpenAIアカウント予算: 100 USD（本体98＋予備2）"
+Write-Host "Provider上限: OpenAI本体 98 / Google 15 / Anthropic 8 USD"
 Write-Host "学習Re-ranker: GPT-4.1 / Gemini 3.1 Flash-Lite"
 Write-Host "GPT-5 Test: 初期長文・最適化長文・最適化短文"
 Write-Host "Gemini Test: 初期長文・最適化長文"
