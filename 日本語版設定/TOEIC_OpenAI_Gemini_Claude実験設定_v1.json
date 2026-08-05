@@ -1,13 +1,13 @@
 {
-  "schema_version": "toeic_egeo_openai_gemini_claude_v2",
+  "schema_version": "toeic_egeo_openai_gemini_claude_cost_control_v3",
   "status": "implemented_not_executed",
-  "last_verified_date": "2026-08-02",
-  "purpose": "GPT-4.1とGemini 3 Flash Previewを学習Re-rankerとしてメタ最適化し、固定後のTestをGPT-5・Gemini 3.5 Flash・Claude Sonnet 4.5の3モデルで同一条件評価する。",
+  "last_verified_date": "2026-08-05",
+  "purpose": "OpenAIへ主予算を置き、GPT-4.1と低価格Gemini Flash-Liteでメタ最適化する。固定後はGPT-5を全条件、Geminiを長文条件、Claude Sonnet 5を最適化済み長文条件だけで追加評価する。",
   "formal_use_policy": {
     "allowed": true,
-    "condition": "3社のsmoke実験で出力形式・実測費用・モデル利用可否を確認し、Train開始前にモデル構成を固定すること",
-    "limitation": "学習Re-rankerは2モデルへ縮小しているため、先行研究の4学習Re-ranker構成の完全再現ではない。Held-out Testでは先行研究と同じGPT-5・Claude Sonnet 4.5に、3社横断比較用のGemini 3.5 Flashを追加する。",
-    "reporting_text": "計算予算に合わせ、GPT-4.1とGemini 3 Flash Previewを学習Re-rankerとしてメタ最適化した。プロンプト固定後は、最適化に使用していないGPT-5、Gemini 3.5 Flash、Claude Sonnet 4.5を同一Test集合へ適用し、提供元をまたぐ順位改善量を比較した。"
+    "condition": "OpenAI・Gemini・Claudeのsmoke実験で出力形式・実測費用・モデル利用可否を確認し、Train開始前に学習モデル構成を固定すること",
+    "limitation": "費用制約のため、GeminiはFlash-Lite系列を使用する。Geminiでは短文Testを省略し、Claudeでは最適化済み長文Testだけを実施する。したがって、3モデルすべての完全対称比較ではなく、GPT-5を主評価、GeminiとClaudeを低予算の転移確認として扱う。",
+    "reporting_text": "GPT-4.1とGemini 3.1 Flash-Liteの順位結果からプロンプトを最適化した。固定後はGPT-5で全条件、Gemini 3.5 Flash-Liteで初期・最適化の長文条件、Claude Sonnet 5で最適化済み長文条件を評価した。"
   },
   "candidate_selection": {
     "provider": "openai",
@@ -52,12 +52,12 @@
         "anonymous_label": "Model B",
         "provider": "google",
         "api_key_env": "GEMINI_API_KEY",
-        "model_id": "gemini-3-flash-preview",
+        "model_id": "gemini-3.1-flash-lite",
         "temperature": 0.3,
         "supports_temperature": true,
-        "max_output_tokens": 500,
-        "input_usd_per_million": 0.5,
-        "output_usd_per_million": 3.0
+        "max_output_tokens": 300,
+        "input_usd_per_million": 0.25,
+        "output_usd_per_million": 1.5
       }
     ],
     "heldout_rerankers": [
@@ -68,7 +68,7 @@
         "model_id": "gpt-5-2025-08-07",
         "temperature": null,
         "supports_temperature": false,
-        "max_output_tokens": 700,
+        "max_output_tokens": 500,
         "input_usd_per_million": 1.25,
         "output_usd_per_million": 10.0
       },
@@ -76,39 +76,65 @@
         "anonymous_label": "Model F",
         "provider": "google",
         "api_key_env": "GEMINI_API_KEY",
-        "model_id": "gemini-3.5-flash",
+        "model_id": "gemini-3.5-flash-lite",
         "temperature": 0.3,
         "supports_temperature": true,
-        "max_output_tokens": 700,
-        "input_usd_per_million": 1.5,
-        "output_usd_per_million": 9.0
+        "max_output_tokens": 300,
+        "input_usd_per_million": 0.3,
+        "output_usd_per_million": 2.5
       },
       {
         "anonymous_label": "Model G",
         "provider": "anthropic",
         "api_key_env": "ANTHROPIC_API_KEY",
-        "model_id": "claude-sonnet-4-5-20250929",
+        "model_id": "claude-sonnet-5",
         "temperature": 0.3,
         "supports_temperature": true,
-        "max_output_tokens": 700,
-        "input_usd_per_million": 3.0,
-        "output_usd_per_million": 15.0
+        "max_output_tokens": 300,
+        "input_usd_per_million": 2.0,
+        "output_usd_per_million": 10.0,
+        "pricing_valid_until": "2026-08-31",
+        "pricing_note": "Claude Sonnet 5の導入価格。2026-09-01以降は標準価格へ更新が必要。"
       }
     ]
   },
   "comparison_policy": {
-    "primary_final_comparison": "Held-out Test上でGPT-5・Gemini 3.5 Flash・Claude Sonnet 4.5を横並び比較する",
-    "same_test_queries": true,
+    "primary_final_comparison": "GPT-5を主評価とし、GeminiとClaudeで最適化プロンプトの提供元外転移を低予算確認する",
+    "same_test_queries_within_each_reported_condition": true,
     "same_candidate_sets": true,
     "same_target_products": true,
-    "same_initial_and_optimized_descriptions": true,
-    "report_per_model_and_macro_average": true,
-    "training_models_are_not_reported_as_heldout_test_models": true
+    "report_per_model": true,
+    "macro_average_only_on_shared_conditions": true,
+    "training_models_are_not_reported_as_heldout_test_models": true,
+    "test_conditions_by_provider": {
+      "openai": [
+        "test_initial_long",
+        "test_optimized_long",
+        "test_optimized_short"
+      ],
+      "google": [
+        "test_initial_long",
+        "test_optimized_long"
+      ],
+      "anthropic": [
+        "test_optimized_long"
+      ]
+    }
   },
   "budget": {
-    "warning_thresholds_usd": [20, 50, 80],
-    "default_hard_stop_usd": 100,
-    "cost_accounting": "各社APIが返す入力・出力トークンへ2026-08-02時点の標準単価を適用する。Geminiのthinking tokensは出力料金へ含める。キャッシュ割引とBatch割引は保守的に考慮しない。"
+    "warning_thresholds_usd": [50, 100, 115, 121],
+    "default_hard_stop_usd": 123,
+    "provider_hard_stops_usd": {
+      "openai": 100,
+      "google": 15,
+      "anthropic": 8
+    },
+    "provider_warning_thresholds_usd": {
+      "openai": [50, 75, 90],
+      "google": [5, 10, 13],
+      "anthropic": [3, 5, 7]
+    },
+    "cost_accounting": "2026-08-05時点の標準単価を使用する。Geminiのthinking tokensを出力料金へ含める。Claudeは5分prompt cacheのwrite 1.25倍・read 0.1倍を反映する。OpenAI 100 USD、Google 15 USD、Anthropic 8 USDで個別停止する。"
   },
   "execution": {
     "max_retries": 3,
@@ -117,6 +143,9 @@
     "resume_from_jsonl_cache": true,
     "test_locked_until_prompt_freeze": true,
     "short_test_after_long_prompt_freeze_only": true,
-    "smoke_tests_all_three_providers": true
+    "smoke_tests_all_three_providers": true,
+    "compact_system_prompt_for_google": true,
+    "compact_system_prompt_for_anthropic": true,
+    "anthropic_ephemeral_prompt_cache": true
   }
 }
