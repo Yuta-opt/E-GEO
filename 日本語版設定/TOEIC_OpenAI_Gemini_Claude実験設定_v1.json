@@ -1,5 +1,5 @@
 {
-  "schema_version": "toeic_egeo_openai_gemini_claude_cost_control_v3",
+  "schema_version": "toeic_egeo_openai_gemini_claude_cost_control_v4",
   "status": "implemented_not_executed",
   "last_verified_date": "2026-08-05",
   "purpose": "OpenAIへ主予算を置き、GPT-4.1と低価格Gemini Flash-Liteでメタ最適化する。固定後はGPT-5を全条件、Geminiを長文条件、Claude Sonnet 5を最適化済み長文条件だけで追加評価する。",
@@ -13,7 +13,7 @@
     "provider": "openai",
     "api_key_env": "OPENAI_API_KEY",
     "model_id": "gpt-5-mini-2025-08-07",
-    "note": "候補30件から10件の選定は04bで先に実行する。"
+    "note": "候補30件から10件の選定は04bで先に実行する。本体外のOpenAI費用なので2 USDの予備枠に含める。"
   },
   "roles": {
     "rewriter": {
@@ -122,19 +122,26 @@
     }
   },
   "budget": {
-    "warning_thresholds_usd": [50, 100, 115, 121],
-    "default_hard_stop_usd": 123,
+    "warning_thresholds_usd": [50, 98, 113, 119],
+    "default_hard_stop_usd": 121,
     "provider_hard_stops_usd": {
-      "openai": 100,
+      "openai": 98,
       "google": 15,
       "anthropic": 8
     },
     "provider_warning_thresholds_usd": {
-      "openai": [50, 75, 90],
+      "openai": [50, 75, 90, 96],
       "google": [5, 10, 13],
       "anthropic": [3, 5, 7]
     },
-    "cost_accounting": "2026-08-05時点の標準単価を使用する。Geminiのthinking tokensを出力料金へ含める。Claudeは5分prompt cacheのwrite 1.25倍・read 0.1倍を反映する。OpenAI 100 USD、Google 15 USD、Anthropic 8 USDで個別停止する。"
+    "openai_account_budget_usd": 100,
+    "openai_reserved_outside_main_run_usd": 2,
+    "openai_reserve_uses": [
+      "GPT-5 miniによる候補10件選定",
+      "text-embedding-3-largeによる収束分析",
+      "丸め誤差と最後の1リクエスト分"
+    ],
+    "cost_accounting": "2026-08-05時点の標準単価を使用する。Geminiのthinking tokensを出力料金へ含める。Claude Sonnet 5は2026-08-31までの導入価格を使用する。OpenAIアカウント全体100 USDのうち本体は98 USDで停止し2 USDを予約する。Google 15 USD、Anthropic 8 USDで個別停止する。"
   },
   "execution": {
     "max_retries": 3,
