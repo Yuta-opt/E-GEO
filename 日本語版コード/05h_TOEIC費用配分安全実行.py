@@ -6,6 +6,7 @@ from __future__ import annotations
 - 成功応答を保存した直後の予算判定で再試行が起きる問題を防ぐ。
 - 1回のリクエスト分だけ上限を超える可能性はあるが、同じProviderの次の新規呼び出し前に停止する。
 - 上限到達後も成功済みキャッシュは読み出せるため、後日Claudeだけを追加できる。
+- Anthropicのprompt cacheは、十分に長いSystem Promptのときだけ有効にする。
 - smokeでは全Held-outモデルを全3条件へ通し、接続と出力形式を確認する。
 """
 
@@ -117,6 +118,56 @@ def safe_generate(self: Any, *args: Any, **kwargs: Any) -> Any:
     return ORIGINAL_GENERATE(self, *args, **kwargs)
 
 
+def safe_anthropic_call(
+    client: Any,
+    role: Any,
+    system_prompt: str,
+    user_prompt: str,
+) -> tuple[str, dict[str, int], str | None]:
+    system_value: Any = system_prompt
+    if len(system_prompt) >= 4000:
+        system_value = [
+            {
+                "type": "text",
+                "text": system_prompt,
+                "cache_control": {"type": "ephemeral"},
+            }
+        ]
+    kwargs: dict[str, Any] = {
+        "model": role.model_id,
+        "max_tokens": role.max_output_tokens,
+        "system": system_value,
+        "messages": [{"role": "user", "content": user_prompt}],
+    }
+    if role.supports_temperature and role.temperature is not None:
+        kwargs["temperature"] = role.temperature
+    response = client.messages.create(**kwargs)
+    text = "".join(
+        str(getattr(block, "text", ""))
+        for block in getattr(response, "content", [])
+        if getattr(block, "type", "") == "text"
+    ).strip()
+    metadata = getattr(response, "usage", None)
+    input_tokens = int(getattr(metadata, "input_tokens", 0) or 0)
+    output_tokens = int(getattr(metadata, "output_tokens", 0) or 0)
+    cache_creation = int(
+        getattr(metadata, "cache_creation_input_tokens", 0) or 0
+    )
+    cache_read = int(
+        getattr(metadata, "cache_read_input_tokens", 0) or 0
+    )
+    usage = {
+        "input_tokens": input_tokens,
+        "output_tokens": output_tokens,
+        "cache_creation_input_tokens": cache_creation,
+        "cache_read_input_tokens": cache_read,
+        "total_tokens": (
+            input_tokens + output_tokens + cache_creation + cache_read
+        ),
+    }
+    return text, usage, getattr(response, "id", None)
+
+
 def smoke_symmetric_run_test(**kwargs: Any) -> list[dict[str, Any]]:
     prompts = kwargs["prompts"]
     test_ids = kwargs["test_ids"]
@@ -147,6 +198,9 @@ def safe_install_cost_controls(profile: dict[str, Any]) -> None:
         warning_only_budget_check
     )
     budgeted.legacy.MultiProviderRunner.generate = safe_generate
+    budgeted.legacy.MultiProviderRunner._anthropic_call = staticmethod(
+        safe_anthropic_call
+    )
     budgeted.base.run_test = smoke_symmetric_run_test
 
 
