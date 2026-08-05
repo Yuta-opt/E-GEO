@@ -3,7 +3,7 @@ param(
     [ValidateSet("Validate", "Smoke", "Full")]
     [string]$Mode = "Validate",
 
-    [double]$HardStopUsd = 115,
+    [double]$HardStopUsd = 113,
 
     [switch]$SkipSmoke
 )
@@ -41,7 +41,8 @@ function Invoke-Step {
 Write-Host "E-GEO 日本語TOEIC研究：OpenAI主予算＋低予算Gemini" -ForegroundColor Green
 Write-Host "Mode: $Mode"
 Write-Host "総hard stop: USD $HardStopUsd"
-Write-Host "Provider上限: OpenAI 100 USD / Google 15 USD"
+Write-Host "OpenAIアカウント予算: 100 USD（本体98＋予備2）"
+Write-Host "Provider上限: OpenAI本体 98 USD / Google 15 USD"
 Write-Host "学習Re-ranker: GPT-4.1 / Gemini 3.1 Flash-Lite"
 Write-Host "Held-out Test: GPT-5（全条件）/ Gemini 3.5 Flash-Lite（長文のみ）"
 Write-Host "後日追加可能: Claude Sonnet 5（最適化済み長文のみ）"
@@ -61,6 +62,7 @@ Invoke-Step "2. 実行コードの構文チェック" {
         ".\日本語版コード\05d_TOEIC_OpenAI_Gemini_Claude実験を自動実行.py" `
         ".\日本語版コード\05e_TOEIC先行研究準拠_OpenAI_Gemini_Claude実験.py" `
         ".\日本語版コード\05g_TOEIC費用配分_OpenAI_Gemini_Claude実験.py" `
+        ".\日本語版コード\05h_TOEIC費用配分安全実行.py" `
         $Runner `
         ".\日本語版コード\06b_TOEIC先行研究準拠結果分析.py" `
         ".\日本語版コード\07c_TOEIC費用配分完了チェック.py"
