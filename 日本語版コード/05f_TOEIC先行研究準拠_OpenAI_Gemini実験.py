@@ -17,7 +17,7 @@ from typing import Any
 
 
 BUDGETED_RUNNER = Path(__file__).with_name(
-    "05g_TOEIC費用配分_OpenAI_Gemini_Claude実験.py"
+    "05h_TOEIC費用配分安全実行.py"
 )
 MODEL_PROFILE = Path(
     "日本語版設定/TOEIC_OpenAI_Gemini実験設定_v1.json"
