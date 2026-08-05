@@ -13,7 +13,7 @@ $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 Set-Location $RepoRoot
 
 $CandidateModel = "gpt-5-mini-2025-08-07"
-$Runner = ".\日本語版コード\05g_TOEIC費用配分_OpenAI_Gemini_Claude実験.py"
+$Runner = ".\日本語版コード\05h_TOEIC費用配分安全実行.py"
 $ExperimentConfig = ".\日本語版設定\TOEIC_EGEO実験設定_v3_先行研究準拠.json"
 $ModelProfile = ".\日本語版設定\TOEIC_OpenAI_Gemini_Claude実験設定_v1.json"
 $RunDir = ".\日本語版データ\TOEIC\05_API実験\02_OpenAI_Gemini_Claude実行"
@@ -61,6 +61,7 @@ Invoke-Step "2. 実行コードの構文チェック" {
         ".\日本語版コード\05a_TOEICメタ最適化実験を計画.py" `
         ".\日本語版コード\05d_TOEIC_OpenAI_Gemini_Claude実験を自動実行.py" `
         ".\日本語版コード\05e_TOEIC先行研究準拠_OpenAI_Gemini_Claude実験.py" `
+        ".\日本語版コード\05g_TOEIC費用配分_OpenAI_Gemini_Claude実験.py" `
         $Runner `
         ".\日本語版コード\06b_TOEIC先行研究準拠結果分析.py" `
         ".\日本語版コード\07c_TOEIC費用配分完了チェック.py"
