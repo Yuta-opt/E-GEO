@@ -2,9 +2,10 @@ from __future__ import annotations
 
 """05gの費用配分を安全に実行する最終ラッパー。
 
-- hard stop超過をAPI呼び出し前に判定する。
+- hard stop超過を新規API呼び出し前に判定する。
 - 成功応答を保存した直後の予算判定で再試行が起きる問題を防ぐ。
-- 1回のリクエスト分だけ上限を超える可能性はあるが、次の呼び出し前に停止する。
+- 1回のリクエスト分だけ上限を超える可能性はあるが、同じProviderの次の新規呼び出し前に停止する。
+- 上限到達後も成功済みキャッシュは読み出せるため、後日Claudeだけを追加できる。
 - smokeでは全Held-outモデルを全3条件へ通し、接続と出力形式を確認する。
 """
 
@@ -65,25 +66,54 @@ def warning_only_budget_check(self: Any) -> None:
                 self.provider_warned.add(key)
 
 
-def strict_preflight_budget_check(self: Any) -> None:
+def strict_preflight_budget_check(self: Any, provider: str) -> None:
     total_spent = float(self.cache.spent_usd)
     if total_spent >= float(self.hard_stop_usd):
         raise RuntimeError(
             f"全社合計${total_spent:.2f}が総hard stop "
             f"${self.hard_stop_usd:.2f}へ到達済みです。"
         )
+    limit = budgeted.PROVIDER_HARD_STOPS.get(provider)
+    if limit is None:
+        return
     totals = budgeted.provider_spend(self.cache)
-    for provider, limit in budgeted.PROVIDER_HARD_STOPS.items():
-        spent = float(totals.get(provider, 0.0))
-        if spent >= float(limit):
-            raise RuntimeError(
-                f"{provider}累計${spent:.2f}がProvider hard stop "
-                f"${float(limit):.2f}へ到達済みです。"
-            )
+    spent = float(totals.get(provider, 0.0))
+    if spent >= float(limit):
+        raise RuntimeError(
+            f"{provider}累計${spent:.2f}がProvider hard stop "
+            f"${float(limit):.2f}へ到達済みです。"
+        )
+
+
+def cached_job_id(kwargs: dict[str, Any]) -> str | None:
+    required = {"kind", "context_id", "role", "system_prompt", "user_prompt"}
+    if not required.issubset(kwargs):
+        return None
+    role = kwargs["role"]
+    identity = {
+        "kind": kwargs["kind"],
+        "context_id": kwargs["context_id"],
+        "provider": role.provider,
+        "model": role.model_id,
+        "temperature": (
+            role.temperature if role.supports_temperature else None
+        ),
+        "system_sha256": budgeted.base.stable_hash(
+            kwargs["system_prompt"]
+        ),
+        "user_sha256": budgeted.base.stable_hash(kwargs["user_prompt"]),
+    }
+    return f"{kwargs['kind']}__{budgeted.base.stable_hash(identity)[:24]}"
 
 
 def safe_generate(self: Any, *args: Any, **kwargs: Any) -> Any:
-    strict_preflight_budget_check(self)
+    job_id = cached_job_id(kwargs)
+    if job_id is not None and self.cache.get(job_id) is not None:
+        return ORIGINAL_GENERATE(self, *args, **kwargs)
+
+    role = kwargs.get("role")
+    provider = str(getattr(role, "provider", "unknown"))
+    strict_preflight_budget_check(self, provider)
     return ORIGINAL_GENERATE(self, *args, **kwargs)
 
 
