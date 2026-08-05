@@ -3,7 +3,7 @@ param(
     [ValidateSet("Validate", "Smoke", "Full")]
     [string]$Mode = "Validate",
 
-    [double]$HardStopUsd = 100,
+    [double]$HardStopUsd = 115,
 
     [switch]$SkipSmoke
 )
@@ -19,7 +19,7 @@ $ModelProfile = ".\日本語版設定\TOEIC_OpenAI_Gemini実験設定_v1.json"
 $RunDir = ".\日本語版データ\TOEIC\05_API実験\02_OpenAI_Gemini_Claude実行"
 $AnalysisDir = ".\日本語版データ\TOEIC\06_分析結果\02_OpenAI_Gemini_Claude"
 $SmokeCompletionReport = ".\日本語版データ\TOEIC\07_本番前チェック\03_OpenAI_Gemini_smokeチェック.json"
-$CompletionReport = ".\日本語版データ\TOEIC\07_本番前チェック\04_OpenAI_Gemini段階完了チェック.json"
+$CompletionReport = ".\日本語版データ\TOEIC\07_本番前チェック\05_OpenAI_Gemini費用配分完了チェック.json"
 $ExpectedHeldoutCount = 2
 
 function Invoke-Step {
@@ -38,12 +38,13 @@ function Invoke-Step {
     }
 }
 
-Write-Host "E-GEO 日本語TOEIC研究：先行研究準拠 OpenAI + Gemini段階実行" -ForegroundColor Green
+Write-Host "E-GEO 日本語TOEIC研究：OpenAI主予算＋低予算Gemini" -ForegroundColor Green
 Write-Host "Mode: $Mode"
-Write-Host "Hard stop: USD $HardStopUsd"
-Write-Host "学習Re-ranker: GPT-4.1 / Gemini 3 Flash Preview"
-Write-Host "今回のHeld-out Test: GPT-5 / Gemini 3.5 Flash"
-Write-Host "後日追加可能: Claude Sonnet 4.5（再学習不要・キャッシュ再利用）"
+Write-Host "総hard stop: USD $HardStopUsd"
+Write-Host "Provider上限: OpenAI 100 USD / Google 15 USD"
+Write-Host "学習Re-ranker: GPT-4.1 / Gemini 3.1 Flash-Lite"
+Write-Host "Held-out Test: GPT-5（全条件）/ Gemini 3.5 Flash-Lite（長文のみ）"
+Write-Host "後日追加可能: Claude Sonnet 5（最適化済み長文のみ）"
 Write-Host "必要キー: OPENAI_API_KEY / GEMINI_API_KEY"
 Write-Host "ANTHROPIC_API_KEYは今回不要です。"
 Write-Host "Validationは版選択専用で、Meta-optimizerへ渡しません。"
@@ -59,9 +60,10 @@ Invoke-Step "2. 実行コードの構文チェック" {
         ".\日本語版コード\05a_TOEICメタ最適化実験を計画.py" `
         ".\日本語版コード\05d_TOEIC_OpenAI_Gemini_Claude実験を自動実行.py" `
         ".\日本語版コード\05e_TOEIC先行研究準拠_OpenAI_Gemini_Claude実験.py" `
+        ".\日本語版コード\05g_TOEIC費用配分_OpenAI_Gemini_Claude実験.py" `
         $Runner `
         ".\日本語版コード\06b_TOEIC先行研究準拠結果分析.py" `
-        ".\日本語版コード\07b_TOEIC先行研究準拠完了チェック.py"
+        ".\日本語版コード\07c_TOEIC費用配分完了チェック.py"
 }
 
 Invoke-Step "3. Dense Retrieval入力の再検証" {
@@ -109,7 +111,7 @@ Invoke-Step "7. GPT-5 miniで候補10件を全80購入意図について選定" 
 }
 
 if ($Mode -eq "Smoke") {
-    Invoke-Step "8. OpenAI＋Geminiの先行研究準拠smoke実験" {
+    Invoke-Step "8. OpenAI＋Geminiの低予算smoke実験" {
         uv run python $Runner `
             --mode smoke `
             --experiment-config $ExperimentConfig `
@@ -122,7 +124,7 @@ if ($Mode -eq "Smoke") {
             --run-dir $RunDir `
             --output-dir $AnalysisDir
     }
-    Invoke-Step "10. smoke完了チェック（GPT・Geminiの2評価モデル）" {
+    Invoke-Step "10. smoke完了チェック" {
         uv run python ".\日本語版コード\07_TOEIC研究完了チェック.py" `
             --run-dir $RunDir `
             --analysis-dir $AnalysisDir `
@@ -147,7 +149,7 @@ if (-not $SkipSmoke) {
     }
 }
 
-Invoke-Step "9. 15プロンプトの正式メタ最適化・GPT/Gemini Test評価" {
+Invoke-Step "9. 15プロンプトの正式メタ最適化・費用配分Test評価" {
     uv run python $Runner `
         --mode full `
         --experiment-config $ExperimentConfig `
@@ -163,13 +165,12 @@ Invoke-Step "10. Test統計・text-embedding-3-large収束・人手評価表を�
         --execute-embeddings
 }
 
-Invoke-Step "11. GPT＋Gemini段階の完了チェック" {
-    uv run python ".\日本語版コード\07b_TOEIC先行研究準拠完了チェック.py" `
+Invoke-Step "11. GPT＋Gemini費用配分段階の完了チェック" {
+    uv run python ".\日本語版コード\07c_TOEIC費用配分完了チェック.py" `
         --run-dir $RunDir `
         --analysis-dir $AnalysisDir `
         --report $CompletionReport `
-        --expected-heldout-count $ExpectedHeldoutCount `
-        --hard-stop-usd $HardStopUsd
+        --expected-heldout-count $ExpectedHeldoutCount
 }
 
 Write-Host ""
@@ -177,6 +178,7 @@ Write-Host "============================================================" -Foreg
 Write-Host "OpenAI＋Gemini段階の実行・統計・埋め込み分析が終了しました。" -ForegroundColor Green
 Write-Host "============================================================" -ForegroundColor Green
 Write-Host "APIログ：$RunDir"
+Write-Host "Provider別費用：$RunDir\05b_provider_cost_summary.json"
 Write-Host "分析結果：$AnalysisDir"
 Write-Host "段階完了判定：$CompletionReport"
 Write-Host "人手特徴評価表：$AnalysisDir\04_prompt_feature_manual_review.xlsx"
