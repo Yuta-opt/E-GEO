@@ -25,7 +25,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 LEGACY_MULTI_PROVIDER_RUNNER = Path(__file__).with_name(
     "05d_TOEIC_OpenAI_Gemini_Claude実験を自動実行.py"
 )
-ORIGINAL_PROMPTS_PATH = REPO_ROOT / "src/multi_model_optimization/prompts.py"
+ORIGINAL_PROMPTS_PATH = REPO_ROOT / "src/prompts.py"
 COMPLIANT_EXPERIMENT_CONFIG = Path(
     "日本語版設定/TOEIC_EGEO実験設定_v3_先行研究準拠.json"
 )
@@ -246,8 +246,7 @@ def annotate_run_summary() -> None:
             "training prompt text and per-engine training results only"
         ),
         "reranker_system_prompts": (
-            "model-family-specific prompts from "
-            "src/multi_model_optimization/prompts.py"
+            "model-family-specific prompts from src/prompts.py"
         ),
         "rewriter_input": "target listing title + description; query blind",
         "prompt_count": 15,
