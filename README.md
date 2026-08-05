@@ -1,126 +1,88 @@
-# E-GEO
+# E-GEO 日本語TOEIC縮小再現実験
 
-**A testbed for Generative Engine Optimization in e-commerce.**
+このブランチは、E-GEO v2のメタ最適化を日本語TOEIC教材へ適用する研究用ブランチです。
 
-[📄 Paper (arXiv:2511.20867)](https://arxiv.org/abs/2511.20867) · [🏆 Leaderboard](https://e-geo.netlify.app/) · [📦 Data (HuggingFace)](https://huggingface.co/datasets/psbagga17/E-GEO)
+- 対象ブランチ：`ja-toeic-prototype`
+- 最終更新：2026年8月5日
+- 詳細な日本語README：[`README_日本語.md`](README_日本語.md)
+- 現行設計の正本：[`日本語版ドキュメント/TOEIC実験_現行設計と実施記録.md`](日本語版ドキュメント/TOEIC実験_現行設計と実施記録.md)
 
-> 🏆 **Want to submit to the leaderboard? → [submission.md](submission.md)**
+> 元の公開E-GEO実装は`main`ブランチを参照してください。このブランチでは、日本語TOEIC研究用のコード・設定・ドキュメントを追加しています。
 
----
+## 現在地
 
-## What is E-GEO?
-
-As LLM **generative engines** (chatbots) increasingly stand in for search, a product's visibility depends less on classic SEO and more on what these engines choose to surface — what we call **generative engine optimization (GEO)**. E-commerce is a natural testbed: a generative shopping assistant returns a *ranked* list of products, so rank maps directly to clicks and revenue. **E-GEO studies that ranking step.** We frame GEO as a *rewriter* that edits a product's description to improve its rank — **without seeing the query, and without changing the product's facts** — and measure how far it moves a target product up the rankings of five LLM judges: GPT-5, Claude Sonnet 4.5, Gemini 3 Flash Preview, DeepSeek V3.2, and Llama 4 Maverick.
-
-<p align="center">
-  <img src="assets/GEO_in_e-commerce.png" width="760" alt="The GEO process: a rewriter edits a product's description to move it up the generative engine's ranking.">
-</p>
-<p align="center"><sub><em>The GEO process — a rewriter edits a product's description (Product E → E') to lift it from 4th to 1st in the generative engine's ranking, without changing the product's facts.</em></sub></p>
-
-**The dataset.** Unlike keyword-style retrieval datasets, E-GEO uses **long-form, natural-language shopping requests** rich with intent and constraints. It pairs **13,747 queries** (sourced from [r/BuyItForLife](https://www.reddit.com/r/BuyItForLife/) and filtered by an LLM pipeline) with **86,060 real products** from the Amazon Reviews 2023 corpus — **137,470 query–product pairs** in all, of which 2,000 queries are held out as the fixed test set. See the [paper](https://arxiv.org/abs/2511.20867) for the construction pipeline and [data.md](data.md) for file-level details.
-
-**Scoring.** Each test query names one target product. A rewriter rewrites that product's description; each judge ranks it among its 10 candidates before and after, and we score `original rank − rewritten rank` (positions run 1 = top to 10 = bottom, so a **positive** score means the product moved up). We report mean improvement per judge.
-
----
-
-## What you can do with this repo
-
-- **Submit to the public leaderboard** — score your rewriter against all five judges and open a PR. → **[submission.md](submission.md)**
-- **Reproduce the paper / run prompt optimization** — the research pipeline lives in `src/multi_model_optimization/` (see [How E-GEO works](#how-e-geo-works); parameters in [submission.md](submission.md#prompt-optimization-parameters-mode-c)).
-- **Use the optimized prompts out of the box** — the 15 best optimized rewriting prompts ship in `src/optimized_prompts.json`; run any of them with `--prompt optimized:<style>` (e.g. `optimized:competitive`) in a Mode B submission.
-- **Explore the data** — the 2,000-query test set, train/val split, per-model rankings, and all experiment results are hosted on HuggingFace. → **[data.md](data.md)**
-- **Browse the live leaderboard** — see how every submitted rewriter scores across the five judges. → **[website](https://e-geo.netlify.app/)**
-
----
-
-## How E-GEO works
-
-To optimize a rewriting prompt automatically, E-GEO uses a **reflective prompt meta-optimizer** (inspired by GEPA, [Agrawal et al., 2025](https://arxiv.org/abs/2507.19457)): a meta-model reads a prompt's per-engine results and proposes an improved prompt, scored on a held-out **validation** split so the test set is never touched. This is what **Mode C** of the submission script runs — see [submission.md](submission.md#prompt-optimization-parameters-mode-c) and the [paper](https://arxiv.org/abs/2511.20867) for details.
-
-The research pipeline (in `src/multi_model_optimization/`) includes:
-
-- **`run_meta_optimization.py`** — the reflective prompt-optimization training loop over train/val/test splits.
-- **`cross_engine_optimization.py`** — the cross-engine reflection step (used by the meta-optimizer above to improve one prompt across all re-rankers at once).
-- **`optimizing_prompts.py`** — baseline evaluation of each initial prompt style, no optimization.
-- **`leaderboard.py`** — every optimizer × ranker combination, producing the cross-model leaderboard.
-- **`reranking_prompts.py`** / **`reranking_claude_caching.py`** — rerank a fixed set of optimized products under any judge.
-- **`make_feature_heatmap.py`** — builds the initial-vs-optimized feature-presence heatmap (paper figure).
-- **`adversarial_benchmark.py`** — the heuristic 14-attack red-team benchmark (Section 6.1): rewrites each target under all 14 adversarial prompts and scores rank improvement vs. flag rate across the five judges.
-- **`llm_helpers.py`** — shared batched-LLM rewrite/rerank helpers used across the pipeline.
-- **`config.py`** is the single source of truth for the active model set, pricing, and token caps.
-
-See the [paper](https://arxiv.org/abs/2511.20867) for the full methodology and results.
-
----
-
-## Setup
-
-Requires [uv](https://docs.astral.sh/uv/) (the Python package manager used throughout).
-
-```bash
-git clone https://github.com/psbagga17/E-GEO.git
-cd E-GEO
-uv sync        # install dependencies (commands use `uv run`)
-
-# Download from HuggingFace. The dataset repo has two top-level folders:
-#   data/    — the dataset (splits, selected products, cached rankings, corpus)
-#   results/ — run-output artifacts, only needed to reproduce paper analyses/figures
-# Submitters need only data/ (~620 MB: ~90 MB core splits + rankings, 292 MB corpus, 240 MB full train pool):
-uv run hf download psbagga17/E-GEO --repo-type dataset --local-dir . --include "data/**"
-# For full reproduction (adds the ~3 GB results/ trees), omit --include:
-uv run hf download psbagga17/E-GEO --repo-type dataset --local-dir .
+```text
+商品270件・購入意図80件・Dense Retrieval   完了
+先行研究準拠ランナー                        実装済み
+OpenAI・Gemini・Claude接続基盤               実装済み
+Provider別予算停止・キャッシュ再開          実装済み
+分析・完了チェック                          実装済み
+APIを呼ばないValidate                       確認済み
+正式な有料API実験                           未開始
+A0ポスター                                  結果差し替え前提で先行作成
 ```
 
-Then add a `.env` file in the project root:
+## 実験の概要
 
-```bash
-OPENAI_API_KEY=your_key       # used directly for GPT models (research scripts only)
-OPENROUTER_API_KEY=your_key   # all five judges + the rewriter; the only key needed to submit
+```text
+15種類の初期プロンプト
+  ↓
+GPT-4.1とGeminiでTrain順位を評価
+  ↓
+Train履歴だけでプロンプトを更新
+  ↓
+Validationで最良版を固定
+  ↓
+GPT-5・Gemini・ClaudeでHeld-out Test
+  ↓
+初期版対最適化版、長文対短文、収束を分析
 ```
 
-OpenAI is used directly for GPT models; all other models (Gemini, Claude, DeepSeek, Llama) are accessed via OpenRouter. **Submitting to the leaderboard needs only `OPENROUTER_API_KEY`.**
+- Train／Validation／Test：40／10／30
+- 各初期プロンプト：8版評価、6回更新
+- RewriterとMeta-optimizer：GPT-4.1
+- Training Re-ranker：GPT-4.1、Gemini 3.1 Flash-Lite
+- Held-out Test：GPT-5、Gemini 3.5 Flash-Lite、Claude Sonnet 5
 
----
+## Pull後の最短確認
 
-## Repository layout
-
-```
-E-GEO/
-├── README.md          # you are here — project overview
-├── submission.md      # how to submit to the leaderboard
-├── data.md            # dataset documentation (provenance, structure, download)
-├── data/              # the dataset, downloaded from HuggingFace (git-ignored)
-├── results/           # run-output artifacts from HuggingFace (reproduction only; git-ignored)
-├── submissions/       # leaderboard submissions, one folder per entry (+ example/ template)
-└── src/
-    ├── submission.py            # single entry point for scoring a submission (see submission.md)
-    ├── all_init_prompts.py      # 29 rewriting prompts (15 heuristic + 14 adversarial red-team)
-    ├── optimized_prompts.json   # the 15 best optimized prompts (ready for Mode B)
-    ├── length_structure_analysis.py  # robustness check: rank gains vs. rewrite length/structure
-    ├── prompts.py / analysis.py / utils.py
-    └── multi_model_optimization/   # reflective meta-optimization, cross-engine optimization, leaderboard, red-teaming
+```powershell
+git switch ja-toeic-prototype
+git pull origin ja-toeic-prototype
+powershell -ExecutionPolicy Bypass -File ".\tools\実行_TOEIC研究_OpenAI_Gemini.ps1" -Mode Validate
 ```
 
-The bulk content is hosted on HuggingFace in two folders — `data/` (the dataset: splits,
-per-model rankings, corpus) and `results/` (all experiment artifacts, needed only to
-reproduce the paper); see **[data.md](data.md)** for the full layout and download commands.
+`Validate`はAPIを呼びません。有料の`Smoke`と`Full`は、予算とAPIキーを確認してから実行します。
 
-**Models** (via OpenAI or OpenRouter): `openai/gpt-4.1`, `openai/gpt-5`, `google/gemini-3-flash-preview`, `anthropic/claude-sonnet-4.5`, `deepseek/deepseek-v3.2`, `meta-llama/llama-4-maverick`.
+## 正式実行入口
 
----
+### OpenAI＋Gemini
 
-## Paper & citation
-
-- **Paper:** [E-GEO: A Testbed for Generative Engine Optimization in E-Commerce (arXiv:2511.20867)](https://arxiv.org/abs/2511.20867)
-
-```bibtex
-@misc{bagga2025egeo,
-  title         = {E-GEO: A Testbed for Generative Engine Optimization in E-Commerce},
-  author        = {Puneet S. Bagga and Vivek F. Farias and Tamar Korkotashvili and Tianyi Peng and Yuhang Wu},
-  year          = {2025},
-  eprint        = {2511.20867},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.IR},
-  url           = {https://arxiv.org/abs/2511.20867}
-}
+```text
+tools/実行_TOEIC研究_OpenAI_Gemini.ps1
 ```
+
+### Claudeを後日追加
+
+```text
+tools/実行_TOEIC研究_OpenAI_Gemini_Claude.ps1
+```
+
+## 予算
+
+| Provider | 本体上限 |
+|---|---:|
+| OpenAI | 98 USD |
+| Gemini | 15 USD |
+| Claude | 8 USD |
+| 最大合計 | 121 USD |
+
+OpenAIアカウント100 USDのうち2 USDは、候補選定、埋め込み収束分析、最後の1リクエストに予約します。
+
+## 最初に読む順番
+
+1. [`README_日本語.md`](README_日本語.md)
+2. [`00_最初に読む_日本語版研究の全ファイル案内.md`](00_最初に読む_日本語版研究の全ファイル案内.md)
+3. [`日本語版ドキュメント/TOEIC実験_現行設計と実施記録.md`](日本語版ドキュメント/TOEIC実験_現行設計と実施記録.md)
+4. [`日本語版ドキュメント/TOEIC_API費用と完了見込み.md`](日本語版ドキュメント/TOEIC_API費用と完了見込み.md)
+5. [`日本語版コード/00_最初に読む_全コードの役割.md`](日本語版コード/00_最初に読む_全コードの役割.md)
