@@ -1,19 +1,21 @@
 {
-  "schema_version": "toeic_egeo_openai_gemini_claude_cost_control_v4",
-  "status": "implemented_not_executed",
-  "last_verified_date": "2026-08-05",
+  "schema_version": "toeic_egeo_openai_gemini_claude_cost_control_v5",
+  "status": "implemented_connectivity_smoke_required",
+  "last_verified_date": "2026-08-06",
   "purpose": "OpenAIへ主予算を置き、GPT-4.1と低価格Gemini Flash-Liteでメタ最適化する。固定後はGPT-5を全条件、Geminiを長文条件、Claude Sonnet 5を最適化済み長文条件だけで追加評価する。",
   "formal_use_policy": {
     "allowed": true,
-    "condition": "OpenAI・Gemini・Claudeのsmoke実験で出力形式・実測費用・モデル利用可否を確認し、Train開始前に学習モデル構成を固定すること",
-    "limitation": "費用制約のため、GeminiはFlash-Lite系列を使用する。Geminiでは短文Testを省略し、Claudeでは最適化済み長文Testだけを実施する。したがって、3モデルすべての完全対称比較ではなく、GPT-5を主評価、GeminiとClaudeを低予算の転移確認として扱う。",
-    "reporting_text": "GPT-4.1とGemini 3.1 Flash-Liteの順位結果からプロンプトを最適化した。固定後はGPT-5で全条件、Gemini 3.5 Flash-Liteで初期・最適化の長文条件、Claude Sonnet 5で最適化済み長文条件を評価した。"
+    "condition": "OpenAI・Gemini・Claudeのダミーデータ接続Smoke、候補選定1件Smoke、正式80件候補選定、正式Smokeの順で、出力形式・実測費用・モデル利用可否を確認し、Train開始前に学習モデル構成を固定すること",
+    "limitation": "費用制約のため、GeminiはFlash-Lite系列を使用する。GeminiとClaudeには短いProvider固有System Promptを使用し、Geminiでは短文Testを省略、Claudeでは最適化済み長文Testだけを実施する。したがって、3モデルすべての完全対称比較ではなく、GPT-5を主評価、GeminiとClaudeを低予算の転移確認として扱う。",
+    "reporting_text": "GPT-4.1とGemini 3.1 Flash-Liteの順位結果からプロンプトを最適化した。固定後はGPT-5で全条件、Gemini 3.5 Flash-Liteで初期・最適化の長文条件、Claude Sonnet 5で最適化済み長文条件を評価した。最適化長文と最適化短文では、同一のリライト文章を再利用した。"
   },
   "candidate_selection": {
     "provider": "openai",
     "api_key_env": "OPENAI_API_KEY",
     "model_id": "gpt-5-mini-2025-08-07",
-    "note": "候補30件から10件の選定は04bで先に実行する。本体外のOpenAI費用なので2 USDの予備枠に含める。"
+    "reasoning_effort": "minimal",
+    "max_output_tokens": 200,
+    "note": "候補30件から10件の選定は04dで実行する。本体外のOpenAI費用なので2 USDの予備枠に含め、正式80件の前に1件Smokeを行う。"
   },
   "roles": {
     "rewriter": {
@@ -68,17 +70,18 @@
         "model_id": "gpt-5-2025-08-07",
         "temperature": null,
         "supports_temperature": false,
-        "max_output_tokens": 500,
+        "max_output_tokens": 1000,
         "input_usd_per_million": 1.25,
-        "output_usd_per_million": 10.0
+        "output_usd_per_million": 10.0,
+        "reasoning_effort": "minimal"
       },
       {
         "anonymous_label": "Model F",
         "provider": "google",
         "api_key_env": "GEMINI_API_KEY",
         "model_id": "gemini-3.5-flash-lite",
-        "temperature": 0.3,
-        "supports_temperature": true,
+        "temperature": null,
+        "supports_temperature": false,
         "max_output_tokens": 300,
         "input_usd_per_million": 0.3,
         "output_usd_per_million": 2.5
@@ -103,6 +106,7 @@
     "same_test_queries_within_each_reported_condition": true,
     "same_candidate_sets": true,
     "same_target_products": true,
+    "same_optimized_rewrite_for_long_and_short": true,
     "report_per_model": true,
     "macro_average_only_on_shared_conditions": true,
     "training_models_are_not_reported_as_heldout_test_models": true,
@@ -122,7 +126,12 @@
     }
   },
   "budget": {
-    "warning_thresholds_usd": [50, 98, 113, 119],
+    "warning_thresholds_usd": [
+      50,
+      98,
+      113,
+      119
+    ],
     "default_hard_stop_usd": 121,
     "provider_hard_stops_usd": {
       "openai": 98,
@@ -130,9 +139,22 @@
       "anthropic": 8
     },
     "provider_warning_thresholds_usd": {
-      "openai": [50, 75, 90, 96],
-      "google": [5, 10, 13],
-      "anthropic": [3, 5, 7]
+      "openai": [
+        50,
+        75,
+        90,
+        96
+      ],
+      "google": [
+        5,
+        10,
+        13
+      ],
+      "anthropic": [
+        3,
+        5,
+        7
+      ]
     },
     "openai_account_budget_usd": 100,
     "openai_reserved_outside_main_run_usd": 2,
@@ -141,7 +163,7 @@
       "text-embedding-3-largeによる収束分析",
       "丸め誤差と最後の1リクエスト分"
     ],
-    "cost_accounting": "2026-08-05時点の標準単価を使用する。Geminiのthinking tokensを出力料金へ含める。Claude Sonnet 5は2026-08-31までの導入価格を使用する。OpenAIアカウント全体100 USDのうち本体は98 USDで停止し2 USDを予約する。Google 15 USD、Anthropic 8 USDで個別停止する。"
+    "cost_accounting": "2026-08-06時点の設定単価を使用する。Geminiのthinking tokensを出力料金へ含める。Claude Sonnet 5は2026-08-31までの導入価格を使用する。API応答後にParserが失敗した場合もusageと費用を記録する。OpenAIアカウント全体100 USDのうち本体は98 USDで停止し2 USDを予約する。Google 15 USD、Anthropic 8 USDで個別停止する。"
   },
   "execution": {
     "max_retries": 3,
@@ -150,9 +172,14 @@
     "resume_from_jsonl_cache": true,
     "test_locked_until_prompt_freeze": true,
     "short_test_after_long_prompt_freeze_only": true,
+    "shared_rewrite_across_long_short": true,
+    "failed_usage_counted_before_parse": true,
+    "gpt5_reasoning_effort": "minimal",
+    "connectivity_smoke_before_candidate_full": true,
     "smoke_tests_all_three_providers": true,
     "compact_system_prompt_for_google": true,
     "compact_system_prompt_for_anthropic": true,
+    "compact_system_prompt_is_budget_deviation": true,
     "anthropic_ephemeral_prompt_cache": true
   }
 }
