@@ -6,6 +6,7 @@ from __future__ import annotations
 - JSON解析失敗もAPI試行として再試行する。
 - 成功・失敗の全試行についてusageと概算費用を記録する。
 - 有効な10件が順不同で返った場合は、集合を変えず昇順へ正規化する。
+- 旧実行で順不同だけを理由に失敗した応答は、追加APIなしで回収する。
 - 出力フォルダごとに1 USDで停止する。
 - 1件でも未成功なら終了コードを非0にし、後続工程へ進ませない。
 """
@@ -155,6 +156,74 @@ def event_spend(path: Path) -> float:
     )
 
 
+def reusable_prior_output(
+    result_path: Path,
+    job: dict[str, Any],
+) -> tuple[dict[str, Any], list[int], list[int], bool] | None:
+    """旧失敗ログに意味的に有効な候補集合があれば回収する。"""
+
+    if not result_path.exists():
+        return None
+    rows = base.read_jsonl_rows(result_path)
+    for row in reversed(rows):
+        if row.get("status") != "failed":
+            continue
+        if str(row.get("intent_id", "")) != str(job["intent_id"]):
+            continue
+        if str(row.get("model", "")) != str(job["model"]):
+            continue
+        text = str(row.get("raw_output", "") or "").strip()
+        if not text:
+            continue
+        try:
+            selected, raw_selected, normalized = parse_candidate_selection(text)
+        except Exception:
+            continue
+        return row, selected, raw_selected, normalized
+    return None
+
+
+def recovered_success_row(
+    job: dict[str, Any],
+    prior: dict[str, Any],
+    selected: list[int],
+    raw_selected: list[int],
+    order_normalized: bool,
+) -> dict[str, Any]:
+    row = {
+        key: value
+        for key, value in job.items()
+        if key != "payload"
+    }
+    timestamp = base.now()
+    row.update(
+        {
+            "status": "success",
+            "attempt": 0,
+            "selected_indices": selected,
+            "raw_selected_indices": raw_selected,
+            "selection_order_normalized": order_normalized,
+            "selection_order_policy": (
+                "valid distinct index set is sorted ascending; "
+                "selected product set is unchanged"
+            ),
+            "raw_output": str(prior.get("raw_output", "")),
+            "usage": prior.get("usage", openai_usage(None)),
+            "cost_usd": 0.0,
+            "response_id": prior.get("response_id"),
+            "recovered_without_api_call": True,
+            "recovered_from_job_id": prior.get("job_id"),
+            "recovered_from_attempt": prior.get("attempt"),
+            "prior_cost_already_recorded_usd": float(
+                prior.get("cost_usd", 0) or 0
+            ),
+            "started_at": timestamp,
+            "finished_at": timestamp,
+        }
+    )
+    return row
+
+
 def safe_execute_jobs(
     api_jobs: list[dict[str, Any]],
     cache: dict[str, dict[str, Any]],
@@ -176,6 +245,24 @@ def safe_execute_jobs(
     for number, job in enumerate(api_jobs, start=1):
         existing = cache.get(job["job_id"])
         if existing and existing.get("status") == "success":
+            continue
+
+        recovered = reusable_prior_output(result_path, job)
+        if recovered is not None:
+            prior, selected, raw_selected, order_normalized = recovered
+            row = recovered_success_row(
+                job,
+                prior,
+                selected,
+                raw_selected,
+                order_normalized,
+            )
+            base.append_jsonl(result_path, row)
+            cache[job["job_id"]] = row
+            print(
+                f"[candidate_recover {number}/{len(api_jobs)}] "
+                f"{job['intent_id']} 追加APIなしで旧応答を回収"
+            )
             continue
 
         print(
@@ -230,6 +317,7 @@ def safe_execute_jobs(
                         "usage": usage,
                         "cost_usd": cost,
                         "response_id": getattr(response, "id", None),
+                        "recovered_without_api_call": False,
                         "started_at": started,
                         "finished_at": base.now(),
                     }
@@ -310,11 +398,17 @@ def ensure_requested_jobs_succeeded() -> None:
         for row in latest.values()
         if row.get("status") == "success"
     )
+    recovered_jobs = sum(
+        int(bool(row.get("recovered_without_api_call")))
+        for row in latest.values()
+        if row.get("status") == "success"
+    )
     summary = {
         "runner_revision": RUNNER_REVISION,
         "successful_jobs": len(latest),
         "failed_jobs": 0,
         "order_normalized_jobs": normalized_jobs,
+        "recovered_without_api_call_jobs": recovered_jobs,
         "normalization_changes_selected_set": False,
         "total_cost_usd": round(event_spend(result_path), 6),
         "hard_stop_usd": float(
