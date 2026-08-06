@@ -1,6 +1,6 @@
 {
-  "schema_version": "toeic_egeo_meta_optimization_v3_prior_study_aligned",
-  "status": "design_locked_api_not_started",
+  "schema_version": "toeic_egeo_meta_optimization_v4_final_safety",
+  "status": "design_locked_connectivity_smoke_required",
   "source": {
     "paper": "E-GEO v2",
     "arxiv": "2511.20867v2",
@@ -31,7 +31,9 @@
     "scaled_elements": [
       "80 Japanese TOEIC purchase intents instead of the full E-GEO benchmark",
       "2 training rerankers instead of 4",
-      "4 batches per epoch instead of 10"
+      "4 batches per epoch instead of 10",
+      "compact provider-specific system prompts for Gemini and Claude",
+      "asymmetric held-out conditions under provider budgets"
     ]
   },
   "dataset": {
@@ -48,7 +50,8 @@
     "short_query_runs_only_after_prompt_freeze": true,
     "short_query_evaluates_initial_prompts": false,
     "same_candidates_and_target_for_long_and_short": true,
-    "note": "長文を先行研究準拠の主実験に使用し、短文は固定済み最適化プロンプトの転移評価に限定する。"
+    "same_optimized_rewrite_for_long_and_short": true,
+    "note": "長文を先行研究準拠の主実験に使用し、短文は固定済み最適化プロンプトの転移評価に限定する。長文と短文の比較では同一のリライト文章を再利用し、クエリ形式だけを変更する。"
   },
   "prompt_policy": {
     "initial_prompt_count": 15,
@@ -79,25 +82,25 @@
   },
   "reranker_prompt_policy": {
     "shared_user_prompt": "日本語版設定/E_GEO先行研究_共通プロンプト設定.json",
-    "system_prompt_source": "src/multi_model_optimization/prompts.py",
-    "system_prompt_is_model_family_specific": true,
-    "families": {
-      "GPT-4.1": "get_gpt41_prompt",
-      "GPT-5": "get_gpt5_prompt",
-      "Gemini": "get_gemini_prompt",
-      "Claude": "get_claude_prompt"
-    },
-    "single_short_generic_system_prompt_is_prohibited": true
+    "openai_system_prompt_source": "src/prompts.py model-family-specific prompts",
+    "google_system_prompt": "compact provider-specific reranker prompt",
+    "anthropic_system_prompt": "compact provider-specific reranker prompt",
+    "full_original_system_prompts_for_all_providers": false,
+    "compact_prompt_is_budget_scaled_deviation": true,
+    "single_short_generic_system_prompt_is_prohibited": true,
+    "note": "短縮PromptはProvider名と商品検索Re-ranker役割を明示したProvider固有Promptとし、単一の汎用Promptを全社へ流用しない。"
   },
   "evaluation": {
     "rank_improvement": "original_rank - rewritten_rank",
     "original_rank_is_cached_once_per_query_and_reranker": true,
     "same_candidate_set_and_target_across_all_conditions": true,
+    "same_optimized_rewrite_for_long_and_short": true,
     "test_is_locked_until_prompt_freeze": true,
     "evaluate_initial_and_optimized_prompts_on_primary_test": true,
     "heldout_rerankers_are_not_visible_to_meta_optimizer": true,
     "training_rerankers_are_anonymized": true,
-    "validation_is_used_only_for_prompt_selection": true
+    "validation_is_used_only_for_prompt_selection": true,
+    "failed_api_usage_is_counted_before_output_parse": true
   },
   "analysis_policy": {
     "embedding_model": "text-embedding-3-large",
@@ -106,6 +109,9 @@
       "mean cosine distance to centroid",
       "mean pairwise cosine distance"
     ],
+    "primary_paired_test": "Wilcoxon signed-rank on Test intent-level optimized-minus-initial differences",
+    "multiple_testing_correction": "Holm, global and within reranker",
+    "confidence_intervals": "95% percentile bootstrap with 10000 resamples",
     "feature_presence_scoring": {
       "method": "manual",
       "scale": {
@@ -118,8 +124,10 @@
   },
   "temperature_and_seed": {
     "rewriter_temperature": 0.5,
-    "reranker_temperature": 0.3,
+    "training_reranker_temperature": 0.3,
     "meta_optimizer_temperature": 0.7,
+    "heldout_gpt5_reasoning_effort": "minimal",
+    "heldout_gemini_3_5_temperature": null,
     "numpy_seed": 42,
     "target_selection_seed": 42
   },
@@ -140,8 +148,8 @@
       },
       {
         "anonymous_label": "Model B",
-        "paper_model": "Gemini 3 Flash Preview",
-        "planned_model_id": "gemini-3-flash-preview"
+        "paper_model": "budget transfer model",
+        "planned_model_id": "gemini-3.1-flash-lite"
       }
     ],
     "heldout_rerankers": [
@@ -153,20 +161,21 @@
       {
         "anonymous_label": "Model F",
         "paper_model": "Gemini transfer evaluator added for this study",
-        "planned_model_id": "gemini-3.5-flash"
+        "planned_model_id": "gemini-3.5-flash-lite"
       },
       {
         "anonymous_label": "Model G",
-        "paper_model": "Claude Sonnet 4.5",
-        "planned_model_id": "claude-sonnet-4-5-20250929"
+        "paper_model": "Claude transfer evaluator added for this study",
+        "planned_model_id": "claude-sonnet-5",
+        "optional_extension": true
       }
     ],
-    "note": "学習はGPT-4.1とGeminiへ縮小する。Testでは最適化に未使用のGPT-5・Gemini・Claudeを同一条件で評価する。"
+    "note": "学習はGPT-4.1とGeminiへ縮小する。主TestはGPT-5とGeminiで行い、Claudeは固定済みプロンプトへの任意追加評価とする。"
   },
   "execution_plans": [
     {
-      "id": "smoke_3_provider",
-      "label_ja": "3社接続・全工程確認",
+      "id": "smoke_openai_gemini",
+      "label_ja": "OpenAI・Gemini全工程Smoke",
       "formal_research_result": false,
       "prompt_count": 1,
       "train_count": 2,
@@ -176,13 +185,13 @@
       "batches_per_epoch": 2,
       "batch_size": 1,
       "training_reranker_count": 2,
-      "heldout_reranker_count": 3,
+      "heldout_reranker_count": 2,
       "candidate_selection_count": 1,
-      "run_supplemental_short": false
+      "run_supplemental_short": true
     },
     {
-      "id": "formal_scaled_replication",
-      "label_ja": "先行研究準拠の縮小正式実験",
+      "id": "formal_scaled_replication_openai_gemini",
+      "label_ja": "先行研究準拠の縮小正式実験（OpenAI・Gemini段階）",
       "formal_research_result": true,
       "prompt_count": 15,
       "train_count": 40,
@@ -192,9 +201,22 @@
       "batches_per_epoch": 4,
       "batch_size": 10,
       "training_reranker_count": 2,
-      "heldout_reranker_count": 3,
+      "heldout_reranker_count": 2,
       "candidate_selection_count": 80,
       "run_supplemental_short": true
     }
-  ]
+  ],
+  "optional_claude_extension": {
+    "enabled_after_prompt_freeze": true,
+    "requires_retraining": false,
+    "condition": "test_optimized_long only",
+    "same_test_queries_candidates_targets_and_rewrites": true,
+    "provider_hard_stop_usd": 8
+  },
+  "preflight_policy": {
+    "api_free_self_check_required": true,
+    "dummy_connectivity_smoke_required": true,
+    "candidate_selection_one_intent_smoke_required": true,
+    "formal_smoke_required_before_full": true
+  }
 }
