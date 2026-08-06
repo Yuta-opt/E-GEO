@@ -5,6 +5,7 @@ from __future__ import annotations
 - minimal reasoningと出力上限200を固定する。
 - JSON解析失敗もAPI試行として再試行する。
 - 成功・失敗の全試行についてusageと概算費用を記録する。
+- 有効な10件が順不同で返った場合は、集合を変えず昇順へ正規化する。
 - 出力フォルダごとに1 USDで停止する。
 - 1件でも未成功なら終了コードを非0にし、後続工程へ進ませない。
 """
@@ -21,7 +22,7 @@ from typing import Any
 
 BASE_SCRIPT = Path(__file__).with_name("04b_TOEIC候補10商品を選ぶ.py")
 DEFAULT_HARD_STOP_USD = 1.0
-RUNNER_REVISION = "04d-candidate-safety-v2"
+RUNNER_REVISION = "04d-candidate-safety-v3"
 
 
 def load_module(path: Path, module_name: str) -> Any:
@@ -56,6 +57,40 @@ def safe_build_api_jobs(
             f"{base.digest({'revision': RUNNER_REVISION, 'payload': payload})[:12]}"
         )
     return output
+
+
+def parse_candidate_selection(
+    text: str,
+) -> tuple[list[int], list[int], bool]:
+    """候補集合を検証し、順不同だけなら昇順へ正規化する。
+
+    LLMの出力順は研究上の順位ではなく、選択された10件の集合だけが意味を持つ。
+    そのため、件数・重複・範囲が正しい場合は、集合を変えずDense Retrieval順
+    （index昇順）へ決定論的に並べ替える。
+    """
+
+    cleaned = text.strip()
+    if cleaned.startswith("```"):
+        cleaned = cleaned.strip("`").strip()
+        if cleaned.startswith("json"):
+            cleaned = cleaned[4:].strip()
+    value = json.loads(cleaned)
+    if not isinstance(value, list):
+        raise ValueError("候補選定結果はJSON配列である必要があります。")
+
+    raw_selected = [int(number) for number in value]
+    if len(raw_selected) != 10:
+        raise ValueError(f"選定件数が10件ではありません: {raw_selected}")
+    if len(set(raw_selected)) != 10:
+        raise ValueError(f"選定indexが重複しています: {raw_selected}")
+    if any(number < 0 or number > 29 for number in raw_selected):
+        raise ValueError(
+            f"選定indexが0〜29の範囲外です: {raw_selected}"
+        )
+
+    selected = sorted(raw_selected)
+    base.parse_selection(json.dumps(selected))
+    return selected, raw_selected, selected != raw_selected
 
 
 def openai_usage(response: Any) -> dict[str, int]:
@@ -170,7 +205,11 @@ def safe_execute_jobs(
                 cost = candidate_cost(str(job["model"]), usage)
                 if not text:
                     raise ValueError("API応答が空です。")
-                selected = base.parse_selection(text)
+                (
+                    selected,
+                    raw_selected,
+                    order_normalized,
+                ) = parse_candidate_selection(text)
                 row = {
                     key: value
                     for key, value in job.items()
@@ -181,6 +220,12 @@ def safe_execute_jobs(
                         "status": "success",
                         "attempt": attempt,
                         "selected_indices": selected,
+                        "raw_selected_indices": raw_selected,
+                        "selection_order_normalized": order_normalized,
+                        "selection_order_policy": (
+                            "valid distinct index set is sorted ascending; "
+                            "selected product set is unchanged"
+                        ),
                         "raw_output": text,
                         "usage": usage,
                         "cost_usd": cost,
@@ -260,10 +305,17 @@ def ensure_requested_jobs_succeeded() -> None:
         raise RuntimeError(
             f"候補選定に未成功ジョブが{len(failures)}件あります。"
         )
+    normalized_jobs = sum(
+        int(bool(row.get("selection_order_normalized")))
+        for row in latest.values()
+        if row.get("status") == "success"
+    )
     summary = {
         "runner_revision": RUNNER_REVISION,
         "successful_jobs": len(latest),
         "failed_jobs": 0,
+        "order_normalized_jobs": normalized_jobs,
+        "normalization_changes_selected_set": False,
         "total_cost_usd": round(event_spend(result_path), 6),
         "hard_stop_usd": float(
             os.environ.get(
