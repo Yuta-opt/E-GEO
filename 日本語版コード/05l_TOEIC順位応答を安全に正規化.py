@@ -5,9 +5,12 @@ from __future__ import annotations
 05iのモデル呼び出し・費用制御・Test共有リライトは変更しない。
 ランキングが1〜10をすべて含み、余分な値が同じ番号の重複だけの場合に限り、
 最初に現れた順を保って重複を除去する。欠番・範囲外は従来どおり失敗する。
+また、実行中のProvider表示と実行サマリーはモデル設定から自動生成する。
 """
 
+import builtins
 import importlib.util
+import json
 import sys
 from pathlib import Path
 from typing import Any
@@ -15,6 +18,11 @@ from typing import Any
 
 FINAL_RUNNER = Path(__file__).with_name("05i_TOEIC最終安全実行.py")
 RANKING_PARSER_REVISION = "ranking-duplicate-only-normalization-v1"
+PROVIDER_DISPLAY_NAMES = {
+    "openai": "OpenAI",
+    "google": "Google Gemini",
+    "anthropic": "Anthropic Claude",
+}
 
 
 def load_module(path: Path, module_name: str) -> Any:
@@ -211,29 +219,93 @@ def recovery_generate(
     )
 
 
-def annotate_parser_summary() -> None:
+def argument_value(flag: str) -> str | None:
+    for index, value in enumerate(sys.argv):
+        if value == flag and index + 1 < len(sys.argv):
+            return sys.argv[index + 1]
+    return None
+
+
+def active_provider_metadata() -> tuple[list[str], str]:
+    profile_path = Path(
+        argument_value("--model-profile")
+        or str(final.budgeted.DEFAULT_MODEL_PROFILE)
+    )
+    profile = json.loads(profile_path.read_text(encoding="utf-8"))
+    roles = profile["roles"]
+    role_values = [
+        roles["rewriter"],
+        roles["meta_optimizer"],
+        *roles["training_rerankers"],
+        *roles["heldout_rerankers"],
+    ]
+    providers: list[str] = []
+    for role in role_values:
+        provider = str(role["provider"]).strip().lower()
+        if provider not in providers:
+            providers.append(provider)
+    display = " + ".join(
+        PROVIDER_DISPLAY_NAMES.get(provider, provider)
+        for provider in providers
+    )
+    return providers, display
+
+
+def annotate_parser_summary(
+    providers: list[str],
+    provider_configuration: str,
+) -> None:
     output_dir = final.budgeted.output_dir_from_argv()
     summary_path = output_dir / "06_run_summary.json"
     if not summary_path.exists():
         return
-    import json
 
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    summary["provider_configuration"] = provider_configuration
+    summary["active_providers"] = providers
     patches = summary.setdefault("final_safety_patches", {})
     patches["ranking_parser_revision"] = RANKING_PARSER_REVISION
     patches["duplicate_only_ranking_normalization"] = True
     patches["failed_rerank_response_recovery_without_api_call"] = True
+    patches["provider_configuration_derived_from_profile"] = True
     summary_path.write_text(
         json.dumps(summary, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
 
 
+def run_with_provider_aware_output(provider_configuration: str) -> None:
+    original_print = builtins.print
+
+    def provider_aware_print(*args: Any, **kwargs: Any) -> None:
+        values = list(args)
+        if len(values) == 1 and isinstance(values[0], str):
+            text = values[0]
+            text = text.replace(
+                "05d OpenAI・Gemini・Claude 3社モデル実験ランナー",
+                f"05d {provider_configuration} モデル実験ランナー",
+            )
+            text = text.replace("3社合計", "全Provider合計")
+            text = text.replace(
+                "--executeを付けると3社APIを実行します。",
+                f"--executeを付けると{provider_configuration} APIを実行します。",
+            )
+            values[0] = text
+        original_print(*values, **kwargs)
+
+    builtins.print = provider_aware_print
+    try:
+        final.main()
+    finally:
+        builtins.print = original_print
+
+
 def main() -> None:
+    providers, provider_configuration = active_provider_metadata()
     base.parse_ranking = safe_parse_ranking
     final.final_generate = recovery_generate
-    final.main()
-    annotate_parser_summary()
+    run_with_provider_aware_output(provider_configuration)
+    annotate_parser_summary(providers, provider_configuration)
 
 
 if __name__ == "__main__":
