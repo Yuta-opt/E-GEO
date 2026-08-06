@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-"""最終安全実装と順位応答回収をAPIなしで自己検査する。"""
+"""最終安全実装・順位応答回収・120 USD予算設定をAPIなしで自己検査する。"""
 
 import importlib.util
+import json
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -14,6 +15,9 @@ BASE_CHECK = Path(__file__).with_name(
 )
 RANK_RECOVERY = Path(__file__).with_name(
     "05l_TOEIC順位応答を安全に正規化.py"
+)
+MODEL_PROFILE = Path(
+    "日本語版設定/TOEIC_OpenAI_Gemini実験設定_v1.json"
 )
 
 
@@ -141,6 +145,39 @@ def check_failed_rerank_recovery_without_api() -> bool:
     )
 
 
+def check_120usd_budget_profile() -> bool:
+    profile = json.loads(MODEL_PROFILE.read_text(encoding="utf-8"))
+    budget = profile["budget"]
+    provider_stops = budget["provider_hard_stops_usd"]
+    return bool(
+        float(budget["openai_account_budget_usd"]) == 120.0
+        and float(budget["openai_reserved_outside_main_run_usd"]) == 2.0
+        and float(provider_stops["openai"]) == 118.0
+        and float(provider_stops["google"]) == 15.0
+        and float(budget["default_hard_stop_usd"]) == 133.0
+        and float(budget["full_projection_pass_fraction"]) == 0.9
+        and abs(float(provider_stops["openai"]) * 0.9 - 106.2) < 1e-12
+    )
+
+
+def check_active_provider_configuration() -> bool:
+    original_argv = list(sys.argv)
+    sys.argv = [
+        original_argv[0],
+        "--model-profile",
+        str(MODEL_PROFILE),
+    ]
+    try:
+        providers, display = recovery.active_provider_metadata()
+    finally:
+        sys.argv = original_argv
+    return bool(
+        providers == ["openai", "google"]
+        and display == "OpenAI + Google Gemini"
+        and "Claude" not in display
+    )
+
+
 def main() -> None:
     checks = {
         "provider_sdks_import": base_check.check_provider_sdk_imports(),
@@ -163,8 +200,12 @@ def main() -> None:
         "failed_rerank_is_recovered_without_api": (
             check_failed_rerank_recovery_without_api()
         ),
+        "openai_120usd_budget_guardrails": check_120usd_budget_profile(),
+        "active_providers_are_openai_and_gemini": (
+            check_active_provider_configuration()
+        ),
     }
-    print("07f 最終安全実装・順位応答回収セルフチェック")
+    print("07f 最終安全実装・順位応答回収・予算セルフチェック")
     for key, value in checks.items():
         print(f"  {key}: {'OK' if value else 'NG'}")
     if not all(checks.values()):
