@@ -18,10 +18,28 @@ if (-not $target) {
     throw "Target OpenAI_Gemini PowerShell script was not found."
 }
 
+$safeRunner = Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot "..") `
+    -Recurse -File -Filter "toeic_onedrive_safe_runner.py" |
+    Select-Object -First 1
+
+if (-not $safeRunner) {
+    throw "Retry-safe TOEIC runner was not found."
+}
+
 $tempPath = Join-Path $PSScriptRoot ".run_toeic_openai_gemini_utf8bom.ps1"
 $utf8Read = New-Object System.Text.UTF8Encoding($false)
 $utf8Bom = New-Object System.Text.UTF8Encoding($true)
 $text = [System.IO.File]::ReadAllText($target.FullName, $utf8Read)
+
+$safeRunnerLiteral = $safeRunner.FullName.Replace("'", "''")
+$runnerLine = '$Runner = ''' + $safeRunnerLiteral + ''''
+$text = [regex]::Replace(
+    $text,
+    '(?m)^\$Runner\s*=.*$',
+    $runnerLine,
+    1
+)
+
 [System.IO.File]::WriteAllText($tempPath, $text, $utf8Bom)
 
 $invokeArgs = @(
