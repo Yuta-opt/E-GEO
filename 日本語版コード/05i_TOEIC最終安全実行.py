@@ -6,6 +6,7 @@ from __future__ import annotations
 - 長文・短文Testで同一の最適化リライトを再利用する。
 - API応答取得後、JSON解析より先にusageと費用を確定する。
 - GPT-5系列のResponses APIへminimal reasoningを明示する。
+- OpenAIのcached inputを実際の割引単価で費用計上する。
 - 成功キャッシュは従来どおり再利用し、Provider別hard stopを維持する。
 """
 
@@ -19,7 +20,12 @@ from typing import Any
 
 
 SAFE_RUNNER = Path(__file__).with_name("05h_TOEIC費用配分安全実行.py")
-RUNNER_REVISION = "05i-final-safety-v1"
+RUNNER_REVISION = "05i-final-safety-v2"
+OPENAI_CACHED_INPUT_USD_PER_MILLION = {
+    "gpt-4.1-2025-04-14": 0.50,
+    "gpt-5-2025-08-07": 0.125,
+    "gpt-5-mini-2025-08-07": 0.025,
+}
 
 
 def load_module(path: Path, module_name: str) -> Any:
@@ -38,6 +44,64 @@ legacy = budgeted.legacy
 base = budgeted.base
 prior = budgeted.prior
 ORIGINAL_SAFE_INSTALL = safe.safe_install_cost_controls
+
+
+def openai_usage_dict(response: Any) -> dict[str, int]:
+    usage = getattr(response, "usage", None)
+    if usage is None:
+        return {
+            "input_tokens": 0,
+            "cached_input_tokens": 0,
+            "uncached_input_tokens": 0,
+            "output_tokens": 0,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 0,
+        }
+    input_tokens = int(getattr(usage, "input_tokens", 0) or 0)
+    output_tokens = int(getattr(usage, "output_tokens", 0) or 0)
+    total_tokens = int(
+        getattr(usage, "total_tokens", input_tokens + output_tokens) or 0
+    )
+    input_details = getattr(usage, "input_tokens_details", None)
+    output_details = getattr(usage, "output_tokens_details", None)
+    cached = int(getattr(input_details, "cached_tokens", 0) or 0)
+    reasoning = int(getattr(output_details, "reasoning_tokens", 0) or 0)
+    return {
+        "input_tokens": input_tokens,
+        "cached_input_tokens": cached,
+        "uncached_input_tokens": max(input_tokens - cached, 0),
+        "output_tokens": output_tokens,
+        "reasoning_output_tokens": reasoning,
+        "total_tokens": total_tokens,
+    }
+
+
+def final_role_cost(self: Any, usage: dict[str, int]) -> float:
+    if str(self.provider) == "anthropic":
+        return float(budgeted.cache_aware_role_cost(self, usage))
+
+    input_tokens = int(usage.get("input_tokens", 0) or 0)
+    output_tokens = int(usage.get("output_tokens", 0) or 0)
+    if str(self.provider) != "openai":
+        return (
+            input_tokens / 1_000_000 * self.input_usd_per_million
+            + output_tokens / 1_000_000 * self.output_usd_per_million
+        )
+
+    cached = min(
+        int(usage.get("cached_input_tokens", 0) or 0),
+        input_tokens,
+    )
+    uncached = max(input_tokens - cached, 0)
+    cached_rate = OPENAI_CACHED_INPUT_USD_PER_MILLION.get(
+        str(self.model_id),
+        self.input_usd_per_million,
+    )
+    return (
+        uncached / 1_000_000 * self.input_usd_per_million
+        + cached / 1_000_000 * cached_rate
+        + output_tokens / 1_000_000 * self.output_usd_per_million
+    )
 
 
 def final_openai_call(
@@ -60,8 +124,19 @@ def final_openai_call(
 
     response = client.responses.create(**kwargs)
     text = base.response_text(response).strip()
-    usage = base.usage_dict(response)
+    usage = openai_usage_dict(response)
     return text, usage, getattr(response, "id", None)
+
+
+def empty_usage() -> dict[str, int]:
+    return {
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "uncached_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 0,
+    }
 
 
 def final_generate(
@@ -98,11 +173,7 @@ def final_generate(
         started = base.utc_now()
         text = ""
         response_id: str | None = None
-        usage = {
-            "input_tokens": 0,
-            "output_tokens": 0,
-            "total_tokens": 0,
-        }
+        usage = empty_usage()
         cost = 0.0
         try:
             text, usage, response_id = self._provider_call(
@@ -338,6 +409,7 @@ def final_install_cost_controls(profile: dict[str, Any]) -> None:
     ORIGINAL_SAFE_INSTALL(profile)
     legacy.MultiProviderRunner._openai_call = staticmethod(final_openai_call)
     legacy.MultiProviderRunner.generate = final_generate
+    legacy.MultiProviderRole.cost = final_role_cost
     base.run_test = final_run_test
 
 
@@ -351,9 +423,11 @@ def annotate_final_summary() -> None:
         "runner_revision": RUNNER_REVISION,
         "shared_optimized_rewrite_for_long_and_short": True,
         "failed_response_usage_costed_before_parse": True,
+        "openai_cached_input_priced_from_usage_details": True,
         "gpt5_reasoning_effort": "minimal",
         "provider_preflight_hard_stop": True,
         "connectivity_smoke_required_before_full_candidate_selection": True,
+        "full_budget_projection_required_after_smoke": True,
     }
     summary_path.write_text(
         json.dumps(summary, ensure_ascii=False, indent=2),
