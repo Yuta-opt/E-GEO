@@ -16,6 +16,7 @@ $CandidateModel = "gpt-5-mini-2025-08-07"
 $CandidateRunner = ".\日本語版コード\04d_TOEIC候補10商品を安全に選ぶ.py"
 $Runner = ".\日本語版コード\05i_TOEIC最終安全実行.py"
 $ConnectivitySmoke = ".\日本語版コード\05j_TOEIC_API接続Smoke.py"
+$BudgetProjection = ".\日本語版コード\05k_TOEIC_Smoke実測からFull予算を判定.py"
 $SelfCheck = ".\日本語版コード\07e_TOEIC最終安全実装を自己検査.py"
 $AnalysisRunner = ".\日本語版コード\06c_TOEIC最終統計分析.py"
 $CompletionChecker = ".\日本語版コード\07d_TOEIC最終完了チェック.py"
@@ -50,9 +51,12 @@ Write-Host "Mode: $Mode"
 Write-Host "総hard stop: USD $HardStopUsd"
 Write-Host "OpenAIアカウント予算: 100 USD（本体98＋予備2）"
 Write-Host "Provider上限: OpenAI本体 98 USD / Google 15 USD"
+Write-Host "候補選定上限: 出力フォルダごとに1 USD"
 Write-Host "学習Re-ranker: GPT-4.1 / Gemini 3.1 Flash-Lite"
 Write-Host "Held-out Test: GPT-5（全条件）/ Gemini 3.5 Flash-Lite（長文のみ）"
 Write-Host "最適化長文と最適化短文は同一リライトを共有します。"
+Write-Host "OpenAI cached inputは実測cached_tokensを割引単価で計上します。"
+Write-Host "Full前にSmoke実測費用からProvider別予算を自動判定します。"
 Write-Host "必要キー: OPENAI_API_KEY / GEMINI_API_KEY"
 Write-Host "ANTHROPIC_API_KEYは今回不要です。"
 Write-Host "Validationは版選択専用で、Meta-optimizerへ渡しません。"
@@ -73,6 +77,7 @@ Invoke-Step "2. 実行コードの構文チェック" {
         ".\日本語版コード\05h_TOEIC費用配分安全実行.py" `
         $Runner `
         $ConnectivitySmoke `
+        $BudgetProjection `
         ".\日本語版コード\06b_TOEIC先行研究準拠結果分析.py" `
         $AnalysisRunner `
         ".\日本語版コード\07c_TOEIC費用配分完了チェック.py" `
@@ -174,8 +179,16 @@ if ($Mode -eq "Smoke") {
             --allow-smoke `
             --hard-stop-usd $HardStopUsd
     }
+    Invoke-Step "14. Smoke実測費用からFull予算を保守的に判定" {
+        uv run python $BudgetProjection `
+            --run-dir $RunDir `
+            --experiment-config $ExperimentConfig `
+            --model-profile $ModelProfile `
+            --budget-fraction 0.90
+    }
     Write-Host ""
-    Write-Host "OpenAI＋Gemini Smoke完了。正式実験は -Mode Full です。" -ForegroundColor Green
+    Write-Host "OpenAI＋Gemini SmokeとFull予算判定が完了しました。" -ForegroundColor Green
+    Write-Host "正式実験は -Mode Full -SkipSmoke です。"
     exit 0
 }
 
@@ -190,7 +203,15 @@ if (-not $SkipSmoke) {
     }
 }
 
-Invoke-Step "12. 15プロンプトの正式メタ最適化・費用配分Test評価" {
+Invoke-Step "12. Smoke実測費用からFull予算を再判定" {
+    uv run python $BudgetProjection `
+        --run-dir $RunDir `
+        --experiment-config $ExperimentConfig `
+        --model-profile $ModelProfile `
+        --budget-fraction 0.90
+}
+
+Invoke-Step "13. 15プロンプトの正式メタ最適化・費用配分Test評価" {
     uv run python $Runner `
         --mode full `
         --experiment-config $ExperimentConfig `
@@ -199,14 +220,14 @@ Invoke-Step "12. 15プロンプトの正式メタ最適化・費用配分Test評
         --hard-stop-usd $HardStopUsd
 }
 
-Invoke-Step "13. Test統計・95%CI・Holm補正・埋め込み収束・人手評価表を生成" {
+Invoke-Step "14. Test統計・95%CI・Holm補正・埋め込み収束・人手評価表を生成" {
     uv run python $AnalysisRunner `
         --run-dir $RunDir `
         --output-dir $AnalysisDir `
         --execute-embeddings
 }
 
-Invoke-Step "14. GPT＋Gemini段階の最終安全完了チェック" {
+Invoke-Step "15. GPT＋Gemini段階の最終安全完了チェック" {
     uv run python $CompletionChecker `
         --run-dir $RunDir `
         --analysis-dir $AnalysisDir `
@@ -220,6 +241,7 @@ Write-Host "============================================================" -Foreg
 Write-Host "OpenAI＋Gemini段階の実行・統計・埋め込み分析が終了しました。" -ForegroundColor Green
 Write-Host "============================================================" -ForegroundColor Green
 Write-Host "API接続Smoke：$ConnectivityDir"
+Write-Host "Full予算判定：$RunDir\00b_full_budget_projection.json"
 Write-Host "APIログ：$RunDir"
 Write-Host "Provider別費用：$RunDir\05b_provider_cost_summary.json"
 Write-Host "分析結果：$AnalysisDir"
