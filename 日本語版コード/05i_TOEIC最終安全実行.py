@@ -19,6 +19,7 @@ from typing import Any
 
 
 SAFE_RUNNER = Path(__file__).with_name("05h_TOEIC費用配分安全実行.py")
+RUNNER_REVISION = "05i-final-safety-v1"
 
 
 def load_module(path: Path, module_name: str) -> Any:
@@ -74,6 +75,7 @@ def final_generate(
     parser: Any,
 ) -> tuple[str, Any, dict[str, Any]]:
     identity = {
+        "runner_revision": RUNNER_REVISION,
         "kind": kind,
         "context_id": context_id,
         "provider": role.provider,
@@ -346,6 +348,7 @@ def annotate_final_summary() -> None:
         return
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
     summary["final_safety_patches"] = {
+        "runner_revision": RUNNER_REVISION,
         "shared_optimized_rewrite_for_long_and_short": True,
         "failed_response_usage_costed_before_parse": True,
         "gpt5_reasoning_effort": "minimal",
