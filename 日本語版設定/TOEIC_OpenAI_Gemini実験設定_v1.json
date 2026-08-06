@@ -1,5 +1,5 @@
 {
-  "schema_version": "toeic_egeo_openai_gemini_cost_control_v5",
+  "schema_version": "toeic_egeo_openai_gemini_cost_control_v6_120usd",
   "status": "implemented_smoke_budget_projection_required",
   "last_verified_date": "2026-08-06",
   "purpose": "OpenAIへ主予算を置き、GPT-4.1と低価格Gemini Flash-Liteでメタ最適化する。プロンプト固定後はGPT-5を全条件、未学習のGemini 3.5 Flash-Liteを長文条件だけで評価する。Claudeは後日、最適化済み長文条件だけ追加する。",
@@ -126,11 +126,12 @@
     "warning_thresholds_usd": [
       50,
       90,
-      103
+      110,
+      125
     ],
-    "default_hard_stop_usd": 113,
+    "default_hard_stop_usd": 133,
     "provider_hard_stops_usd": {
-      "openai": 98,
+      "openai": 118,
       "google": 15
     },
     "provider_warning_thresholds_usd": {
@@ -138,7 +139,8 @@
         50,
         75,
         90,
-        96
+        105,
+        115
       ],
       "google": [
         5,
@@ -147,14 +149,14 @@
       ]
     },
     "full_projection_pass_fraction": 0.9,
-    "openai_account_budget_usd": 100,
+    "openai_account_budget_usd": 120,
     "openai_reserved_outside_main_run_usd": 2,
     "openai_reserve_uses": [
       "GPT-5 miniによる候補10件選定",
       "text-embedding-3-largeによる収束分析",
       "丸め誤差と最後の1リクエスト分"
     ],
-    "cost_accounting": "2026-08-06時点の設定単価を使用する。OpenAIはusage.input_tokens_details.cached_tokensを分離し、cached input単価で計上する。Geminiのthinking tokensは出力料金へ含める。API応答後にParserが失敗した場合もusageと費用を記録する。OpenAIアカウント全体100 USDのうち本体ランナーは98 USDで停止し、候補選定・埋め込み・最終リクエストのため2 USDを予約する。Googleは15 USDで個別停止する。Full前にSmoke平均費用へ安全係数を掛けた外挿が各Provider hard stopの90%以下であることを要求する。"
+    "cost_accounting": "2026-08-06時点の設定単価を使用する。OpenAIはusage.input_tokens_details.cached_tokensを分離し、cached input単価で計上する。Geminiのthinking tokensは出力料金へ含める。API応答後にParserが失敗した場合もusageと費用を記録する。OpenAIアカウント全体120 USDのうち本体ランナーは118 USDで停止し、候補選定・埋め込み・最終リクエストのため2 USDを予約する。Googleは15 USDで個別停止する。Full前にSmoke平均費用へ安全係数を掛けた外挿が各Provider hard stopの90%以下であることを要求する。"
   },
   "execution": {
     "max_retries": 3,
