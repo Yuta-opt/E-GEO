@@ -139,6 +139,18 @@ def shared_rewrite_check(test_frame: pd.DataFrame) -> dict[str, Any]:
     }
 
 
+def argv_without_option(values: list[str], flag: str) -> list[str]:
+    output: list[str] = []
+    index = 0
+    while index < len(values):
+        if values[index] == flag:
+            index += 2
+            continue
+        output.append(values[index])
+        index += 1
+    return output
+
+
 def main() -> None:
     run_dir = argument_path("--run-dir", DEFAULT_RUN_DIR)
     analysis_dir = argument_path("--analysis-dir", DEFAULT_ANALYSIS_DIR)
@@ -148,7 +160,12 @@ def main() -> None:
         run_dir.parent / "00_API接続Smoke",
     )
 
-    checker.main()
+    original_argv = list(sys.argv)
+    sys.argv = argv_without_option(original_argv, "--connectivity-dir")
+    try:
+        checker.main()
+    finally:
+        sys.argv = original_argv
 
     report = read_json(report_path)
     test_frame = pd.DataFrame(
