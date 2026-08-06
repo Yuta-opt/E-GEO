@@ -11,6 +11,9 @@ from typing import Any
 
 
 FINAL_RUNNER = Path(__file__).with_name("05i_TOEIC最終安全実行.py")
+CANDIDATE_RUNNER = Path(__file__).with_name(
+    "04d_TOEIC候補10商品を安全に選ぶ.py"
+)
 TWO_PROVIDER_PROFILE = Path(
     "日本語版設定/TOEIC_OpenAI_Gemini実験設定_v1.json"
 )
@@ -30,6 +33,7 @@ def load_module(path: Path, module_name: str) -> Any:
 
 
 final = load_module(FINAL_RUNNER, "toeic_egeo_final_self_check")
+candidate = load_module(CANDIDATE_RUNNER, "toeic_candidate_final_self_check")
 base = final.base
 
 
@@ -92,6 +96,39 @@ def check_provider_sdk_imports() -> bool:
     except Exception:
         return False
     return bool(OpenAI and genai.Client and Anthropic)
+
+
+def check_candidate_unsorted_normalization() -> bool:
+    raw = [0, 3, 11, 12, 17, 23, 27, 28, 6, 19]
+    expected = [0, 3, 6, 11, 12, 17, 19, 23, 27, 28]
+    normalized, observed_raw, changed = candidate.parse_candidate_selection(
+        json.dumps(raw)
+    )
+    if normalized != expected or observed_raw != raw or not changed:
+        return False
+
+    already_sorted, observed_sorted, changed_sorted = (
+        candidate.parse_candidate_selection(json.dumps(expected))
+    )
+    if (
+        already_sorted != expected
+        or observed_sorted != expected
+        or changed_sorted
+    ):
+        return False
+
+    invalid_samples = [
+        [0, 0, 1, 2, 3, 4, 5, 6, 7, 8],
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 30],
+        [0, 1, 2],
+    ]
+    for value in invalid_samples:
+        try:
+            candidate.parse_candidate_selection(json.dumps(value))
+        except ValueError:
+            continue
+        return False
+    return True
 
 
 def check_cached_input_cost() -> bool:
@@ -289,6 +326,9 @@ def check_profiles() -> bool:
 def main() -> None:
     checks = {
         "provider_sdks_import": check_provider_sdk_imports(),
+        "candidate_unsorted_output_is_normalized": (
+            check_candidate_unsorted_normalization()
+        ),
         "cached_input_discount_is_accounted": check_cached_input_cost(),
         "failed_parse_cost_is_recorded": check_failed_parse_cost(),
         "optimized_long_short_share_one_rewrite": check_shared_test_rewrite(),
