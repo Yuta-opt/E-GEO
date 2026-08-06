@@ -36,8 +36,11 @@ def final_call_components(
     heldout_long = int(
         plan.get("heldout_long_reranker_count", heldout_total)
     )
+    default_short = heldout_total
+    if str(plan.get("id")) == "formal_scaled_replication_openai_gemini":
+        default_short = 1
     heldout_short = int(
-        plan.get("heldout_short_reranker_count", heldout_total)
+        plan.get("heldout_short_reranker_count", default_short)
     )
     if not 0 <= heldout_long <= heldout_total:
         raise ValueError("heldout_long_reranker_countが不正です。")
