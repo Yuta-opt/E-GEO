@@ -145,7 +145,7 @@ def main() -> None:
     checks = {
         "provider_sdks_import": base_check.check_provider_sdk_imports(),
         "candidate_unsorted_output_is_normalized": (
-            base_check.check_candidate_order_normalization()
+            base_check.check_candidate_unsorted_normalization()
         ),
         "cached_input_discount_is_accounted": (
             base_check.check_cached_input_cost()
