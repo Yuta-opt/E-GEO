@@ -14,11 +14,11 @@ Set-Location $RepoRoot
 
 $CandidateModel = "gpt-5-mini-2025-08-07"
 $CandidateRunner = ".\日本語版コード\04d_TOEIC候補10商品を安全に選ぶ.py"
-$Runner = ".\日本語版コード\05i_TOEIC最終安全実行.py"
+$Runner = ".\日本語版コード\05l_TOEIC順位応答を安全に正規化.py"
 $ConnectivitySmoke = ".\日本語版コード\05j_TOEIC_API接続Smoke.py"
 $PlanRunner = ".\日本語版コード\05b_TOEIC最終実行計画.py"
-$BudgetProjection = ".\日本語版コード\05k_TOEIC_Smoke実測からFull予算を判定.py"
-$SelfCheck = ".\日本語版コード\07e_TOEIC最終安全実装を自己検査.py"
+$BudgetProjection = ".\日本語版コード\05m_TOEIC回収済み費用を含めてFull予算判定.py"
+$SelfCheck = ".\日本語版コード\07f_TOEIC順位応答回収を自己検査.py"
 $AnalysisRunner = ".\日本語版コード\06c_TOEIC最終統計分析.py"
 $CompletionChecker = ".\日本語版コード\07d_TOEIC最終完了チェック.py"
 $ExperimentConfig = ".\日本語版設定\TOEIC_EGEO実験設定_v3_先行研究準拠.json"
@@ -56,6 +56,7 @@ Write-Host "候補選定上限: 出力フォルダごとに1 USD"
 Write-Host "学習Re-ranker: GPT-4.1 / Gemini 3.1 Flash-Lite"
 Write-Host "Held-out Test: GPT-5（全条件）/ Gemini 3.5 Flash-Lite（長文のみ）"
 Write-Host "最適化長文と最適化短文は同一リライトを共有します。"
+Write-Host "重複だけの順位出力は集合を変えず、最初の出現順で正規化します。"
 Write-Host "OpenAI cached inputは実測cached_tokensを割引単価で計上します。"
 Write-Host "Full前にSmoke実測費用からProvider別予算を自動判定します。"
 Write-Host "必要キー: OPENAI_API_KEY / GEMINI_API_KEY"
@@ -77,13 +78,16 @@ Invoke-Step "2. 実行コードの構文チェック" {
         ".\日本語版コード\05e_TOEIC先行研究準拠_OpenAI_Gemini_Claude実験.py" `
         ".\日本語版コード\05g_TOEIC費用配分_OpenAI_Gemini_Claude実験.py" `
         ".\日本語版コード\05h_TOEIC費用配分安全実行.py" `
+        ".\日本語版コード\05i_TOEIC最終安全実行.py" `
         $Runner `
         $ConnectivitySmoke `
+        ".\日本語版コード\05k_TOEIC_Smoke実測からFull予算を判定.py" `
         $BudgetProjection `
         ".\日本語版コード\06b_TOEIC先行研究準拠結果分析.py" `
         $AnalysisRunner `
         ".\日本語版コード\07c_TOEIC費用配分完了チェック.py" `
         $CompletionChecker `
+        ".\日本語版コード\07e_TOEIC最終安全実装を自己検査.py" `
         $SelfCheck
 }
 
