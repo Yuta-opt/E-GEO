@@ -1,19 +1,21 @@
 {
-  "schema_version": "toeic_egeo_openai_gemini_cost_control_v3",
-  "status": "implemented_not_executed",
-  "last_verified_date": "2026-08-05",
+  "schema_version": "toeic_egeo_openai_gemini_cost_control_v4",
+  "status": "implemented_connectivity_smoke_required",
+  "last_verified_date": "2026-08-06",
   "purpose": "OpenAIへ主予算を置き、GPT-4.1と低価格Gemini Flash-Liteでメタ最適化する。プロンプト固定後はGPT-5を全条件、未学習のGemini 3.5 Flash-Liteを長文条件だけで評価する。Claudeは後日、最適化済み長文条件だけ追加する。",
   "formal_use_policy": {
     "allowed": true,
-    "condition": "OpenAIとGeminiのsmoke実験で出力形式・実測費用・モデル利用可否を確認し、Train開始前にモデル構成を固定すること",
-    "limitation": "費用制約のため、GeminiはFlash-Lite系列を使用し、Held-out Geminiでは短文Testを省略する。先行研究のモデル構成と全条件をそのまま再現するものではない。GPT-5では初期長文・最適化長文・最適化短文の全条件を評価する。",
-    "reporting_text": "計算予算に合わせ、GPT-4.1とGemini 3.1 Flash-Liteを学習Re-rankerとしてメタ最適化した。プロンプト固定後はGPT-5で全Test条件を評価し、Gemini 3.5 Flash-Liteでは初期長文と最適化長文を評価した。"
+    "condition": "ダミーデータのAPI接続Smoke、候補選定1件Smoke、正式80件候補選定、正式Smokeの順で、出力形式・実測費用・モデル利用可否を確認し、Train開始前にモデル構成を固定すること",
+    "limitation": "費用制約のため、GeminiはFlash-Lite系列と短いProvider固有System Promptを使用し、Held-out Geminiでは短文Testを省略する。先行研究のモデル構成と全System Promptをそのまま再現するものではない。GPT-5では初期長文・最適化長文・最適化短文の全条件を評価する。",
+    "reporting_text": "計算予算に合わせ、GPT-4.1とGemini 3.1 Flash-Liteを学習Re-rankerとしてメタ最適化した。プロンプト固定後はGPT-5で全Test条件を評価し、Gemini 3.5 Flash-Liteでは初期長文と最適化長文を評価した。最適化長文と最適化短文では、同一のリライト文章を再利用した。"
   },
   "candidate_selection": {
     "provider": "openai",
     "api_key_env": "OPENAI_API_KEY",
     "model_id": "gpt-5-mini-2025-08-07",
-    "note": "候補30件から10件の選定は04bで先に実行する。本体外のOpenAI費用なので2 USDの予備枠に含める。"
+    "reasoning_effort": "minimal",
+    "max_output_tokens": 200,
+    "note": "候補30件から10件の選定は04dで実行する。本体外のOpenAI費用なので2 USDの予備枠に含め、正式80件の前に1件Smokeを行う。"
   },
   "roles": {
     "rewriter": {
@@ -68,17 +70,18 @@
         "model_id": "gpt-5-2025-08-07",
         "temperature": null,
         "supports_temperature": false,
-        "max_output_tokens": 500,
+        "max_output_tokens": 1000,
         "input_usd_per_million": 1.25,
-        "output_usd_per_million": 10.0
+        "output_usd_per_million": 10.0,
+        "reasoning_effort": "minimal"
       },
       {
         "anonymous_label": "Model F",
         "provider": "google",
         "api_key_env": "GEMINI_API_KEY",
         "model_id": "gemini-3.5-flash-lite",
-        "temperature": 0.3,
-        "supports_temperature": true,
+        "temperature": null,
+        "supports_temperature": false,
         "max_output_tokens": 300,
         "input_usd_per_million": 0.3,
         "output_usd_per_million": 2.5
@@ -90,6 +93,7 @@
     "same_test_queries": true,
     "same_candidate_sets": true,
     "same_target_products": true,
+    "same_optimized_rewrite_for_long_and_short": true,
     "report_per_model": true,
     "macro_average_only_on_shared_long_conditions": true,
     "training_models_are_not_reported_as_heldout_test_models": true,
@@ -106,18 +110,31 @@
     },
     "claude_can_be_added_after_prompt_freeze": true,
     "claude_addition_requires_retraining": false,
-    "claude_addition_note": "後日3社版profileで同じ出力フォルダを再実行すると、成功済みOpenAI・Geminiジョブとリライトをキャッシュから再利用し、Claudeの最適化済み長文Testだけを追加できる。"
+    "claude_addition_note": "後日3社版profileで同じ出力フォルダを再実行すると、成功済みOpenAI・Geminiジョブと共有リライトをキャッシュから再利用し、Claudeの最適化済み長文Testだけを追加できる。"
   },
   "budget": {
-    "warning_thresholds_usd": [50, 90, 103],
+    "warning_thresholds_usd": [
+      50,
+      90,
+      103
+    ],
     "default_hard_stop_usd": 113,
     "provider_hard_stops_usd": {
       "openai": 98,
       "google": 15
     },
     "provider_warning_thresholds_usd": {
-      "openai": [50, 75, 90, 96],
-      "google": [5, 10, 13]
+      "openai": [
+        50,
+        75,
+        90,
+        96
+      ],
+      "google": [
+        5,
+        10,
+        13
+      ]
     },
     "openai_account_budget_usd": 100,
     "openai_reserved_outside_main_run_usd": 2,
@@ -126,7 +143,7 @@
       "text-embedding-3-largeによる収束分析",
       "丸め誤差と最後の1リクエスト分"
     ],
-    "cost_accounting": "2026-08-05時点の標準単価を使用する。Geminiのthinking tokensを出力料金へ含める。OpenAIアカウント全体100 USDのうち本体ランナーは98 USDで停止し、候補選定・埋め込み・最終リクエストのため2 USDを予約する。Googleは15 USDで個別停止する。"
+    "cost_accounting": "2026-08-06時点の設定単価を使用する。Geminiのthinking tokensを出力料金へ含める。API応答後にParserが失敗した場合もusageと費用を記録する。OpenAIアカウント全体100 USDのうち本体ランナーは98 USDで停止し、候補選定・埋め込み・最終リクエストのため2 USDを予約する。Googleは15 USDで個別停止する。"
   },
   "execution": {
     "max_retries": 3,
@@ -135,7 +152,12 @@
     "resume_from_jsonl_cache": true,
     "test_locked_until_prompt_freeze": true,
     "short_test_after_long_prompt_freeze_only": true,
+    "shared_rewrite_across_long_short": true,
+    "failed_usage_counted_before_parse": true,
+    "gpt5_reasoning_effort": "minimal",
+    "connectivity_smoke_before_candidate_full": true,
     "smoke_tests_all_configured_providers": true,
-    "compact_system_prompt_for_google": true
+    "compact_system_prompt_for_google": true,
+    "compact_system_prompt_is_budget_deviation": true
   }
 }
