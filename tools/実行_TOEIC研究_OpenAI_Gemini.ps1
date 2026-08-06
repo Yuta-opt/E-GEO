@@ -16,6 +16,7 @@ $CandidateModel = "gpt-5-mini-2025-08-07"
 $CandidateRunner = ".\日本語版コード\04d_TOEIC候補10商品を安全に選ぶ.py"
 $Runner = ".\日本語版コード\05i_TOEIC最終安全実行.py"
 $ConnectivitySmoke = ".\日本語版コード\05j_TOEIC_API接続Smoke.py"
+$PlanRunner = ".\日本語版コード\05b_TOEIC最終実行計画.py"
 $BudgetProjection = ".\日本語版コード\05k_TOEIC_Smoke実測からFull予算を判定.py"
 $SelfCheck = ".\日本語版コード\07e_TOEIC最終安全実装を自己検査.py"
 $AnalysisRunner = ".\日本語版コード\06c_TOEIC最終統計分析.py"
@@ -71,6 +72,7 @@ Invoke-Step "2. 実行コードの構文チェック" {
         $CandidateRunner `
         ".\日本語版コード\04c_TOEIC候補検索入力を検証.py" `
         ".\日本語版コード\05a_TOEICメタ最適化実験を計画.py" `
+        $PlanRunner `
         ".\日本語版コード\05d_TOEIC_OpenAI_Gemini_Claude実験を自動実行.py" `
         ".\日本語版コード\05e_TOEIC先行研究準拠_OpenAI_Gemini_Claude実験.py" `
         ".\日本語版コード\05g_TOEIC費用配分_OpenAI_Gemini_Claude実験.py" `
@@ -99,7 +101,7 @@ Invoke-Step "5. 候補30件→10件の計画を安全設定で再作成" {
 }
 
 Invoke-Step "6. 先行研究準拠メタ最適化スケジュールを再確認" {
-    uv run python ".\日本語版コード\05a_TOEICメタ最適化実験を計画.py" `
+    uv run python $PlanRunner `
         --config $ExperimentConfig `
         --overwrite
 }
