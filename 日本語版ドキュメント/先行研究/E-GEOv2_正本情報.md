@@ -44,15 +44,19 @@ PDF本体は会話添付／研究ライブラリ側で保管し、リポジト�
 - TestはPrompt固定後のみ使用
 - 未学習モデルで転移を評価
 
-明示する縮小・拡張：
+明示する縮小・変更・拡張：
 
 - 1000／500／2000ではなく40／10／30
 - 学習Re-ranker 4モデルではなく2モデル
 - 1 epoch 10 batchesではなく4 batches
-- GeminiとClaudeは費用制約によりProvider固有の短縮System Prompt
-- 日本語TOEIC教材ドメイン
-- 同一リライトを使った長文対短文の追加転移評価
+- 英語商品向け`all-MiniLM-L6-v2`ではなく、日本語対応の`paraphrase-multilingual-MiniLM-L12-v2`でDense Retrievalを行う
+- GeminiとClaudeは費用制約によりProvider固有の短縮System Promptを使用する
+- 日本語TOEIC教材ドメインへ変更する
+- 先行研究で明示されるTest対象固定に加え、本研究ではTrain／Validationもseed 42で対象商品を固定し、Prompt間比較の乱数差を除く
+- 同一リライトを使った長文対短文の追加転移評価を行う
 - Claudeを実行しない段階では、提供元を完全に跨ぐHeld-out評価とは表現しない
+
+これらは研究目的に沿った事前固定の変更であり、結果確認後に追加・変更しない。
 
 ## 実行前条件
 
