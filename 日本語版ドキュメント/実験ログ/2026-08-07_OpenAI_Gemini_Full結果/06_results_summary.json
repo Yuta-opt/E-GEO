@@ -1,0 +1,43 @@
+{
+  "analysis_status": "numeric_and_embedding_complete_manual_feature_scoring_pending",
+  "run_status": "complete",
+  "embedding_model": "text-embedding-3-large",
+  "embedding_trajectory_steps": 8,
+  "manual_feature_scoring_complete": false,
+  "manual_feature_scale": {
+    "0": "absent",
+    "1": "implicit",
+    "2": "explicit"
+  },
+  "automatic_keyword_feature_scoring_used": false,
+  "charts": [
+    "C:\\Users\\Komug\\OneDrive\\ドキュメント\\egeo-research\\E-GEO\\日本語版データ\\TOEIC\\06_分析結果\\02_OpenAI_Gemini_Claude\\07_initial_vs_optimized.png",
+    "C:\\Users\\Komug\\OneDrive\\ドキュメント\\egeo-research\\E-GEO\\日本語版データ\\TOEIC\\06_分析結果\\02_OpenAI_Gemini_Claude\\08_long_vs_short.png",
+    "C:\\Users\\Komug\\OneDrive\\ドキュメント\\egeo-research\\E-GEO\\日本語版データ\\TOEIC\\06_分析結果\\02_OpenAI_Gemini_Claude\\09_prompt_convergence.png"
+  ],
+  "feature_outputs": [],
+  "prior_study_alignment": {
+    "embedding_model_matches_paper": true,
+    "feature_scoring_method": "manual three-level review"
+  },
+  "statistical_inference": {
+    "confidence_interval": {
+      "level": 0.95,
+      "method": "percentile bootstrap",
+      "resamples": 10000,
+      "unit": "Test intent",
+      "seed_rule": "deterministic SHA-256 by comparison key"
+    },
+    "multiple_testing": {
+      "raw_test": "paired Wilcoxon signed-rank",
+      "correction": "Holm",
+      "global_family_size": 30,
+      "within_reranker_families": {
+        "Model E": 15,
+        "Model F": 15
+      }
+    }
+  },
+  "holm_correction_complete": true,
+  "confidence_intervals_95_complete": true
+}
