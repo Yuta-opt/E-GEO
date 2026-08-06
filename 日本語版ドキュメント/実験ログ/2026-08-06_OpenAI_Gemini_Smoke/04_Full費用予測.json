@@ -1,0 +1,114 @@
+{
+  "status": "failed",
+  "runner_revision": "05i-final-safety-v2",
+  "method": "role/model別Smoke成功ジョブの平均費用 × 正式呼び出し回数 × 役割別安全係数",
+  "budget_fraction": 0.9,
+  "safety_factors": {
+    "rewriter": 2.0,
+    "meta_optimizer": 4.0,
+    "training_reranker": 1.5,
+    "heldout_reranker": 1.5
+  },
+  "provider_checks": {
+    "openai": {
+      "projected_cost_usd": 97.429631,
+      "hard_stop_usd": 98.0,
+      "pass_threshold_usd": 88.2,
+      "headroom_usd": 0.570369,
+      "passed": false
+    },
+    "google": {
+      "projected_cost_usd": 6.408966,
+      "hard_stop_usd": 15.0,
+      "pass_threshold_usd": 13.5,
+      "headroom_usd": 8.591034,
+      "passed": true
+    }
+  },
+  "role_model_projection": [
+    {
+      "role": "rewriter",
+      "provider": "openai",
+      "model": "gpt-4.1-2025-04-14",
+      "smoke_successful_calls": 6,
+      "smoke_mean_cost_usd": 0.004679,
+      "smoke_max_cost_usd": 0.00635,
+      "formal_calls": 3300,
+      "safety_factor": 2.0,
+      "projected_cost_usd": 30.8814,
+      "conditions": []
+    },
+    {
+      "role": "meta_optimizer",
+      "provider": "openai",
+      "model": "gpt-4.1-2025-04-14",
+      "smoke_successful_calls": 1,
+      "smoke_mean_cost_usd": 0.012504,
+      "smoke_max_cost_usd": 0.012504,
+      "formal_calls": 90,
+      "safety_factor": 4.0,
+      "projected_cost_usd": 4.50144,
+      "conditions": []
+    },
+    {
+      "role": "training_reranker",
+      "provider": "openai",
+      "model": "gpt-4.1-2025-04-14",
+      "smoke_successful_calls": 7,
+      "smoke_mean_cost_usd": 0.014519428571428572,
+      "smoke_max_cost_usd": 0.018150000000000003,
+      "formal_calls": 2450,
+      "safety_factor": 1.5,
+      "projected_cost_usd": 53.358900000000006,
+      "conditions": []
+    },
+    {
+      "role": "training_reranker",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "smoke_successful_calls": 7,
+      "smoke_mean_cost_usd": 0.0012773571428571428,
+      "smoke_max_cost_usd": 0.00148025,
+      "formal_calls": 2450,
+      "safety_factor": 1.5,
+      "projected_cost_usd": 4.6942875,
+      "conditions": []
+    },
+    {
+      "role": "heldout_reranker",
+      "provider": "openai",
+      "model": "gpt-5-2025-08-07",
+      "smoke_successful_calls": 5,
+      "smoke_mean_cost_usd": 0.00410775,
+      "smoke_max_cost_usd": 0.007216500000000001,
+      "formal_calls": 1410,
+      "safety_factor": 1.5,
+      "projected_cost_usd": 8.687891250000002,
+      "conditions": [
+        "test_initial_long",
+        "test_optimized_long",
+        "test_optimized_short"
+      ]
+    },
+    {
+      "role": "heldout_reranker",
+      "provider": "google",
+      "model": "gemini-3.5-flash-lite",
+      "smoke_successful_calls": 5,
+      "smoke_mean_cost_usd": 0.00122916,
+      "smoke_max_cost_usd": 0.0012762000000000001,
+      "formal_calls": 930,
+      "safety_factor": 1.5,
+      "projected_cost_usd": 1.7146781999999998,
+      "conditions": [
+        "test_initial_long",
+        "test_optimized_long"
+      ]
+    }
+  ],
+  "limitations": [
+    "Smokeは小標本のため、安全係数を掛けた保守的な事前推定である。",
+    "実行中は各API応答の実測usageでProvider hard stopを継続適用する。",
+    "OpenAI cached inputはusage.input_tokens_details.cached_tokensから割引単価で計上する。"
+  ]
+}

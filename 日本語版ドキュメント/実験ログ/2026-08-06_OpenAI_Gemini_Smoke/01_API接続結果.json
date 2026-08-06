@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "api_calls_completed": 6,
+  "failed_attempts": 0,
+  "provider_cost_usd": {
+    "openai": 0.02876,
+    "google": 0.00047675
+  },
+  "total_cost_usd": 0.029237,
+  "rerankers": [
+    {
+      "anonymous_label": "Model A",
+      "provider": "openai",
+      "model": "gpt-4.1-2025-04-14",
+      "ranking_count": 10,
+      "job_id": "connectivity_rerank__e2bc43f72b1cd7b50276498e"
+    },
+    {
+      "anonymous_label": "Model B",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "ranking_count": 10,
+      "job_id": "connectivity_rerank__55ce17fe8328ea6fe203c6b1"
+    },
+    {
+      "anonymous_label": "Model E",
+      "provider": "openai",
+      "model": "gpt-5-2025-08-07",
+      "ranking_count": 10,
+      "job_id": "connectivity_rerank__71cc8d2793a31f98070a0293"
+    },
+    {
+      "anonymous_label": "Model F",
+      "provider": "google",
+      "model": "gemini-3.5-flash-lite",
+      "ranking_count": 10,
+      "job_id": "connectivity_rerank__1660cb5859832f59eaef90aa"
+    }
+  ],
+  "safety_checks": {
+    "all_configured_providers_called": true,
+    "all_ranking_parsers_returned_10_items": true,
+    "cost_recorded": true
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "provider_cost_usd": {
+    "openai": 0.172043,
+    "google": 0.015087
+  },
+  "provider_hard_stops_usd": {
+    "openai": 98.0,
+    "google": 15.0
+  },
+  "test_conditions_by_provider": {
+    "openai": [
+      "test_initial_long",
+      "test_optimized_long",
+      "test_optimized_short"
+    ],
+    "google": [
+      "test_initial_long",
+      "test_optimized_long"
+    ]
+  },
+  "heldout_test_policy": {
+    "Model E": [
+      "test_initial_long",
+      "test_optimized_long",
+      "test_optimized_short"
+    ],
+    "Model F": [
+      "test_initial_long",
+      "test_optimized_long"
+    ]
+  },
+  "cost_control_changes": [
+    "Gemini uses Flash-Lite models",
+    "Gemini skips supplemental short-query Test",
+    "Claude evaluates optimized long-query prompts only",
+    "Gemini and Claude use compact model-specific reranker system prompts",
+    "Claude uses ephemeral prompt caching"
+  ]
+}

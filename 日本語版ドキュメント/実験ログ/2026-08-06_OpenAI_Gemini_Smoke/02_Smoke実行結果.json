@@ -1,0 +1,59 @@
+{
+  "completed_at": "2026-08-06T10:55:50.365232+00:00",
+  "mode": "smoke",
+  "status": "complete",
+  "provider_configuration": "OpenAI + Google Gemini + Anthropic Claude",
+  "prompt_count": 1,
+  "optimization_version_count": 2,
+  "test_result_rows": 6,
+  "total_api_cost_usd_estimate": 0.187131,
+  "hard_stop_usd": 113.0,
+  "test_locked_until_prompt_freeze": true,
+  "short_test_used_only_after_prompt_freeze": true,
+  "model_profile": "日本語版設定\\TOEIC_OpenAI_Gemini実験設定_v1.json",
+  "limitations": "費用制約のため、GeminiはFlash-Lite系列と短いProvider固有System Promptを使用し、Held-out Geminiでは短文Testを省略する。先行研究のモデル構成と全System Promptをそのまま再現するものではない。GPT-5では初期長文・最適化長文・最適化短文の全条件を評価する。",
+  "prior_study_compliance": {
+    "validation_visible_to_meta_optimizer": false,
+    "meta_optimizer_history": "training prompt text and per-engine training results only",
+    "reranker_system_prompts": "full original model-family prompts for OpenAI; compact model-specific prompts for Gemini and Claude",
+    "rewriter_input": "target listing title + description; query blind",
+    "prompt_count": 15,
+    "epochs": 2,
+    "batches_per_epoch": 4,
+    "evaluated_versions_per_prompt": 8,
+    "scaled_replication_note": "The prior study used 4 training rerankers and 10 batches per epoch; this budget-scaled Japanese replication uses GPT-4.1 and Gemini with 4 batches per epoch."
+  },
+  "provider_cost_usd": {
+    "openai": 0.172043,
+    "google": 0.015087
+  },
+  "provider_hard_stops_usd": {
+    "openai": 98.0,
+    "google": 15.0
+  },
+  "heldout_test_policy": {
+    "Model E": [
+      "test_initial_long",
+      "test_optimized_long",
+      "test_optimized_short"
+    ],
+    "Model F": [
+      "test_initial_long",
+      "test_optimized_long"
+    ]
+  },
+  "cost_control_variant": true,
+  "final_safety_patches": {
+    "runner_revision": "05i-final-safety-v2",
+    "shared_optimized_rewrite_for_long_and_short": true,
+    "failed_response_usage_costed_before_parse": true,
+    "openai_cached_input_priced_from_usage_details": true,
+    "gpt5_reasoning_effort": "minimal",
+    "provider_preflight_hard_stop": true,
+    "connectivity_smoke_required_before_full_candidate_selection": true,
+    "full_budget_projection_required_after_smoke": true,
+    "ranking_parser_revision": "ranking-duplicate-only-normalization-v1",
+    "duplicate_only_ranking_normalization": true,
+    "failed_rerank_response_recovery_without_api_call": true
+  }
+}

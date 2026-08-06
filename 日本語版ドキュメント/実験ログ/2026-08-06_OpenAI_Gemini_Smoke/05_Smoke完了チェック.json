@@ -1,0 +1,43 @@
+{
+  "status": "smoke_complete",
+  "allow_smoke": true,
+  "checks": {
+    "instances_available": true,
+    "at_least_one_prompt": true,
+    "two_versions_per_smoke_prompt": true,
+    "heldout_reranker_count": true,
+    "test_conditions_present": true,
+    "test_rows_per_condition": true,
+    "test_rows_unique": true,
+    "analysis_complete": true,
+    "cost_below_hard_stop": true
+  },
+  "instance_count": 80,
+  "split_counts": {
+    "train": 40,
+    "test": 30,
+    "validation": 10
+  },
+  "optimization_version_count": 2,
+  "final_prompt_count": 1,
+  "expected_heldout_reranker_count": 2,
+  "actual_heldout_reranker_count": 2,
+  "heldout_reranker_labels": [
+    "Model E",
+    "Model F"
+  ],
+  "heldout_reranker_models": [
+    "gemini-3.5-flash-lite",
+    "gpt-5-2025-08-07"
+  ],
+  "test_result_count": 6,
+  "test_condition_counts": {
+    "test_initial_long": 2,
+    "test_optimized_long": 2,
+    "test_optimized_short": 2
+  },
+  "missing_analysis_files": [],
+  "estimated_api_cost_usd": 0.187131,
+  "hard_stop_usd": 113.0,
+  "meaning": "research_numeric_results_completeは、指定した全Held-out Re-rankerについて数値結果・統計・図表がそろった状態を示す。ポスター本文の最終解釈とレイアウト確認は別途必要である。"
+}
