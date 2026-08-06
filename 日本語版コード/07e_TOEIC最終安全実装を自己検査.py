@@ -71,7 +71,10 @@ class FakeRunner:
             '{"ok": true}',
             {
                 "input_tokens": 100,
+                "cached_input_tokens": 60,
+                "uncached_input_tokens": 40,
                 "output_tokens": 20,
+                "reasoning_output_tokens": 0,
                 "total_tokens": 120,
             },
             f"response-{self.calls}",
@@ -79,6 +82,33 @@ class FakeRunner:
 
     def _check_budget(self) -> None:
         return
+
+
+def check_provider_sdk_imports() -> bool:
+    try:
+        from anthropic import Anthropic
+        from google import genai
+        from openai import OpenAI
+    except Exception:
+        return False
+    return bool(OpenAI and genai.Client and Anthropic)
+
+
+def check_cached_input_cost() -> bool:
+    role = SimpleNamespace(
+        provider="openai",
+        model_id="gpt-4.1-2025-04-14",
+        input_usd_per_million=2.0,
+        output_usd_per_million=8.0,
+    )
+    usage = {
+        "input_tokens": 1000,
+        "cached_input_tokens": 800,
+        "output_tokens": 100,
+    }
+    actual = final.final_role_cost(role, usage)
+    expected = 0.0016
+    return abs(actual - expected) < 1e-12
 
 
 def check_failed_parse_cost() -> bool:
@@ -220,9 +250,7 @@ def check_shared_test_rewrite() -> bool:
         base.rank_instance = original_rank_instance
         final.budgeted.conditions_for_role = original_conditions
 
-    frame = {
-        row["condition"]: row for row in rows
-    }
+    frame = {row["condition"]: row for row in rows}
     return bool(
         calls["rewrite"] == 2
         and len(rows) == 3
@@ -260,6 +288,8 @@ def check_profiles() -> bool:
 
 def main() -> None:
     checks = {
+        "provider_sdks_import": check_provider_sdk_imports(),
+        "cached_input_discount_is_accounted": check_cached_input_cost(),
         "failed_parse_cost_is_recorded": check_failed_parse_cost(),
         "optimized_long_short_share_one_rewrite": check_shared_test_rewrite(),
         "model_profiles_are_safe": check_profiles(),
