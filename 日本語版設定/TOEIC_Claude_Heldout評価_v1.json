@@ -1,0 +1,70 @@
+{
+  "schema_version": "toeic_claude_heldout_v1",
+  "status": "ready_for_validate_smoke_full",
+  "last_verified_date": "2026-08-07",
+  "purpose": "成功済みOpenAI・Gemini Fullのリライト文章を再利用し、Claude Sonnet 4.5で初期長文・最適化長文だけをHeld-out評価する。",
+  "model": {
+    "anonymous_label": "Model G",
+    "provider": "anthropic",
+    "api_key_env": "ANTHROPIC_API_KEY",
+    "model_id": "claude-sonnet-4-5",
+    "temperature": 0.3,
+    "max_output_tokens": 300,
+    "input_usd_per_million": 3.0,
+    "output_usd_per_million": 15.0,
+    "pricing_source_note": "Anthropic公式のClaude Sonnet 4.5標準価格。実行前のSmoke実測を費用判断の正本とする。"
+  },
+  "evaluation": {
+    "conditions": [
+      "test_initial_long",
+      "test_optimized_long"
+    ],
+    "test_intents": 30,
+    "prompt_count": 15,
+    "original_rank_calls": 30,
+    "rewritten_rank_calls": 900,
+    "full_calls_total": 930,
+    "reuse_existing_rewrites": true,
+    "rerun_train_validation_meta_optimization": false,
+    "rerun_openai_gemini": false,
+    "short_query_test": false,
+    "reason": "先行研究Table 6と同様に最適化後の絶対値と最適化−初期を計算しつつ、費用を長文2条件へ限定する。"
+  },
+  "budget": {
+    "expected_range_usd": [
+      10.0,
+      16.0
+    ],
+    "warning_thresholds_usd": [
+      5.0,
+      10.0,
+      14.0,
+      16.5
+    ],
+    "smoke_projection_safety_factor": 1.25,
+    "full_projection_gate_usd": 16.5,
+    "hard_stop_usd": 18.0,
+    "account_credit_assumption_usd": 20.0,
+    "reserve_usd": 2.0
+  },
+  "execution": {
+    "stages": [
+      "validate",
+      "smoke",
+      "full",
+      "analyze"
+    ],
+    "max_retries": 3,
+    "retry_max_wait_seconds": 12,
+    "resume_from_separate_jsonl_cache": true,
+    "file_lock_retry_seconds": 240,
+    "failed_response_usage_counted_before_parse": true,
+    "ranking_duplicate_only_normalization": true
+  },
+  "reporting": {
+    "model_name": "Claude Sonnet 4.5",
+    "heldout_only": true,
+    "comparison": "初期長文 vs 最適化長文",
+    "limitation": "Claudeは最適化学習には使用せず、固定済みTestと固定済みリライトを評価する。短文条件は評価しない。"
+  }
+}
