@@ -8,11 +8,11 @@ $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 Set-Location $repoRoot
 
-Write-Host "Claude Batch repair runner"
+Write-Host "Claude Batch repair runner v2"
 Write-Host "  Mode: $Mode"
 Write-Host "  Repo: $repoRoot"
 
-uv run python ".\tools\toeic_claude_batch_repair.py" `
+uv run python ".\tools\toeic_claude_batch_repair_v2.py" `
     --mode $Mode.ToLowerInvariant()
 
 if ($LASTEXITCODE -ne 0) {
