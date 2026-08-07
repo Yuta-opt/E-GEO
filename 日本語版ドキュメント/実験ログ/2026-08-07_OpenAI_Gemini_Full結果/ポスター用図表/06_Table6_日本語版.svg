@@ -1,0 +1,249 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1260" height="760" viewBox="0 0 1260 760">
+<style>
+text{font-family:Yu Gothic, Meiryo, Noto Sans CJK JP, sans-serif;fill:#111827}
+.title{font-size:24px;font-weight:700}
+.label{font-size:15px}
+.small{font-size:13px}
+.axis{stroke:#111827;stroke-width:1}
+.grid{stroke:#d1d5db;stroke-width:1}
+.zero{stroke:#111827;stroke-width:1.5}
+.a{fill:#3b82f6}
+.b{fill:#f59e0b}
+.green{fill:#dcfce7}
+.red{fill:#fee2e2}
+.yellow{fill:#fef3c7}
+.gray{fill:#e5e7eb}
+.header{fill:#f3f4f6}
+.cell{stroke:#9ca3af;stroke-width:.8}
+</style>
+<text x="630.0" y="38" text-anchor="middle" class="title">Table 6（日本語版）：メタ最適化後の平均順位改善量と初期からの変化</text>
+<rect x="20" y="75" width="220" height="76" class="header cell"/>
+<text x="130.0" y="118.0" text-anchor="middle" class="label" font-weight="700">プロンプト</text>
+<rect x="240" y="75" width="485" height="38" class="header cell"/>
+<text x="482.5" y="99.0" text-anchor="middle" class="label" font-weight="700">最適化後</text>
+<rect x="725" y="75" width="485" height="38" class="header cell"/>
+<text x="967.5" y="99.0" text-anchor="middle" class="label" font-weight="700">最適化 − 初期</text>
+<rect x="240" y="113" width="170" height="38" class="header cell"/>
+<text x="325.0" y="137.0" text-anchor="middle" class="label" font-weight="700">GPT-5</text>
+<rect x="410" y="113" width="170" height="38" class="header cell"/>
+<text x="495.0" y="137.0" text-anchor="middle" class="label" font-weight="700">Gemini</text>
+<rect x="580" y="113" width="145" height="38" class="header cell"/>
+<text x="652.5" y="137.0" text-anchor="middle" class="label" font-weight="700">Claude</text>
+<rect x="725" y="113" width="170" height="38" class="header cell"/>
+<text x="810.0" y="137.0" text-anchor="middle" class="label" font-weight="700">GPT-5</text>
+<rect x="895" y="113" width="170" height="38" class="header cell"/>
+<text x="980.0" y="137.0" text-anchor="middle" class="label" font-weight="700">Gemini</text>
+<rect x="1065" y="113" width="145" height="38" class="header cell"/>
+<text x="1137.5" y="137.0" text-anchor="middle" class="label" font-weight="700">Claude</text>
+<rect x="20" y="151" width="220" height="38" class=" cell"/>
+<text x="130.0" y="175.0" text-anchor="middle" class="label" font-weight="700">権威的</text>
+<rect x="240" y="151" width="170" height="38" class="green cell"/>
+<text x="325.0" y="175.0" text-anchor="middle" class="label">+0.57 (0.27)</text>
+<rect x="410" y="151" width="170" height="38" class="green cell"/>
+<text x="495.0" y="175.0" text-anchor="middle" class="label">+0.20 (0.35)</text>
+<rect x="580" y="151" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="175.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="151" width="170" height="38" class="green cell"/>
+<text x="810.0" y="175.0" text-anchor="middle" class="label">+1.67</text>
+<rect x="895" y="151" width="170" height="38" class="green cell"/>
+<text x="980.0" y="175.0" text-anchor="middle" class="label">+0.67</text>
+<rect x="1065" y="151" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="175.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="189" width="220" height="38" class=" cell"/>
+<text x="130.0" y="213.0" text-anchor="middle" class="label" font-weight="700">技術的</text>
+<rect x="240" y="189" width="170" height="38" class="red cell"/>
+<text x="325.0" y="213.0" text-anchor="middle" class="label">-0.20 (0.36)</text>
+<rect x="410" y="189" width="170" height="38" class="yellow cell"/>
+<text x="495.0" y="213.0" text-anchor="middle" class="label">+0.07 (0.36)</text>
+<rect x="580" y="189" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="213.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="189" width="170" height="38" class="green cell"/>
+<text x="810.0" y="213.0" text-anchor="middle" class="label">+0.23</text>
+<rect x="895" y="189" width="170" height="38" class="green cell"/>
+<text x="980.0" y="213.0" text-anchor="middle" class="label">+0.53</text>
+<rect x="1065" y="189" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="213.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="227" width="220" height="38" class=" cell"/>
+<text x="130.0" y="251.0" text-anchor="middle" class="label" font-weight="700">独自性</text>
+<rect x="240" y="227" width="170" height="38" class="green cell"/>
+<text x="325.0" y="251.0" text-anchor="middle" class="label">+0.27 (0.31)</text>
+<rect x="410" y="227" width="170" height="38" class="red cell"/>
+<text x="495.0" y="251.0" text-anchor="middle" class="label">-0.17 (0.35)</text>
+<rect x="580" y="227" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="251.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="227" width="170" height="38" class="green cell"/>
+<text x="810.0" y="251.0" text-anchor="middle" class="label">+0.20</text>
+<rect x="895" y="227" width="170" height="38" class="green cell"/>
+<text x="980.0" y="251.0" text-anchor="middle" class="label">+0.23</text>
+<rect x="1065" y="227" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="251.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="265" width="220" height="38" class=" cell"/>
+<text x="130.0" y="289.0" text-anchor="middle" class="label" font-weight="700">流暢性</text>
+<rect x="240" y="265" width="170" height="38" class="green cell"/>
+<text x="325.0" y="289.0" text-anchor="middle" class="label">+0.27 (0.22)</text>
+<rect x="410" y="265" width="170" height="38" class="red cell"/>
+<text x="495.0" y="289.0" text-anchor="middle" class="label">-0.53 (0.51)</text>
+<rect x="580" y="265" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="289.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="265" width="170" height="38" class="green cell"/>
+<text x="810.0" y="289.0" text-anchor="middle" class="label">+0.17</text>
+<rect x="895" y="265" width="170" height="38" class="red cell"/>
+<text x="980.0" y="289.0" text-anchor="middle" class="label">-0.90</text>
+<rect x="1065" y="265" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="289.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="303" width="220" height="38" class=" cell"/>
+<text x="130.0" y="327.0" text-anchor="middle" class="label" font-weight="700">クリック誘導</text>
+<rect x="240" y="303" width="170" height="38" class="green cell"/>
+<text x="325.0" y="327.0" text-anchor="middle" class="label">+0.37 (0.31)</text>
+<rect x="410" y="303" width="170" height="38" class="green cell"/>
+<text x="495.0" y="327.0" text-anchor="middle" class="label">+0.40 (0.30)</text>
+<rect x="580" y="303" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="327.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="303" width="170" height="38" class="green cell"/>
+<text x="810.0" y="327.0" text-anchor="middle" class="label">+1.60</text>
+<rect x="895" y="303" width="170" height="38" class="green cell"/>
+<text x="980.0" y="327.0" text-anchor="middle" class="label">+1.93</text>
+<rect x="1065" y="303" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="327.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="341" width="220" height="38" class=" cell"/>
+<text x="130.0" y="365.0" text-anchor="middle" class="label" font-weight="700">多様性</text>
+<rect x="240" y="341" width="170" height="38" class="green cell"/>
+<text x="325.0" y="365.0" text-anchor="middle" class="label">+0.33 (0.37)</text>
+<rect x="410" y="341" width="170" height="38" class="green cell"/>
+<text x="495.0" y="365.0" text-anchor="middle" class="label">+0.33 (0.60)</text>
+<rect x="580" y="341" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="365.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="341" width="170" height="38" class="green cell"/>
+<text x="810.0" y="365.0" text-anchor="middle" class="label">+0.97</text>
+<rect x="895" y="341" width="170" height="38" class="green cell"/>
+<text x="980.0" y="365.0" text-anchor="middle" class="label">+1.60</text>
+<rect x="1065" y="341" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="365.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="379" width="220" height="38" class=" cell"/>
+<text x="130.0" y="403.0" text-anchor="middle" class="label" font-weight="700">品質強調</text>
+<rect x="240" y="379" width="170" height="38" class="red cell"/>
+<text x="325.0" y="403.0" text-anchor="middle" class="label">-0.70 (0.43)</text>
+<rect x="410" y="379" width="170" height="38" class="red cell"/>
+<text x="495.0" y="403.0" text-anchor="middle" class="label">-1.13 (0.45)</text>
+<rect x="580" y="379" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="403.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="379" width="170" height="38" class="red cell"/>
+<text x="810.0" y="403.0" text-anchor="middle" class="label">-0.20</text>
+<rect x="895" y="379" width="170" height="38" class="red cell"/>
+<text x="980.0" y="403.0" text-anchor="middle" class="label">-0.20</text>
+<rect x="1065" y="379" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="403.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="417" width="220" height="38" class=" cell"/>
+<text x="130.0" y="441.0" text-anchor="middle" class="label" font-weight="700">競争優位</text>
+<rect x="240" y="417" width="170" height="38" class="red cell"/>
+<text x="325.0" y="441.0" text-anchor="middle" class="label">-0.67 (0.31)</text>
+<rect x="410" y="417" width="170" height="38" class="red cell"/>
+<text x="495.0" y="441.0" text-anchor="middle" class="label">-0.90 (0.34)</text>
+<rect x="580" y="417" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="441.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="417" width="170" height="38" class="green cell"/>
+<text x="810.0" y="441.0" text-anchor="middle" class="label">+0.53</text>
+<rect x="895" y="417" width="170" height="38" class="green cell"/>
+<text x="980.0" y="441.0" text-anchor="middle" class="label">+0.33</text>
+<rect x="1065" y="417" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="441.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="455" width="220" height="38" class=" cell"/>
+<text x="130.0" y="479.0" text-anchor="middle" class="label" font-weight="700">トリック</text>
+<rect x="240" y="455" width="170" height="38" class="red cell"/>
+<text x="325.0" y="479.0" text-anchor="middle" class="label">-0.67 (0.46)</text>
+<rect x="410" y="455" width="170" height="38" class="red cell"/>
+<text x="495.0" y="479.0" text-anchor="middle" class="label">-0.50 (0.42)</text>
+<rect x="580" y="455" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="479.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="455" width="170" height="38" class="green cell"/>
+<text x="810.0" y="479.0" text-anchor="middle" class="label">+1.20</text>
+<rect x="895" y="455" width="170" height="38" class="green cell"/>
+<text x="980.0" y="479.0" text-anchor="middle" class="label">+1.10</text>
+<rect x="1065" y="455" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="479.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="493" width="220" height="38" class=" cell"/>
+<text x="130.0" y="517.0" text-anchor="middle" class="label" font-weight="700">書式</text>
+<rect x="240" y="493" width="170" height="38" class="red cell"/>
+<text x="325.0" y="517.0" text-anchor="middle" class="label">-1.90 (0.51)</text>
+<rect x="410" y="493" width="170" height="38" class="red cell"/>
+<text x="495.0" y="517.0" text-anchor="middle" class="label">-0.60 (0.57)</text>
+<rect x="580" y="493" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="517.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="493" width="170" height="38" class="red cell"/>
+<text x="810.0" y="517.0" text-anchor="middle" class="label">-0.93</text>
+<rect x="895" y="493" width="170" height="38" class="red cell"/>
+<text x="980.0" y="517.0" text-anchor="middle" class="label">-0.50</text>
+<rect x="1065" y="493" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="517.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="531" width="220" height="38" class=" cell"/>
+<text x="130.0" y="555.0" text-anchor="middle" class="label" font-weight="700">FAQ</text>
+<rect x="240" y="531" width="170" height="38" class="red cell"/>
+<text x="325.0" y="555.0" text-anchor="middle" class="label">-0.27 (0.27)</text>
+<rect x="410" y="531" width="170" height="38" class="yellow cell"/>
+<text x="495.0" y="555.0" text-anchor="middle" class="label">+0.07 (0.41)</text>
+<rect x="580" y="531" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="555.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="531" width="170" height="38" class="red cell"/>
+<text x="810.0" y="555.0" text-anchor="middle" class="label">-0.47</text>
+<rect x="895" y="531" width="170" height="38" class="yellow cell"/>
+<text x="980.0" y="555.0" text-anchor="middle" class="label">+0.03</text>
+<rect x="1065" y="531" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="555.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="569" width="220" height="38" class=" cell"/>
+<text x="130.0" y="593.0" text-anchor="middle" class="label" font-weight="700">広告調</text>
+<rect x="240" y="569" width="170" height="38" class="green cell"/>
+<text x="325.0" y="593.0" text-anchor="middle" class="label">+0.50 (0.33)</text>
+<rect x="410" y="569" width="170" height="38" class="red cell"/>
+<text x="495.0" y="593.0" text-anchor="middle" class="label">-0.17 (0.28)</text>
+<rect x="580" y="569" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="593.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="569" width="170" height="38" class="green cell"/>
+<text x="810.0" y="593.0" text-anchor="middle" class="label">+3.63</text>
+<rect x="895" y="569" width="170" height="38" class="green cell"/>
+<text x="980.0" y="593.0" text-anchor="middle" class="label">+2.40</text>
+<rect x="1065" y="569" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="593.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="607" width="220" height="38" class=" cell"/>
+<text x="130.0" y="631.0" text-anchor="middle" class="label" font-weight="700">外国語表現</text>
+<rect x="240" y="607" width="170" height="38" class="yellow cell"/>
+<text x="325.0" y="631.0" text-anchor="middle" class="label">-0.03 (0.24)</text>
+<rect x="410" y="607" width="170" height="38" class="red cell"/>
+<text x="495.0" y="631.0" text-anchor="middle" class="label">-0.23 (0.29)</text>
+<rect x="580" y="607" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="631.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="607" width="170" height="38" class="green cell"/>
+<text x="810.0" y="631.0" text-anchor="middle" class="label">+2.23</text>
+<rect x="895" y="607" width="170" height="38" class="green cell"/>
+<text x="980.0" y="631.0" text-anchor="middle" class="label">+2.30</text>
+<rect x="1065" y="607" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="631.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="645" width="220" height="38" class=" cell"/>
+<text x="130.0" y="669.0" text-anchor="middle" class="label" font-weight="700">最小限</text>
+<rect x="240" y="645" width="170" height="38" class="green cell"/>
+<text x="325.0" y="669.0" text-anchor="middle" class="label">+0.33 (0.26)</text>
+<rect x="410" y="645" width="170" height="38" class="red cell"/>
+<text x="495.0" y="669.0" text-anchor="middle" class="label">-0.67 (0.45)</text>
+<rect x="580" y="645" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="669.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="645" width="170" height="38" class="green cell"/>
+<text x="810.0" y="669.0" text-anchor="middle" class="label">+2.50</text>
+<rect x="895" y="645" width="170" height="38" class="green cell"/>
+<text x="980.0" y="669.0" text-anchor="middle" class="label">+2.30</text>
+<rect x="1065" y="645" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="669.0" text-anchor="middle" class="label">未実施</text>
+<rect x="20" y="683" width="220" height="38" class=" cell"/>
+<text x="130.0" y="707.0" text-anchor="middle" class="label" font-weight="700">ストーリーテリング</text>
+<rect x="240" y="683" width="170" height="38" class="green cell"/>
+<text x="325.0" y="707.0" text-anchor="middle" class="label">+0.20 (0.21)</text>
+<rect x="410" y="683" width="170" height="38" class="red cell"/>
+<text x="495.0" y="707.0" text-anchor="middle" class="label">-0.40 (0.43)</text>
+<rect x="580" y="683" width="145" height="38" class="gray cell"/>
+<text x="652.5" y="707.0" text-anchor="middle" class="label">未実施</text>
+<rect x="725" y="683" width="170" height="38" class="green cell"/>
+<text x="810.0" y="707.0" text-anchor="middle" class="label">+4.73</text>
+<rect x="895" y="683" width="170" height="38" class="green cell"/>
+<text x="980.0" y="707.0" text-anchor="middle" class="label">+4.37</text>
+<rect x="1065" y="683" width="145" height="38" class="gray cell"/>
+<text x="1137.5" y="707.0" text-anchor="middle" class="label">未実施</text>
+<text x="630.0" y="740" text-anchor="middle" class="small">括弧内は標準誤差。緑：+0.10以上、赤：−0.10以下、黄：それ以外。Claudeは後日追加予定。</text>
+</svg>

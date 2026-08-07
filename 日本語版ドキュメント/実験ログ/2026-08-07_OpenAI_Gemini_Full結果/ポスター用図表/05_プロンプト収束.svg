@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" viewBox="0 0 900 540">
+<style>
+text{font-family:Yu Gothic, Meiryo, Noto Sans CJK JP, sans-serif;fill:#111827}
+.title{font-size:24px;font-weight:700}
+.label{font-size:15px}
+.small{font-size:13px}
+.axis{stroke:#111827;stroke-width:1}
+.grid{stroke:#d1d5db;stroke-width:1}
+.zero{stroke:#111827;stroke-width:1.5}
+.a{fill:#3b82f6}
+.b{fill:#f59e0b}
+.green{fill:#dcfce7}
+.red{fill:#fee2e2}
+.yellow{fill:#fef3c7}
+.gray{fill:#e5e7eb}
+.header{fill:#f3f4f6}
+.cell{stroke:#9ca3af;stroke-width:.8}
+</style>
+<text x="450.0" y="38" text-anchor="middle" class="title">15プロンプトの埋め込み空間における収束</text>
+<line x1="90" x2="860" y1="460.0" y2="460.0" class="grid"/><text x="78" y="465.0" text-anchor="end" class="small">0.05</text>
+<line x1="90" x2="860" y1="387.77777777777777" y2="387.77777777777777" class="grid"/><text x="78" y="392.77777777777777" text-anchor="end" class="small">0.10</text>
+<line x1="90" x2="860" y1="315.55555555555554" y2="315.55555555555554" class="grid"/><text x="78" y="320.55555555555554" text-anchor="end" class="small">0.15</text>
+<line x1="90" x2="860" y1="243.33333333333331" y2="243.33333333333331" class="grid"/><text x="78" y="248.33333333333331" text-anchor="end" class="small">0.20</text>
+<line x1="90" x2="860" y1="171.1111111111111" y2="171.1111111111111" class="grid"/><text x="78" y="176.1111111111111" text-anchor="end" class="small">0.25</text>
+<line x1="90" x2="860" y1="98.88888888888891" y2="98.88888888888891" class="grid"/><text x="78" y="103.88888888888891" text-anchor="end" class="small">0.30</text>
+<text x="90.0" y="505" text-anchor="middle" class="small">初期</text>
+<text x="200.0" y="505" text-anchor="middle" class="small">E1-B2</text>
+<text x="310.0" y="505" text-anchor="middle" class="small">E1-B3</text>
+<text x="420.0" y="505" text-anchor="middle" class="small">E1-B4</text>
+<text x="530.0" y="505" text-anchor="middle" class="small">E2-B1</text>
+<text x="640.0" y="505" text-anchor="middle" class="small">E2-B2</text>
+<text x="750.0" y="505" text-anchor="middle" class="small">E2-B3</text>
+<text x="860.0" y="505" text-anchor="middle" class="small">E2-B4</text>
+<polyline points="90.0,314.11674430000005 200.0,428.38450497777774 310.0,427.57130875555555 420.0,433.0208772666666 530.0,433.0208772666666 640.0,431.21692648888893 750.0,424.26619785555556 860.0,421.28783169999997" fill="none" stroke="#3b82f6" stroke-width="3"/>
+<circle cx="90.0" cy="314.11674430000005" r="5" class="a"/>
+<circle cx="200.0" cy="428.38450497777774" r="5" class="a"/>
+<circle cx="310.0" cy="427.57130875555555" r="5" class="a"/>
+<circle cx="420.0" cy="433.0208772666666" r="5" class="a"/>
+<circle cx="530.0" cy="433.0208772666666" r="5" class="a"/>
+<circle cx="640.0" cy="431.21692648888893" r="5" class="a"/>
+<circle cx="750.0" cy="424.26619785555556" r="5" class="a"/>
+<circle cx="860.0" cy="421.28783169999997" r="5" class="a"/>
+<polyline points="90.0,100.13878024444449 200.0,317.71066695555555 310.0,316.09386273333337 420.0,326.9474854555556 530.0,326.9474854555556 640.0,323.34977214444444 750.0,309.5327079888889 860.0,303.63407383333333" fill="none" stroke="#f59e0b" stroke-width="3"/>
+<circle cx="90.0" cy="100.13878024444449" r="5" class="b"/>
+<circle cx="200.0" cy="317.71066695555555" r="5" class="b"/>
+<circle cx="310.0" cy="316.09386273333337" r="5" class="b"/>
+<circle cx="420.0" cy="326.9474854555556" r="5" class="b"/>
+<circle cx="530.0" cy="326.9474854555556" r="5" class="b"/>
+<circle cx="640.0" cy="323.34977214444444" r="5" class="b"/>
+<circle cx="750.0" cy="309.5327079888889" r="5" class="b"/>
+<circle cx="860.0" cy="303.63407383333333" r="5" class="b"/>
+<rect x="580" y="18" width="18" height="18" class="a"/><text x="605" y="33" class="small">重心への平均距離</text>
+<rect x="735" y="18" width="18" height="18" class="b"/><text x="760" y="33" class="small">平均ペアワイズ距離</text>
+<text x="25" y="270.0" text-anchor="middle" class="label" transform="rotate(-90 25 270.0)">コサイン距離</text>
+</svg>

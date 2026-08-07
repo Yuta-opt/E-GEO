@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<style>
+text{font-family:Yu Gothic, Meiryo, Noto Sans CJK JP, sans-serif;fill:#111827}
+.title{font-size:24px;font-weight:700}
+.label{font-size:15px}
+.small{font-size:13px}
+.axis{stroke:#111827;stroke-width:1}
+.grid{stroke:#d1d5db;stroke-width:1}
+.zero{stroke:#111827;stroke-width:1.5}
+.a{fill:#3b82f6}
+.b{fill:#f59e0b}
+.green{fill:#dcfce7}
+.red{fill:#fee2e2}
+.yellow{fill:#fef3c7}
+.gray{fill:#e5e7eb}
+.header{fill:#f3f4f6}
+.cell{stroke:#9ca3af;stroke-width:.8}
+</style>
+<text x="450.0" y="40" text-anchor="middle" class="title">初期プロンプトと最適化後の全体平均</text>
+<line x1="100" x2="860" y1="436.25" y2="436.25" class="grid"/>
+<text x="88" y="441.25" text-anchor="end" class="small">-1.4</text>
+<line x1="100" x2="860" y1="388.75" y2="388.75" class="grid"/>
+<text x="88" y="393.75" text-anchor="end" class="small">-1.2</text>
+<line x1="100" x2="860" y1="341.25" y2="341.25" class="grid"/>
+<text x="88" y="346.25" text-anchor="end" class="small">-1.0</text>
+<line x1="100" x2="860" y1="293.75" y2="293.75" class="grid"/>
+<text x="88" y="298.75" text-anchor="end" class="small">-0.8</text>
+<line x1="100" x2="860" y1="246.24999999999997" y2="246.24999999999997" class="grid"/>
+<text x="88" y="251.24999999999997" text-anchor="end" class="small">-0.6</text>
+<line x1="100" x2="860" y1="198.75" y2="198.75" class="grid"/>
+<text x="88" y="203.75" text-anchor="end" class="small">-0.4</text>
+<line x1="100" x2="860" y1="151.25" y2="151.25" class="grid"/>
+<text x="88" y="156.25" text-anchor="end" class="small">-0.2</text>
+<line x1="100" x2="860" y1="103.75" y2="103.75" class="grid"/>
+<text x="88" y="108.75" text-anchor="end" class="small">0.0</text>
+<line x1="100" x2="860" y1="103.75" y2="103.75" class="zero"/>
+<rect x="155" y="103.75" width="130" height="311.38888888783333" rx="5" class="a"/>
+<text x="220.0" y="437.13888888783333" text-anchor="middle" class="label">-1.31</text>
+<text x="220.0" y="505" text-anchor="middle" class="label">GPT-5 初期</text>
+<rect x="330" y="103.75" width="130" height="25.333333333333314" rx="5" class="a"/>
+<text x="395.0" y="151.08333333333331" text-anchor="middle" class="label">-0.11</text>
+<text x="395.0" y="505" text-anchor="middle" class="label">GPT-5 最適化</text>
+<rect x="505" y="103.75" width="130" height="323.5277777788333" rx="5" class="b"/>
+<text x="570.0" y="449.2777777788333" text-anchor="middle" class="label">-1.36</text>
+<text x="570.0" y="505" text-anchor="middle" class="label">Gemini 初期</text>
+<rect x="680" y="103.75" width="130" height="67.02777777725001" rx="5" class="b"/>
+<text x="745.0" y="192.77777777725" text-anchor="middle" class="label">-0.28</text>
+<text x="745.0" y="505" text-anchor="middle" class="label">Gemini 最適化</text>
+<text x="28" y="280.0" text-anchor="middle" class="label" transform="rotate(-90 28 280.0)">平均順位改善量（正の値ほど順位上昇）</text>
+</svg>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="800" viewBox="0 0 1100 800">
+<style>
+text{font-family:Yu Gothic, Meiryo, Noto Sans CJK JP, sans-serif;fill:#111827}
+.title{font-size:24px;font-weight:700}
+.label{font-size:15px}
+.small{font-size:13px}
+.axis{stroke:#111827;stroke-width:1}
+.grid{stroke:#d1d5db;stroke-width:1}
+.zero{stroke:#111827;stroke-width:1.5}
+.a{fill:#3b82f6}
+.b{fill:#f59e0b}
+.green{fill:#dcfce7}
+.red{fill:#fee2e2}
+.yellow{fill:#fef3c7}
+.gray{fill:#e5e7eb}
+.header{fill:#f3f4f6}
+.cell{stroke:#9ca3af;stroke-width:.8}
+</style>
+<text x="550.0" y="38" text-anchor="middle" class="title">GPT-5：最適化後の長文クエリと短文クエリ</text>
+<line x1="210.0" x2="210.0" y1="70" y2="745" class="grid"/>
+<text x="210.0" y="780" text-anchor="middle" class="small">-2.1</text>
+<line x1="328.57142857142856" x2="328.57142857142856" y1="70" y2="745" class="grid"/>
+<text x="328.57142857142856" y="780" text-anchor="middle" class="small">-1.7</text>
+<line x1="447.1428571428571" x2="447.1428571428571" y1="70" y2="745" class="grid"/>
+<text x="447.1428571428571" y="780" text-anchor="middle" class="small">-1.2</text>
+<line x1="565.7142857142858" x2="565.7142857142858" y1="70" y2="745" class="grid"/>
+<text x="565.7142857142858" y="780" text-anchor="middle" class="small">-0.8</text>
+<line x1="684.2857142857143" x2="684.2857142857143" y1="70" y2="745" class="grid"/>
+<text x="684.2857142857143" y="780" text-anchor="middle" class="small">-0.3</text>
+<line x1="802.8571428571429" x2="802.8571428571429" y1="70" y2="745" class="grid"/>
+<text x="802.8571428571429" y="780" text-anchor="middle" class="small">+0.1</text>
+<line x1="921.4285714285714" x2="921.4285714285714" y1="70" y2="745" class="grid"/>
+<text x="921.4285714285714" y="780" text-anchor="middle" class="small">+0.6</text>
+<line x1="1040.0" x2="1040.0" y1="70" y2="745" class="grid"/>
+<text x="1040.0" y="780" text-anchor="middle" class="small">+1.0</text>
+<line x1="772.2580645161291" x2="772.2580645161291" y1="70" y2="745" class="zero"/>
+<text x="195" y="97.5" text-anchor="end" class="label">技術的</text>
+<rect x="718.7096774193549" y="78.55000000000001" width="53.54838709677426" height="11.700000000000001" rx="3" class="a"/>
+<rect x="638.3870967741935" y="94.75" width="133.8709677419356" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="142.5" text-anchor="end" class="label">外国語表現</text>
+<rect x="763.333333342258" y="123.55000000000001" width="8.924731173871123" height="11.700000000000001" rx="3" class="a"/>
+<rect x="691.9354838709678" y="139.75" width="80.32258064516134" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="187.5" text-anchor="end" class="label">広告調</text>
+<rect x="772.2580645161291" y="168.55" width="133.87096774193537" height="11.700000000000001" rx="3" class="a"/>
+<rect x="772.2580645161291" y="184.75" width="107.09677419354819" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="232.5" text-anchor="end" class="label">権威的</text>
+<rect x="772.2580645161291" y="213.55" width="151.72043011645155" height="11.700000000000001" rx="3" class="a"/>
+<rect x="772.2580645161291" y="229.75" width="178.4946236648385" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="277.5" text-anchor="end" class="label">FAQ</text>
+<rect x="700.8602150448387" y="258.54999999999995" width="71.39784947129044" height="11.700000000000001" rx="3" class="a"/>
+<rect x="763.333333342258" y="274.75" width="8.924731173871123" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="322.5" text-anchor="end" class="label">クリック誘導</text>
+<rect x="772.2580645161291" y="303.54999999999995" width="98.17204301967729" height="11.700000000000001" rx="3" class="a"/>
+<rect x="772.2580645161291" y="319.75" width="196.34408601258053" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="367.5" text-anchor="end" class="label">競争優位</text>
+<rect x="593.7634408512904" y="348.54999999999995" width="178.49462366483874" height="11.700000000000001" rx="3" class="a"/>
+<rect x="691.9354838709678" y="364.75" width="80.32258064516134" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="412.5" text-anchor="end" class="label">ストーリーテリング</text>
+<rect x="772.2580645161291" y="393.54999999999995" width="53.54838709677415" height="11.700000000000001" rx="3" class="a"/>
+<rect x="772.2580645161291" y="409.75" width="151.72043011645155" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="457.5" text-anchor="end" class="label">流暢性</text>
+<rect x="772.2580645161291" y="438.54999999999995" width="71.39784947129021" height="11.700000000000001" rx="3" class="a"/>
+<rect x="772.2580645161291" y="454.75" width="178.4946236648385" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="502.5" text-anchor="end" class="label">トリック</text>
+<rect x="593.7634408512904" y="483.54999999999995" width="178.49462366483874" height="11.700000000000001" rx="3" class="a"/>
+<rect x="700.8602150448387" y="499.75" width="71.39784947129044" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="547.5" text-anchor="end" class="label">独自性</text>
+<rect x="772.2580645161291" y="528.55" width="71.39784947129021" height="11.700000000000001" rx="3" class="a"/>
+<rect x="772.2580645161291" y="544.75" width="187.4193548387094" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="592.5" text-anchor="end" class="label">多様性</text>
+<rect x="772.2580645161291" y="573.55" width="89.24731181903223" height="11.700000000000001" rx="3" class="a"/>
+<rect x="772.2580645161291" y="589.75" width="205.2688172132257" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="637.5" text-anchor="end" class="label">最小限</text>
+<rect x="772.2580645161291" y="618.55" width="89.24731181903223" height="11.700000000000001" rx="3" class="a"/>
+<rect x="772.2580645161291" y="634.75" width="205.2688172132257" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="682.5" text-anchor="end" class="label">書式</text>
+<rect x="263.54838709677426" y="663.55" width="508.7096774193549" height="11.700000000000001" rx="3" class="a"/>
+<rect x="397.41935483870975" y="679.75" width="374.8387096774194" height="11.700000000000001" rx="3" class="b"/>
+<text x="195" y="727.5" text-anchor="end" class="label">品質強調</text>
+<rect x="584.8387096774194" y="708.55" width="187.41935483870975" height="11.700000000000001" rx="3" class="a"/>
+<rect x="772.2580645161291" y="724.75" width="44.623655922903026" height="11.700000000000001" rx="3" class="b"/>
+<rect x="840" y="18" width="18" height="18" class="a"/><text x="865" y="33" class="small">長文クエリ</text>
+<rect x="965" y="18" width="18" height="18" class="b"/><text x="990" y="33" class="small">短文クエリ</text>
+</svg>
