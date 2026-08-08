@@ -1,0 +1,26 @@
+{
+  "status": "complete",
+  "api_calls": 0,
+  "integrated_source_rows": 2700,
+  "paired_rows": 1350,
+  "model_count": 3,
+  "prompt_count": 15,
+  "intent_count": 30,
+  "primary_inference_unit": "prompt mean across 30 Test intents",
+  "overall_initial_mean": -1.3000000000000003,
+  "overall_optimized_mean": -0.2637037037037037,
+  "overall_recovery_mean": 1.0362962962962963,
+  "overall_recovery_ci95": [
+    0.4362962962962963,
+    1.6926296296296288
+  ],
+  "overall_wilcoxon_p_value": 0.01145674349498795,
+  "model_specific_holm_significant_count": 3,
+  "prompt_level_holm_global_significant_count": 12,
+  "graphs": [
+    "C:\\Users\\Komug\\OneDrive\\ドキュメント\\egeo-research\\E-GEO\\日本語版データ\\TOEIC\\06_分析結果\\03_3モデル統合\\07_three_model_initial_vs_optimized.png",
+    "C:\\Users\\Komug\\OneDrive\\ドキュメント\\egeo-research\\E-GEO\\日本語版データ\\TOEIC\\06_分析結果\\03_3モデル統合\\08_three_model_recovery.png",
+    "C:\\Users\\Komug\\OneDrive\\ドキュメント\\egeo-research\\E-GEO\\日本語版データ\\TOEIC\\06_分析結果\\03_3モデル統合\\09_prompt_recovery_heatmap.png"
+  ],
+  "poster_updated": false
+}

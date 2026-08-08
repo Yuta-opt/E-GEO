@@ -1,0 +1,1351 @@
+﻿reranker_label,model_display,reranker_model,prompt_id,intent_id,test_initial_long,test_optimized_long,recovery_optimized_minus_initial
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-051,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-052,-9,0,9
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-053,-9,0,9
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-054,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-055,0,2,2
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-056,-4,0,4
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-057,-3,0,3
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-058,-9,0,9
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-059,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-060,-8,-1,7
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-061,-8,1,9
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-062,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-064,-8,0,8
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-065,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-066,-2,6,8
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-067,-2,-1,1
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-068,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-069,-3,-3,0
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-070,-5,-1,4
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-071,-3,0,3
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-072,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-073,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-074,-2,6,8
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-075,-1,1,2
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-076,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-077,-1,3,4
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-079,-7,0,7
+Model E,GPT-5,gpt-5-2025-08-07,advertisement,INTENT-080,-4,2,6
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-051,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-052,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-053,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-054,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-055,2,2,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-056,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-057,-3,0,3
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-058,-9,-2,7
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-059,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-060,-5,0,5
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-061,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-062,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-064,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-065,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-066,-2,5,7
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-067,-2,2,4
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-068,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-069,-3,3,6
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-070,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-071,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-072,1,1,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-073,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-074,-1,4,5
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-075,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-076,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-077,-1,3,4
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-079,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,authoritative,INTENT-080,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-051,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-052,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-053,-9,-1,8
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-054,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-055,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-056,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-057,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-058,-3,0,3
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-059,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-060,-8,0,8
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-061,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-062,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-064,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-065,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-066,1,6,5
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-067,1,-2,-3
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-068,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-069,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-070,-3,-1,2
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-071,-2,2,4
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-072,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-073,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-074,-2,5,7
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-075,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-076,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-077,-1,3,4
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-079,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,clickable,INTENT-080,-1,2,3
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-051,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-052,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-053,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-054,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-055,2,0,-2
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-056,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-057,-1,-2,-1
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-058,-9,-7,2
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-059,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-060,-3,-4,-1
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-061,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-062,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-064,-2,-2,0
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-065,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-066,-2,2,4
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-067,-1,1,2
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-068,2,1,-1
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-069,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-070,-3,-1,2
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-071,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-072,1,2,1
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-073,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-074,-2,-2,0
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-075,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-076,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-077,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-079,-7,-1,6
+Model E,GPT-5,gpt-5-2025-08-07,competitive,INTENT-080,-4,0,4
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-051,2,0,-2
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-052,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-053,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-054,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-055,0,2,2
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-056,-7,0,7
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-057,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-058,-3,-5,-2
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-059,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-060,-3,0,3
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-061,-5,-1,4
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-062,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-064,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-065,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-066,3,5,2
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-067,-2,-1,1
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-068,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-069,-2,-1,1
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-070,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-071,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-072,2,1,-1
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-073,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-074,-1,6,7
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-075,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-076,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-077,3,4,1
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-079,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,diverse,INTENT-080,-4,3,7
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-051,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-052,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-053,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-054,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-055,2,0,-2
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-056,0,-2,-2
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-057,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-058,-2,-3,-1
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-059,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-060,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-061,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-062,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-064,0,-2,-2
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-065,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-066,1,3,2
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-067,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-068,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-069,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-070,-1,-3,-2
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-071,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-072,1,-1,-2
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-073,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-074,3,5,2
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-075,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-076,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-077,3,0,-3
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-079,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,faq,INTENT-080,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-051,2,0,-2
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-052,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-053,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-054,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-055,0,2,2
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-056,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-057,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-058,-9,-2,7
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-059,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-060,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-061,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-062,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-064,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-065,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-066,1,3,2
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-067,1,-1,-2
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-068,2,0,-2
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-069,3,2,-1
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-070,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-071,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-072,2,1,-1
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-073,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-074,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-075,-1,1,2
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-076,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-077,3,3,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-079,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,fluent,INTENT-080,0,3,3
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-051,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-052,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-053,-1,-2,-1
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-054,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-055,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-056,0,-4,-4
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-057,-2,-3,-1
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-058,-6,-9,-3
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-059,0,-8,-8
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-060,-3,-1,2
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-061,0,-8,-8
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-062,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-064,-8,-8,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-065,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-066,1,1,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-067,-2,-2,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-068,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-069,0,-3,-3
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-070,-3,-3,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-071,-2,-2,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-072,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-073,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-074,5,-1,-6
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-075,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-076,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-077,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-079,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,format,INTENT-080,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-051,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-052,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-053,-2,-1,1
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-054,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-055,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-056,-8,0,8
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-057,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-058,-9,0,9
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-059,-8,0,8
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-060,-3,-3,0
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-061,-5,-1,4
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-062,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-064,-8,-2,6
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-065,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-066,1,3,2
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-067,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-068,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-069,-3,0,3
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-070,-3,-1,2
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-071,-3,-2,1
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-072,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-073,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-074,-1,2,3
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-075,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-076,0,1,1
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-077,-1,3,4
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-079,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,language,INTENT-080,-4,2,6
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-051,2,0,-2
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-052,-4,0,4
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-053,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-054,-6,0,6
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-055,-3,2,5
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-056,-4,-1,3
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-057,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-058,-6,0,6
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-059,-6,0,6
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-060,-5,0,5
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-061,-6,0,6
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-062,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-064,-7,0,7
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-065,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-066,-1,5,6
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-067,-2,-2,0
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-068,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-069,-3,0,3
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-070,-3,-1,2
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-071,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-072,2,2,0
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-073,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-074,-2,2,4
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-075,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-076,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-077,-1,4,5
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-079,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,minimalist,INTENT-080,-4,0,4
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-051,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-052,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-053,-1,-2,-1
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-054,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-055,2,2,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-056,-9,-2,7
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-057,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-058,0,-7,-7
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-059,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-060,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-061,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-062,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-064,-7,-8,-1
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-065,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-066,0,-2,-2
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-067,2,-1,-3
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-068,0,1,1
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-069,-1,-3,-2
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-070,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-071,0,-2,-2
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-072,2,2,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-073,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-074,-2,5,7
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-075,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-076,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-077,3,0,-3
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-079,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,quality,INTENT-080,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-051,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-052,-9,0,9
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-053,-9,-1,8
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-054,-9,0,9
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-055,-7,2,9
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-056,-9,0,9
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-057,-3,0,3
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-058,-9,0,9
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-059,-8,0,8
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-060,-8,-1,7
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-061,-8,0,8
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-062,-2,-1,1
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-064,-8,0,8
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-065,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-066,-2,3,5
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-067,-2,-1,1
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-068,0,1,1
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-069,-6,0,6
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-070,-5,-1,4
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-071,-3,0,3
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-072,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-073,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-074,-2,4,6
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-075,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-076,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-077,-1,2,3
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-078,-9,0,9
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-079,-8,0,8
+Model E,GPT-5,gpt-5-2025-08-07,storytelling,INTENT-080,-4,0,4
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-051,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-052,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-053,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-054,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-055,2,2,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-056,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-057,-1,-2,-1
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-058,-5,-3,2
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-059,0,-5,-5
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-060,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-061,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-062,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-064,-2,-2,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-065,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-066,1,1,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-067,-2,2,4
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-068,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-069,0,3,3
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-070,-1,-3,-2
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-071,-2,-2,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-072,2,0,-2
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-073,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-074,-1,6,7
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-075,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-076,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-077,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-079,0,-1,-1
+Model E,GPT-5,gpt-5-2025-08-07,technical,INTENT-080,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-051,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-052,0,-9,-9
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-053,-2,-1,1
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-054,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-055,2,2,0
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-056,-2,-1,1
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-057,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-058,-5,0,5
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-059,-8,-5,3
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-060,0,-4,-4
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-061,-8,-1,7
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-062,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-064,-4,-2,2
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-065,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-066,-2,3,5
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-067,-2,-2,0
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-068,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-069,-3,-2,1
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-070,-1,-3,-2
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-071,-3,-2,1
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-072,-2,2,4
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-073,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-074,-2,5,7
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-075,-1,1,2
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-076,0,1,1
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-077,-1,1,2
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-079,-7,-1,6
+Model E,GPT-5,gpt-5-2025-08-07,trick,INTENT-080,-2,-1,1
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-051,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-052,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-053,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-054,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-055,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-056,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-057,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-058,-6,-4,2
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-059,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-060,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-061,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-062,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-063,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-064,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-065,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-066,3,6,3
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-067,-2,2,4
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-068,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-069,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-070,-1,-1,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-071,-2,0,2
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-072,2,-1,-3
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-073,7,0,-7
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-074,6,4,-2
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-075,-1,1,2
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-076,1,0,-1
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-077,0,2,2
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-078,0,0,0
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-079,-1,0,1
+Model E,GPT-5,gpt-5-2025-08-07,unique,INTENT-080,0,2,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-051,-9,0,9
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-052,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-053,-7,1,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-054,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-055,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-056,-5,0,5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-057,-7,0,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-058,1,1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-059,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-060,-8,-5,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-061,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-062,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-063,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-064,-4,-3,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-065,-3,-1,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-066,0,3,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-067,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-068,-1,2,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-069,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-070,-4,-1,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-071,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-072,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-073,-5,2,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-074,-8,0,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-075,-4,-3,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-076,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-077,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-079,-2,-1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,advertisement,INTENT-080,-5,0,5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-051,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-052,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-053,1,1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-054,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-055,-5,1,6
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-056,2,2,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-057,0,-4,-4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-058,-5,1,6
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-059,3,0,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-060,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-061,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-062,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-063,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-064,-4,-2,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-065,1,-1,-2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-066,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-067,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-068,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-069,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-070,-4,-1,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-071,0,2,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-072,4,3,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-073,2,2,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-074,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-075,-4,-3,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-076,0,7,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-077,-1,1,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-079,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,authoritative,INTENT-080,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-051,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-052,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-053,-7,1,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-054,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-055,1,0,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-056,1,1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-057,-7,0,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-058,4,2,-2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-059,1,0,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-060,-8,0,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-061,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-062,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-063,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-064,-4,1,5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-065,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-066,0,3,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-067,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-068,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-069,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-070,-4,-1,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-071,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-072,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-073,-5,2,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-074,-2,0,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-075,-4,-3,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-076,0,7,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-077,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-079,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,clickable,INTENT-080,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-051,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-052,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-053,1,1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-054,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-055,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-056,-5,1,6
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-057,-6,-6,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-058,-5,-4,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-059,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-060,0,-4,-4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-061,0,2,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-062,0,-2,-2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-063,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-064,1,-3,-4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-065,-3,1,4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-066,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-067,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-068,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-069,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-070,-4,-1,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-071,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-072,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-073,-5,-5,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-074,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-075,-4,-3,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-076,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-077,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-079,-2,-1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,competitive,INTENT-080,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-051,0,-9,-9
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-052,-2,0,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-053,1,1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-054,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-055,1,1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-056,-5,2,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-057,-7,0,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-058,-5,2,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-059,0,3,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-060,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-061,0,2,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-062,-3,-3,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-063,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-064,-4,1,5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-065,-3,-2,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-066,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-067,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-068,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-069,-2,0,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-070,-4,-1,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-071,2,9,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-072,0,4,4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-073,-5,-5,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-074,-2,-2,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-075,-3,-3,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-076,7,7,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-077,-1,1,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-079,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,diverse,INTENT-080,0,3,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-051,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-052,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-053,2,1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-054,-2,0,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-055,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-056,1,1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-057,-3,-1,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-058,2,1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-059,3,0,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-060,0,-5,-5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-061,1,1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-062,0,-3,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-063,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-064,-4,-4,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-065,-1,1,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-066,0,3,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-067,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-068,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-069,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-070,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-071,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-072,0,4,4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-073,2,2,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-074,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-075,-3,-3,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-076,7,7,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-077,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-079,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,faq,INTENT-080,1,0,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-051,-1,-9,-8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-052,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-053,1,2,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-054,0,-4,-4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-055,-1,-2,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-056,-2,1,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-057,2,-2,-4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-058,-5,0,5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-059,3,3,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-060,0,-5,-5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-061,1,0,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-062,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-063,1,0,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-064,0,-3,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-065,1,-1,-2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-066,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-067,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-068,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-069,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-070,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-071,2,2,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-072,3,0,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-073,2,2,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-074,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-075,-1,-4,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-076,7,7,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-077,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-079,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,fluent,INTENT-080,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-051,-1,-9,-8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-052,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-053,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-054,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-055,1,1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-056,2,2,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-057,-5,1,6
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-058,-2,-5,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-059,3,-2,-5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-060,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-061,1,2,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-062,-3,-2,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-063,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-064,-1,-4,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-065,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-066,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-067,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-068,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-069,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-070,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-071,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-072,0,4,4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-073,2,2,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-074,0,-8,-8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-075,-3,-4,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-076,7,7,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-077,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-079,-1,1,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,format,INTENT-080,2,0,-2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-051,-9,-1,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-052,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-053,-7,1,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-054,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-055,-8,0,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-056,0,3,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-057,-7,0,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-058,-5,0,5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-059,0,3,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-060,0,-3,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-061,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-062,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-063,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-064,-4,-2,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-065,-3,-1,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-066,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-067,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-068,-1,1,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-069,-9,0,9
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-070,-4,-1,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-071,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-072,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-073,-6,-5,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-074,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-075,-4,-3,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-076,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-077,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-079,1,-1,-2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,language,INTENT-080,-5,0,5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-051,0,-9,-9
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-052,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-053,-7,1,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-054,-9,-1,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-055,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-056,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-057,-7,-7,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-058,-4,2,6
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-059,-6,3,9
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-060,-8,0,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-061,-6,0,6
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-062,-3,-2,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-063,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-064,-4,-4,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-065,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-066,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-067,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-068,-1,1,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-069,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-070,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-071,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-072,0,2,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-073,-5,2,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-074,-8,0,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-075,-4,-3,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-076,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-077,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-079,-5,-2,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,minimalist,INTENT-080,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-051,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-052,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-053,1,0,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-054,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-055,1,-4,-5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-056,-5,-5,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-057,-6,1,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-058,1,-5,-6
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-059,3,0,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-060,-4,-3,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-061,1,2,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-062,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-063,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-064,-4,-4,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-065,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-066,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-067,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-068,2,-1,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-069,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-070,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-071,0,2,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-072,0,3,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-073,2,-5,-7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-074,-4,-8,-4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-075,-4,-3,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-076,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-077,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-079,-2,-1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,quality,INTENT-080,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-051,-9,-9,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-052,-9,0,9
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-053,-7,0,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-054,-9,-1,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-055,-8,0,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-056,-5,-2,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-057,-7,0,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-058,-5,1,6
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-059,-6,0,6
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-060,-8,0,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-061,-6,-1,5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-062,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-063,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-064,-4,-2,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-065,-3,-2,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-066,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-067,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-068,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-069,-9,-1,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-070,-4,-1,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-071,0,2,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-072,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-073,-6,2,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-074,-8,0,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-075,-4,-3,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-076,0,7,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-077,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-078,-9,0,9
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-079,-6,-1,5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,storytelling,INTENT-080,-5,0,5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-051,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-052,-2,0,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-053,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-054,0,-3,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-055,1,1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-056,-2,2,4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-057,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-058,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-059,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-060,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-061,0,-2,-2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-062,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-063,1,0,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-064,-4,-4,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-065,1,1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-066,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-067,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-068,1,2,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-069,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-070,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-071,0,2,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-072,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-073,-5,2,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-074,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-075,-3,-3,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-076,0,7,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-077,-1,1,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-079,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,technical,INTENT-080,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-051,-9,-1,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-052,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-053,-7,1,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-054,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-055,-1,1,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-056,1,-1,-2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-057,-2,-7,-5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-058,4,1,-3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-059,-6,0,6
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-060,0,-2,-2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-061,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-062,-3,0,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-063,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-064,-4,-4,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-065,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-066,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-067,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-068,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-069,0,-4,-4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-070,-4,-1,3
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-071,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-072,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-073,-6,2,8
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-074,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-075,-4,-3,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-076,0,7,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-077,-1,0,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-079,-1,-2,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,trick,INTENT-080,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-051,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-052,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-053,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-054,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-055,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-056,2,-2,-4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-057,-5,0,5
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-058,-3,4,7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-059,3,3,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-060,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-061,1,0,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-062,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-063,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-064,-2,-4,-2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-065,-3,-1,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-066,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-067,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-068,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-069,-4,0,4
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-070,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-071,0,2,2
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-072,4,4,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-073,2,-5,-7
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-074,0,-1,-1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-075,-3,-3,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-076,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-077,-1,-1,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-078,0,0,0
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-079,0,1,1
+Model F,Gemini 3.5 Flash,gemini-3.5-flash-lite,unique,INTENT-080,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-052,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-053,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-054,-6,2,8
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-055,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-056,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-057,-4,-1,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-058,-7,-2,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-059,-3,4,7
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-060,-4,-4,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-061,-6,0,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-062,1,0,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-063,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-064,-8,-2,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-065,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-066,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-067,-1,1,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-069,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-070,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-071,-3,0,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-072,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-073,-7,0,7
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-074,-3,2,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-075,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-076,-6,-6,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-077,-2,1,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-079,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,advertisement,INTENT-080,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-052,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-053,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-054,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-055,1,4,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-056,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-057,-6,-3,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-058,-7,-3,4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-059,-3,2,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-060,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-061,-6,0,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-062,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-063,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-064,-8,-5,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-065,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-066,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-067,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-069,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-070,-3,1,4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-071,-3,0,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-072,-2,-1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-073,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-074,1,2,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-075,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-076,-6,0,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-077,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-079,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,authoritative,INTENT-080,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-052,2,0,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-053,2,0,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-054,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-055,1,0,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-056,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-057,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-058,-4,-2,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-059,3,3,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-060,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-061,-6,0,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-062,1,0,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-063,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-064,-5,-1,4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-065,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-066,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-067,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-069,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-070,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-071,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-072,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-073,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-074,0,2,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-075,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-076,0,-3,-3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-077,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-079,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,clickable,INTENT-080,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-052,1,0,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-053,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-054,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-055,4,1,-3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-056,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-057,-4,-3,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-058,-4,-2,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-059,1,3,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-060,0,-4,-4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-061,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-062,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-063,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-064,0,-2,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-065,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-066,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-067,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-069,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-070,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-071,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-072,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-073,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-074,-3,2,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-075,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-076,-3,0,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-077,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-079,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,competitive,INTENT-080,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-052,1,1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-053,1,2,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-054,-4,-3,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-055,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-056,-3,0,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-057,-1,-4,-3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-058,-3,-4,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-059,3,3,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-060,-1,-4,-3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-061,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-062,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-063,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-064,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-065,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-066,0,2,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-067,-1,1,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-069,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-070,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-071,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-072,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-073,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-074,-4,0,4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-075,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-076,-6,-3,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-077,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-079,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,diverse,INTENT-080,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-052,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-053,2,1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-054,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-055,1,1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-056,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-057,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-058,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-059,1,1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-060,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-061,-2,1,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-062,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-063,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-064,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-065,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-066,0,3,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-067,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-069,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-070,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-071,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-072,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-073,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-074,1,0,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-075,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-076,-6,-3,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-077,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-079,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,faq,INTENT-080,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-052,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-053,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-054,-2,-1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-055,0,4,4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-056,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-057,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-058,-2,-3,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-059,2,3,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-060,0,-4,-4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-061,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-062,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-063,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-064,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-065,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-066,0,2,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-067,1,0,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-069,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-070,1,0,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-071,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-072,0,-2,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-073,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-074,2,0,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-075,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-076,0,-3,-3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-077,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-079,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,fluent,INTENT-080,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-052,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-053,2,0,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-054,2,-2,-4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-055,1,4,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-056,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-057,-1,-5,-4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-058,-3,-7,-4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-059,3,1,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-060,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-061,2,3,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-062,0,-2,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-063,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-064,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-065,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-066,0,-2,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-067,0,-2,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-069,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-070,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-071,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-072,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-073,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-074,2,-3,-5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-075,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-076,-3,-3,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-077,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-079,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,format,INTENT-080,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-052,-1,1,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-053,-3,1,4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-054,-6,0,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-055,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-056,-1,-2,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-057,-1,-2,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-058,-7,-2,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-059,-2,2,4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-060,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-061,-6,0,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-062,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-063,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-064,-8,-5,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-065,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-066,-2,3,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-067,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-069,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-070,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-071,-3,0,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-072,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-073,-7,0,7
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-074,-3,0,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-075,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-076,-6,0,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-077,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-079,-1,-2,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,language,INTENT-080,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-052,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-053,0,2,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-054,-6,-1,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-055,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-056,-3,0,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-057,0,-4,-4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-058,-2,-1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-059,0,3,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-060,-4,-2,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-061,-6,0,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-062,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-063,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-064,-2,-1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-065,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-066,4,0,-4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-067,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-069,-6,0,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-070,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-071,-1,1,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-072,-1,-2,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-073,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-074,-3,0,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-075,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-076,-3,1,4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-077,1,0,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-079,-2,-1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,minimalist,INTENT-080,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-052,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-053,1,0,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-054,-1,-2,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-055,1,0,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-056,-4,-4,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-057,-4,-1,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-058,-7,-5,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-059,6,3,-3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-060,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-061,-6,-1,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-062,-1,-2,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-063,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-064,-8,-8,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-065,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-066,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-067,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-069,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-070,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-071,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-072,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-073,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-074,-3,0,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-075,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-076,-6,-3,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-077,0,-2,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-079,0,-2,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,quality,INTENT-080,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-052,-7,1,8
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-053,-7,2,9
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-054,-7,-2,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-055,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-056,-6,1,7
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-057,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-058,-7,-3,4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-059,-2,3,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-060,-4,-3,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-061,-6,1,7
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-062,-2,1,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-063,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-064,-8,-1,7
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-065,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-066,-2,2,4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-067,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-069,-6,0,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-070,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-071,-3,0,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-072,-2,-1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-073,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-074,-6,-3,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-075,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-076,-6,0,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-077,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-079,-7,0,7
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,storytelling,INTENT-080,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-052,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-053,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-054,-4,0,4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-055,1,0,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-056,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-057,-1,-5,-4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-058,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-059,0,2,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-060,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-061,0,1,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-062,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-063,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-064,-1,-8,-7
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-065,1,0,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-066,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-067,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-069,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-070,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-071,-3,-3,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-072,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-073,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-074,2,2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-075,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-076,-3,-3,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-077,0,-2,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-079,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,technical,INTENT-080,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-051,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-052,0,2,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-053,0,2,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-054,-5,2,7
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-055,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-056,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-057,-4,-3,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-058,-7,-2,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-059,-3,3,6
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-060,0,-4,-4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-061,-6,-6,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-062,-2,1,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-063,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-064,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-065,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-066,2,6,4
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-067,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-069,-2,0,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-070,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-071,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-072,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-073,-7,0,7
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-074,-3,2,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-075,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-076,-6,1,7
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-077,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-079,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,trick,INTENT-080,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-051,3,-2,-5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-052,1,1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-053,1,1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-054,0,-2,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-055,2,0,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-056,-4,1,5
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-057,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-058,-3,-2,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-059,4,2,-2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-060,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-061,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-062,1,1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-063,-1,-1,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-064,-1,-2,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-065,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-066,-2,1,3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-067,-1,1,2
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-068,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-069,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-070,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-071,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-072,-2,-2,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-073,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-074,2,1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-075,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-076,0,-3,-3
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-077,-1,0,1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-078,0,0,0
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-079,0,-1,-1
+Model G,Claude Sonnet 4.5,claude-sonnet-4-5,unique,INTENT-080,0,0,0

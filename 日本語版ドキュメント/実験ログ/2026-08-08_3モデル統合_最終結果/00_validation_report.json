@@ -1,0 +1,48 @@
+{
+  "status": "pass",
+  "main_source_rows": 2250,
+  "claude_source_rows": 900,
+  "integrated_long_rows": 2700,
+  "models": {
+    "Model E": {
+      "display": "GPT-5",
+      "rows": 900,
+      "condition_counts": {
+        "test_initial_long": 450,
+        "test_optimized_long": 450
+      },
+      "prompt_count": 15,
+      "intent_count": 30,
+      "model_ids": [
+        "gpt-5-2025-08-07"
+      ]
+    },
+    "Model F": {
+      "display": "Gemini 3.5 Flash",
+      "rows": 900,
+      "condition_counts": {
+        "test_initial_long": 450,
+        "test_optimized_long": 450
+      },
+      "prompt_count": 15,
+      "intent_count": 30,
+      "model_ids": [
+        "gemini-3.5-flash-lite"
+      ]
+    },
+    "Model G": {
+      "display": "Claude Sonnet 4.5",
+      "rows": 900,
+      "condition_counts": {
+        "test_initial_long": 450,
+        "test_optimized_long": 450
+      },
+      "prompt_count": 15,
+      "intent_count": 30,
+      "model_ids": [
+        "claude-sonnet-4-5"
+      ]
+    }
+  },
+  "api_calls": 0
+}

@@ -1,0 +1,119 @@
+{
+  "generated_at": "2026-08-08T08:27:59.849728+00:00",
+  "source_analysis_dir": "日本語版データ/TOEIC/06_分析結果/03_3モデル統合",
+  "canonical_result_dir": "日本語版ドキュメント/実験ログ/2026-08-08_3モデル統合_最終結果",
+  "validation_status": "pass",
+  "integrated_long_rows": 2700,
+  "model_count": 3,
+  "prompt_count": 15,
+  "intent_count": 30,
+  "paired_rows": 1350,
+  "primary_inference_unit": "prompt mean across 30 Test intents",
+  "files": [
+    {
+      "path": "00_validation_report.json",
+      "bytes": 1072,
+      "sha256": "3ae278d199ddce4315038844eeceef23bdb78ebf2d188ac08c76f974afe34a0d"
+    },
+    {
+      "path": "01_three_model_integrated_table.csv",
+      "bytes": 2742,
+      "sha256": "7d495003b6b9c7a4977482d97843995cbee038cebd8bcbd0f98a13780d615341"
+    },
+    {
+      "path": "02_model_level_statistical_tests.csv",
+      "bytes": 2742,
+      "sha256": "7d495003b6b9c7a4977482d97843995cbee038cebd8bcbd0f98a13780d615341"
+    },
+    {
+      "path": "03_prompt_level_statistical_tests.csv",
+      "bytes": 9998,
+      "sha256": "6531df46c4c927f947ecb2acb3d5b908b3f0675d1697626f95f8467ad0b712c9"
+    },
+    {
+      "path": "04_prompt_by_model_recovery.csv",
+      "bytes": 5316,
+      "sha256": "7497dba62e0184f11d46b9e776cc9ece24508cd2c9af34210dc7ecbb97ce7bab"
+    },
+    {
+      "path": "05_three_model_paired_rows.csv",
+      "bytes": 93268,
+      "sha256": "1c82253933fd622ae4eaf4b954dd4c3273996bfa361d3a17265f44635f0b141d"
+    },
+    {
+      "path": "06_three_model_results_summary.json",
+      "bytes": 1208,
+      "sha256": "ed2439ac462feae8fe976e171af64802543224c7bf6c7b3346f350ee2e799c38"
+    },
+    {
+      "path": "07_three_model_initial_vs_optimized.png",
+      "bytes": 60838,
+      "sha256": "f01c9de9d3fd40bc8895150aa2914f257ee2caaaa73009babfff0deab567080a"
+    },
+    {
+      "path": "08_three_model_recovery.png",
+      "bytes": 49541,
+      "sha256": "7c130e1c62b395bb39e65828176cfeef4ba8103277026703e3816db07cc86b33"
+    },
+    {
+      "path": "09_prompt_recovery_heatmap.png",
+      "bytes": 130471,
+      "sha256": "24acd6b84a1c73a05e2daab038900552adfad1ada04bb2e0b9d6c0bac0ac5800"
+    },
+    {
+      "path": "10_three_model_results.xlsx",
+      "bytes": 59771,
+      "sha256": "6e8fdeadabc437727d31677457cee2c08b3eb35773a7345c2c8b74060699e46b"
+    },
+    {
+      "path": "11_three_model_report.md",
+      "bytes": 1791,
+      "sha256": "58e671ff88a5c1d1e9c1edaaf3bcd0671a234d0a7c7fcd2a18472b2c70bd1659"
+    },
+    {
+      "path": "12_final_prompts.json",
+      "bytes": 30389,
+      "sha256": "7765104165cf032aedcf434e6a13d8a36e20fb14aa4655b5caab353ed6ae4d84"
+    },
+    {
+      "path": "13_prompt_convergence_trajectory.csv",
+      "bytes": 735,
+      "sha256": "aea185316078f2eceb31cfe07c3d64f966ca7599dbd898eb79bff5c9d6b67c9a"
+    },
+    {
+      "path": "14_prompt_trajectory.csv",
+      "bytes": 140747,
+      "sha256": "137eac3ab5bc21bd6936b075877ec325a1279c3b42ee92d43f0aa31b59901484"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3005,
+      "sha256": "20ebaf1b346c3f0968feac69870eb5068a1ee22b61e32c648bcd50d746be8994"
+    },
+    {
+      "path": "ポスター用図表/01_3モデル_初期vs最適化.png",
+      "bytes": 60838,
+      "sha256": "f01c9de9d3fd40bc8895150aa2914f257ee2caaaa73009babfff0deab567080a"
+    },
+    {
+      "path": "ポスター用図表/02_3モデル_回復量.png",
+      "bytes": 49541,
+      "sha256": "7c130e1c62b395bb39e65828176cfeef4ba8103277026703e3816db07cc86b33"
+    },
+    {
+      "path": "ポスター用図表/03_3モデル_プロンプト別回復ヒートマップ.png",
+      "bytes": 130471,
+      "sha256": "24acd6b84a1c73a05e2daab038900552adfad1ada04bb2e0b9d6c0bac0ac5800"
+    },
+    {
+      "path": "ポスター用図表/04_GPT5_長文vs短文.png",
+      "bytes": 69717,
+      "sha256": "5b7d5be17dc3c5ae821804a05306551438c4d105e97ca534e86ea6591a55cf46"
+    },
+    {
+      "path": "ポスター用図表/05_プロンプト収束.png",
+      "bytes": 65778,
+      "sha256": "4bcaa0a9804d639f215171c515b6e20e652930f8f8171d6d7b4df87697d88c44"
+    }
+  ]
+}
